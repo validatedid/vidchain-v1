@@ -1,6 +1,9 @@
 ion-tabs{
   top: 30vh;
+  height: 70vh;
+  overflow: hidden;
   ion-tab{
+    overflow: hidden;
     height:70vh;
   }
 }

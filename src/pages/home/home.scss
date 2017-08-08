@@ -1,3 +1,36 @@
 page-home {
+  overflow: hidden;
+  .fixed-content{
+    margin-top: 0 !important;
+  }
+  .no-header{
+    margin-top: 0!important;
+    overflow: hidden;
+    .content-profile{
+      padding-top: 44px;
+    }
+  }
+  .content-profile{
+    //position: absolute;
+    //top: 0;
+    height: 30vh;
+    background: rgba(40,147,247,1);
+    background: -moz-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(40,147,247,1)), color-stop(100%, rgba(133,189,245,1)));
+    background: -webkit-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
+    background: -o-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
+    background: -ms-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
+    background: linear-gradient(to bottom, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2893f7', endColorstr='#85bdf5', GradientType=0 );
 
+  }
+  ion-header{
+    .menu-icon{
+      color:white;
+    }
+    .toolbar-background{
+      background-color: transparent;
+      border-width: 0px !important;
+    }
+  }
 }
