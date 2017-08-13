@@ -2,7 +2,7 @@
     <ion-list>
         <ion-item *ngFor="let item of items" >
             {{ item }}
-            <button class="info-attribute" ion-button clear item-end>
+            <button class="info-attribute" ion-button clear item-end (click)="openModal(item)">
                 <ion-icon name="information-circle"></ion-icon>
             </button>
         </ion-item>

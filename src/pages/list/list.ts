@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {ModalController} from "ionic-angular";
+import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 
 @Component({
   selector: 'page-list',
@@ -6,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class ListPage {
 
-  constructor() {
+  constructor(public modalCtrl: ModalController) {
 
   }
   items = [
@@ -29,4 +31,8 @@ export class ListPage {
     'Halo'
   ];
 
+  openModal(val) {
+    let profileModal = this.modalCtrl.create(InfoAttributesPages, { info: val });
+    profileModal.present();
+  }
 }
