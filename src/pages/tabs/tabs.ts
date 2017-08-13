@@ -4,7 +4,7 @@
 import { Component } from '@angular/core';
 
 import {NavController} from "ionic-angular";
-import {DevicesPage} from "../devices/devices";
+import {LoginPage} from "../login/login";
 import {ListPage} from "../list/list";
 
 @Component({
@@ -14,7 +14,7 @@ import {ListPage} from "../list/list";
 export class TabsPage {
 
     tab1Root = ListPage;
-    tab2Root = DevicesPage;
+    tab2Root = LoginPage;
 
     constructor(public navCtrl: NavController) {
 

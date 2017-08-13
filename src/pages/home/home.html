@@ -1,14 +1,21 @@
 <ion-header>
   <ion-navbar transparent>
-    <button ion-button menuToggle>
-      <ion-icon class="menu-icon" name="menu" ></ion-icon>
+    <button class="button-header" ion-button menuToggle>
+      <ion-icon name="menu" ></ion-icon>
     </button>
     <ion-title></ion-title>
+    <ion-buttons end>
+      <button class="button-header add-profile" clear>
+        <ion-icon name="add" ></ion-icon>
+      </button>
+
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content >
   <div class="content-profile">
+    <div class="profile-avatar"></div>
   </div>
   <tabs-custom></tabs-custom>
 </ion-content>
