@@ -50,7 +50,8 @@ export class NewAttributesPage {
             return true;
         };
         checkFn['other'] = () =>{
-            if(this.formGroup.value.key !== '' && this.formGroup.value.value !=='' ){
+            console.log("hola");
+            if(this.formGroup.value.key !== '' && this.formGroup.value.value !=='' && (this.formGroup.value.key !== 'email' && this.formGroup.value.key !== 'phone')){
                 return false
             }
             return true;
@@ -69,6 +70,7 @@ export class NewAttributesPage {
                 value : this.formGroup.value.email,
                 timeToValidate : moment(new Date()).add(5, 'minutes').unix(),
                 validated : false,
+                source : 'manual',
                 createdAt:moment(new Date())
             };
         };
@@ -79,15 +81,17 @@ export class NewAttributesPage {
                 value : this.formGroup.value.phone,
                 timeToValidate : moment(new Date()).add(5, 'minutes').unix(),
                 validated : false,
+                source : 'manual',
                 createdAt:moment(new Date())
             };
         };
         checkFn['other'] = () =>{
             return {
-                type : this.formGroup.value.typeAttribute,
+                type : this.formGroup.value.key,
                 key : this.formGroup.value.key,
                 value : this.formGroup.value.value,
                 validated : true,
+                source : 'manual',
                 createdAt:moment(new Date())
             };
         };
@@ -97,21 +101,22 @@ export class NewAttributesPage {
             listAttributes = {}
         }
         let value = checkFn[this.formGroup.value.typeAttribute]();
-        if(!listAttributes[this.formGroup.value.typeAttribute]){
-            listAttributes[this.formGroup.value.typeAttribute] = []
+
+        if(!listAttributes[value.type]){
+            listAttributes[value.type] = []
         }
 
         // condition of one phone
-        if(this.formGroup.value.typeAttribute === 'phone'){
-            listAttributes[this.formGroup.value.typeAttribute][0] = value;
+        if(value.type === 'phone'){
+            listAttributes[value.type][0] = value;
         }
         else{
-            listAttributes[this.formGroup.value.typeAttribute].push(value);
+            listAttributes[value.type].push(value);
         }
 
-        if(this.formGroup.value.typeAttribute === 'phone' || this.formGroup.value.typeAttribute === 'email'){
+        if(value.type === 'phone' || value.type === 'email'){
             this.validateService.sendValidator();
-            let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:this.formGroup.value.typeAttribute,index:listAttributes[this.formGroup.value.typeAttribute].length-1});
+            let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:value.key,index:listAttributes[this.formGroup.value.typeAttribute].length-1});
             profileModal.present();
         }
 

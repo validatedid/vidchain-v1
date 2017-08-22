@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalController, NavParams, ViewController} from "ionic-angular";
 import {ValidateService} from "../validate/validate.service";
 import {ValidatePage} from "../validate/validate";
+import moment from 'moment';
 
 @Component({
   selector: 'page-info-attributtes',
@@ -41,6 +42,9 @@ export class InfoAttributesPages implements OnInit,OnDestroy {
     profileModal.present();
   }
 
+  formatDate(value){
+    return moment(value).format("DD/MM/YYYY - HH:mm:ss");
+  }
   checkValidationInterval(){
     let interval = 1000;
     let vm = this;

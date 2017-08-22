@@ -25,6 +25,14 @@
       <ion-label>{{info.key | capitalize}}</ion-label>
       <ion-input disabled="true" value="{{info.value}}"></ion-input>
     </ion-item>
+    <ion-item >
+      <ion-label>Create Date</ion-label>
+      <ion-input disabled="true" value="{{formatDate(info.createAt | capitalize)}}"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label>Source</ion-label>
+      <ion-input disabled="true" value="{{info?.source}}"></ion-input>
+    </ion-item>
     <ion-item *ngIf="info.type === 'email' || info.type === 'phone'">
       <ion-label>Validated</ion-label>
       <ion-input disabled="true" value="{{info.validated}}"></ion-input>

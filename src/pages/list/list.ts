@@ -27,6 +27,7 @@ export class ListPage implements OnInit,OnDestroy{
     profileModal.present();
   }
   removeItem(key,i){
+    console.log(key);
     this.items[key].splice(i, 1);
     localStorage.setItem('attributes',JSON.stringify(this.items));
   }
