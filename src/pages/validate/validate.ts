@@ -41,7 +41,7 @@ export class ValidatePage {
     checkValidationInterval(){
         let interval = 1000;
         let vm = this;
-        setInterval(function(){
+        setTimeout(function(){
             vm.timeToValidate = vm.validateService.checkValidation(vm.info.timeToValidate);
             if(vm.timeToValidate != 'expired'){
                 vm.checkValidationInterval();

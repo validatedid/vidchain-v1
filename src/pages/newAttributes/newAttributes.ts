@@ -50,7 +50,6 @@ export class NewAttributesPage {
             return true;
         };
         checkFn['other'] = () =>{
-            console.log("hola");
             if(this.formGroup.value.key !== '' && this.formGroup.value.value !=='' && (this.formGroup.value.key !== 'email' && this.formGroup.value.key !== 'phone')){
                 return false
             }
@@ -61,8 +60,6 @@ export class NewAttributesPage {
 
     addFormatAttribute(){
         let checkFn = {};
-
-
         checkFn['email'] = ()=>{
             return {
                 type : this.formGroup.value.typeAttribute,
@@ -71,7 +68,7 @@ export class NewAttributesPage {
                 timeToValidate : moment(new Date()).add(5, 'minutes').unix(),
                 validated : false,
                 source : 'manual',
-                createdAt:moment(new Date())
+                createdAt:moment(new Date()).unix()
             };
         };
         checkFn['phone'] = ()=>{
@@ -82,7 +79,7 @@ export class NewAttributesPage {
                 timeToValidate : moment(new Date()).add(5, 'minutes').unix(),
                 validated : false,
                 source : 'manual',
-                createdAt:moment(new Date())
+                createdAt:moment(new Date()).unix()
             };
         };
         checkFn['other'] = () =>{
@@ -92,7 +89,7 @@ export class NewAttributesPage {
                 value : this.formGroup.value.value,
                 validated : true,
                 source : 'manual',
-                createdAt:moment(new Date())
+                createdAt:moment(new Date()).unix()
             };
         };
 

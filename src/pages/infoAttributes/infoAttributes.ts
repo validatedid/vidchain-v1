@@ -43,12 +43,15 @@ export class InfoAttributesPages implements OnInit,OnDestroy {
   }
 
   formatDate(value){
-    return moment(value).format("DD/MM/YYYY - HH:mm:ss");
+    if(value){
+      return moment(value).format("DD/MM/YYYY - HH:mm:ss");
+    }
+    return "";
   }
   checkValidationInterval(){
     let interval = 1000;
     let vm = this;
-    setInterval(function(){
+    setTimeout(function(){
       vm.timeToValidate = vm.validateService.checkValidation(vm.info.timeToValidate);
       if(vm.timeToValidate != 'expired'){
         vm.checkValidationInterval();
@@ -57,5 +60,6 @@ export class InfoAttributesPages implements OnInit,OnDestroy {
   }
   ngOnDestroy(){
     this.attributedValidatedEmitter.unsubscribe();
+
   }
 }
