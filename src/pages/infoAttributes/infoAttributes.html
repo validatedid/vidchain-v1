@@ -20,7 +20,7 @@
     <!--</ion-item>-->
   <!--<ion-list >-->
 
-  <ion-list *ngIf="info.type === 'email' ">
+  <ion-list >
     <ion-item >
       <ion-label>{{info.key | capitalize}}</ion-label>
       <ion-input disabled="true" value="{{info.value}}"></ion-input>
@@ -29,9 +29,10 @@
       <ion-label>Validated</ion-label>
       <ion-input disabled="true" value="{{info.validated}}"></ion-input>
     </ion-item>
-    <ion-item *ngIf="info.type === 'email' || info.type === 'phone' && !info.validated">
+    <ion-item *ngIf="(info.type === 'email' || info.type === 'phone') && info.validated === false">
       <ion-label>Time to Validate</ion-label>
       <ion-input disabled="true" value="{{timeToValidate}}"></ion-input>
+      <button item-end (click)="openModalValidate()">Validate</button>
     </ion-item>
   </ion-list>
 </ion-content>

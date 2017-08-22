@@ -12,7 +12,17 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-<div class="time-to-validate">
+    <div class="content-time-to-validate">
+        <span class="time-validate">{{timeToValidate}}</span>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="validateValue()">
+        <ion-item>
+            <ion-label>Code</ion-label>
+            <ion-input type="number" formControlName="code"></ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="showInvalidCode">Invalid Code</div>
 
-</div>
+        <button ion-button full color="primary" type="submit" [disabled]="!formGroup.valid">Submit</button>
+
+    </form>
 </ion-content>

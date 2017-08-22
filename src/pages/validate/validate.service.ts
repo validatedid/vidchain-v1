@@ -11,7 +11,7 @@ import moment from 'moment';
 @Injectable()
 export class ValidateService {
     private interval = 1000;
-
+    public attributedValidated : EventEmitter<any> = new EventEmitter();
     checkValidation(timeToFinish){
         let diffTime = timeToFinish - moment(new Date()).unix();
         let duration= moment.duration(diffTime*1000, 'milliseconds');
@@ -25,5 +25,8 @@ export class ValidateService {
         }
     }
 
+    sendValidator(){
+        //todo falta hacer
+    }
 
 }
