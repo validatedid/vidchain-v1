@@ -23,12 +23,10 @@ export class ListPage implements OnInit,OnDestroy{
   items = JSON.parse(localStorage.getItem('attributes')) || {};
 
   openModal(val,key,index) {
-    console.log(val,key,index)
     let profileModal = this.modalCtrl.create(InfoAttributesPages, { info: val,key:key,index:index});
     profileModal.present();
   }
   removeItem(key,i){
-    console.log(key,i);
     this.items[key].splice(i, 1);
     localStorage.setItem('attributes',JSON.stringify(this.items));
   }

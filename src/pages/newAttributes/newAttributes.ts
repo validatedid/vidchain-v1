@@ -2,10 +2,12 @@
  * Created by alexmarcos on 22/8/17.
  */
 import { Component } from '@angular/core';
-import {ViewController} from "ionic-angular";
+import {ModalController, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NewAttributeService} from "./newAttributes.service";
 import moment from 'moment';
+import {ValidatePage} from "../validate/validate";
+import {ValidateService} from "../validate/validate.service";
 
 @Component({
     selector: 'new-attributes',
@@ -18,7 +20,9 @@ export class NewAttributesPage {
     constructor(
         public viewCtrl: ViewController,
         private formBuilder: FormBuilder,
-        private newAttributedService : NewAttributeService
+        private newAttributedService : NewAttributeService,
+        private validateService : ValidateService,
+        public modalCtrl: ModalController
     ) {
         this.formGroup = this.formBuilder.group({
             typeAttribute: ['email'],
@@ -103,6 +107,12 @@ export class NewAttributesPage {
         }
         else{
             listAttributes[this.formGroup.value.typeAttribute].push(value);
+        }
+
+        if(this.formGroup.value.typeAttribute === 'phone' || this.formGroup.value.typeAttribute === 'email'){
+            this.validateService.sendValidator();
+            let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:this.formGroup.value.typeAttribute,index:listAttributes[this.formGroup.value.typeAttribute].length-1});
+            profileModal.present();
         }
 
         localStorage.setItem('attributes',JSON.stringify(listAttributes));

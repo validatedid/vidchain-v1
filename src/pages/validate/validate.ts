@@ -59,21 +59,18 @@ export class ValidatePage {
     }
 
     saveValidateValue(){
-        console.log(this.info,this.key,this.index);
         let list = JSON.parse(localStorage.getItem('attributes'));
         list[this.key][this.index].validated = true;
         localStorage.setItem('attributes',JSON.stringify(list));
         this.validateService.attributedValidated.emit(list[this.key][this.index]);
     }
     refreshTimeToValidator(){
-        console.log(this.info,this.key,this.index);
         let list = JSON.parse(localStorage.getItem('attributes'));
         list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
         this.info=list[this.key][this.index];
         localStorage.setItem('attributes',JSON.stringify(list));
     }
     validateValue(){
-        console.log(this.formGroup.value);
         if(+this.formGroup.value.code === 6666){
             let toast = this.toastCtrl.create({
                 message: 'Attribute '+this.info.value+' was validated',

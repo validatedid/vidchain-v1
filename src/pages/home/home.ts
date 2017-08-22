@@ -10,7 +10,6 @@ import {NewAttributesPage} from "../newAttributes/newAttributes";
 export class HomePage {
   @ViewChild(Content) content: Content;
   constructor(public modalCtrl: ModalController) {
-    console.log(this.content)
   }
 
   ionViewWillEnter() { // THERE IT IS!!!
@@ -23,7 +22,6 @@ export class HomePage {
   }
 
   newAttributesPage(fab: FabContainer){
-    console.log("hola");
     fab.close();
     let newAttributesModal = this.modalCtrl.create(NewAttributesPage);
     newAttributesModal.present();
