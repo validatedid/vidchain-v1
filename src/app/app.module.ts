@@ -8,10 +8,12 @@ import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { InfoAttributesPages } from '../pages/infoAttributes/infoAttributes';
 import { ListPage } from '../pages/list/list';
+import { NewAttributesPage } from "../pages/newAttributes/newAttributes";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     LoginPage,
     TabsPage,
     ListPage,
-    InfoAttributesPages
+    InfoAttributesPages,
+    NewAttributesPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     LoginPage,
     TabsPage,
     ListPage,
-    InfoAttributesPages
+    InfoAttributesPages,
+    NewAttributesPage
   ],
   providers: [
     StatusBar,
