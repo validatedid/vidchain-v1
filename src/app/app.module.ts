@@ -18,6 +18,7 @@ import {CapitalizePipe} from "../pipes/CapitalizePipe";
 import {KeysPipe} from "../pipes/KeysPipe";
 import {ValidatePage} from "../pages/validate/validate";
 import {ValidateService} from "../pages/validate/validate.service";
+import {HttpModule} from "@angular/http";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {ValidateService} from "../pages/validate/validate.service";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       tabsPlacement: 'top',
       platforms: {

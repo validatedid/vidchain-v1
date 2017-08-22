@@ -1,26 +1,82 @@
+import {Http, RequestOptions, Headers} from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import {AlertController} from "ionic-angular";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
 
-  constructor(private barcodeScanner: BarcodeScanner) {
+  private URL_HOST = "http://192.168.1.6:8818/";
+  private URL_CONFIRM_LOGIN = this.URL_HOST + "confirm_login.php";
+  constructor(private barcodeScanner: BarcodeScanner,
+              private http:Http,
+              private alertCtrl: AlertController) {
 
   }
 
   readQR(){
     let options = {
-      resultDisplayDuration : 4000,
       showTorchButton : true,
       showFlipCameraButton : true
     };
 
     this.barcodeScanner.scan(options).then((barcodeData) => {
-      // Success! Barcode data is here
+      if(!barcodeData.cancelled && barcodeData.text.indexOf('vidchain') != -1){
+        this.http.get(this.URL_CONFIRM_LOGIN+'?id='+barcodeData.text).map(res => res.json()).subscribe(data => {
+          console.log(data);
+          let message = "Do you want to send this Attributes: ";
+          data.userinfo.forEach((val,index)=>{
+            message +="<br/> - "+val;
+          });
+          let alert = this.alertCtrl.create({
+            title: 'Login',
+            message: message,
+            buttons: [
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                  console.log('Cancel clicked');
+                }
+              },
+              {
+                text: 'Send',
+                handler: () => {
+                  let headers = new Headers({ 'Content-Type': 'application/json',
+                    'Accept': 'q=0.8;application/json;q=0.9' });
+                  let options = new RequestOptions({ headers: headers });
+                  let values = {
+                    'name': 'Pepito',
+                    'email': 'pepito@gmail.com',
+                    'nif': null,
+                    'phone': '666123123'
+                  };
+
+                  this.http.post(this.URL_CONFIRM_LOGIN, JSON.stringify(values), options).toPromise()
+                      .then((val)=>{
+                        console.log(val);
+                        let alert = this.alertCtrl.create({
+                          title: 'Login',
+                          subTitle: 'Login Done',
+                          buttons: ['Dismiss']
+                        });
+                        alert.present();
+                      });
+                }
+              }
+            ]
+          });
+          alert.present();
+        });
+      }
     }, (err) => {
       // An error occurred
     });
+
+
   }
 }
