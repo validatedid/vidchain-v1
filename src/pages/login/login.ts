@@ -1,14 +1,26 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
 
-  constructor() {
+  constructor(private barcodeScanner: BarcodeScanner) {
 
   }
 
+  readQR(){
+    let options = {
+      resultDisplayDuration : 4000,
+      showTorchButton : true,
+      showFlipCameraButton : true
+    };
+
+    this.barcodeScanner.scan(options).then((barcodeData) => {
+      // Success! Barcode data is here
+    }, (err) => {
+      // An error occurred
+    });
+  }
 }

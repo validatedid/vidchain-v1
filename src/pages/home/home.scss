@@ -1,5 +1,8 @@
 page-home {
   overflow: hidden;
+  ion-fab[top][edge]{
+    top:0
+  }
   .fixed-content{
     margin-top: 0 !important;
   }

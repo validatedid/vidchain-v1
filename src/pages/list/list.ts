@@ -35,4 +35,7 @@ export class ListPage {
     let profileModal = this.modalCtrl.create(InfoAttributesPages, { info: val });
     profileModal.present();
   }
+  removeItem(i){
+    this.items.splice(i, 1);
+  }
 }
