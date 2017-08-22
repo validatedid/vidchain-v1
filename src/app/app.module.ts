@@ -16,6 +16,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import {NewAttributeService} from "../pages/newAttributes/newAttributes.service";
 import {CapitalizePipe} from "../pipes/CapitalizePipe";
 import {KeysPipe} from "../pipes/KeysPipe";
+import {ValidatePage} from "../pages/validate/validate";
+import {ValidateService} from "../pages/validate/validate.service";
 
 
 @NgModule({
@@ -27,6 +29,7 @@ import {KeysPipe} from "../pipes/KeysPipe";
     ListPage,
     InfoAttributesPages,
     NewAttributesPage,
+    ValidatePage,
     CapitalizePipe,
     KeysPipe
   ],
@@ -55,13 +58,15 @@ import {KeysPipe} from "../pipes/KeysPipe";
     TabsPage,
     ListPage,
     InfoAttributesPages,
-    NewAttributesPage
+    NewAttributesPage,
+    ValidatePage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
     NewAttributeService,
+    ValidateService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

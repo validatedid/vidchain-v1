@@ -11,11 +11,27 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let key of info | keys">
-      <ion-label>{{key | capitalize}}</ion-label>
-      <ion-input type="text" disabled="true" value="{{info[key]}}"></ion-input>
+  <!--<ion-list>-->
+    <!--<ion-item *ngFor="let key of info | keys">-->
+      <!--<ion-label>{{key | capitalize}}</ion-label>-->
+      <!--<ion-input type="text" disabled="true" value="{{info[key]}}"></ion-input>-->
+    <!--</ion-item>-->
+  <!--<ion-list >-->
+
+  <ion-list *ngIf="info.type === 'email' ">
+    <ion-item >
+      <ion-label>{{info.key | capitalize}}</ion-label>
+      <ion-input disabled="true" value="{{info.value}}"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="info.type === 'email' || info.type === 'phone'">
+      <ion-label>Validated</ion-label>
+      <ion-input disabled="true" value="{{info.validated}}"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="info.type === 'email' || info.type === 'phone' && !info.validated">
+      <ion-label>Time to Validate</ion-label>
+      <ion-input disabled="true" value="{{timeToValidate}}"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>
