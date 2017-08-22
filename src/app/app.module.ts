@@ -13,6 +13,9 @@ import { NewAttributesPage } from "../pages/newAttributes/newAttributes";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import {NewAttributeService} from "../pages/newAttributes/newAttributes.service";
+import {CapitalizePipe} from "../pipes/CapitalizePipe";
+import {KeysPipe} from "../pipes/KeysPipe";
 
 
 @NgModule({
@@ -23,7 +26,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     TabsPage,
     ListPage,
     InfoAttributesPages,
-    NewAttributesPage
+    NewAttributesPage,
+    CapitalizePipe,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    NewAttributeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

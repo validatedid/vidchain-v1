@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content, ModalController} from "ionic-angular";
+import {Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
 
 
@@ -17,12 +17,14 @@ export class HomePage {
     this.content._elementRef.nativeElement.childNodes[1].classList.add("no-header")
   }
 
-  notImplemented(){
+  notImplemented(fab: FabContainer){
     alert("not implemented");
+    fab.close();
   }
 
-  newAttributesPage(){
+  newAttributesPage(fab: FabContainer){
     console.log("hola");
+    fab.close();
     let newAttributesModal = this.modalCtrl.create(NewAttributesPage);
     newAttributesModal.present();
   }

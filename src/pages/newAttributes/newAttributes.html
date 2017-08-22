@@ -12,5 +12,37 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    {{info}}
+    <ion-list>
+        <form [formGroup]="formGroup" (ngSubmit)="addNewAttribute()">
+            <ion-item>
+                <ion-label>Type</ion-label>
+                <ion-select formControlName="typeAttribute">
+                    <ion-option value="email">Email</ion-option>
+                    <ion-option value="phone">Phone</ion-option>
+                    <ion-option value="other">Other</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="formGroup.value.typeAttribute === 'email'">
+                <ion-label>Email</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="formGroup.value.typeAttribute === 'phone'">
+                <ion-label>Phone</ion-label>
+                <ion-input type="phone" formControlName="phone"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="formGroup.value.typeAttribute === 'other'">
+                <ion-label>Key</ion-label>
+                <ion-input type="text" formControlName="key"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="formGroup.value.typeAttribute === 'other'">
+                <ion-label>Value</ion-label>
+                <ion-input type="text" formControlName="value"></ion-input>
+            </ion-item>
+            <div padding>
+                <button ion-button color="primary" type="submit" [disabled]="checkSubmit()">Submit</button>
+            </div>
+
+        </form>
+    </ion-list>
 </ion-content>
+

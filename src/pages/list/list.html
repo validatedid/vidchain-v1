@@ -1,19 +1,22 @@
-<ion-content padding>
+<ion-content>
     <ion-list>
-        <ion-item-sliding *ngFor="let item of items;let i =index " >
-            <ion-item>
-                {{ item }}
-                <button class="info-attribute" ion-button clear item-end (click)="openModal(item)">
-                    <ion-icon name="information-circle"></ion-icon>
-                </button>
-            </ion-item>
-            <ion-item-options side="right" (ionSwipe)="removeItem(i,item)">
-                <button color="danger" ion-button expandable (click)="removeItem(i,item)">
-                    <ion-icon name="trash"></ion-icon>
-                </button>
-            </ion-item-options>
+        <ion-item-group *ngFor="let groupItems of items | keys">
+            <ion-item-divider *ngIf="items[groupItems].length > 0" color="light">{{groupItems | capitalize}}</ion-item-divider>
+            <ion-item-sliding *ngFor="let item of items[groupItems]; let i = index">
+                <ion-item>
+                    {{ item.value }}
+                    <button class="info-attribute" ion-button clear item-end (click)="openModal(item)">
+                        <ion-icon name="information-circle"></ion-icon>
+                    </button>
+                </ion-item>
+                <ion-item-options side="right" >
+                    <button color="danger" ion-button expandable (click)="removeItem(groupItems,i,item)">
+                        <ion-icon name="trash"></ion-icon>
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-item-group>
 
-        </ion-item-sliding>
 
     </ion-list>
 </ion-content>

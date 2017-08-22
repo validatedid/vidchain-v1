@@ -12,12 +12,12 @@
     <!--</ion-buttons>-->
   </ion-navbar>
 </ion-header>
-<ion-fab top right edge>
+<ion-fab top right edge #fab>
   <button ion-fab mini><ion-icon name="add"></ion-icon></button>
   <ion-fab-list>
-    <button ion-fab (click)="notImplemented()"><ion-icon name="logo-facebook" ></ion-icon></button>
-    <button ion-fab (click)="notImplemented()"><ion-icon name="logo-googleplus" ></ion-icon></button>
-    <button ion-fab (click)="newAttributesPage()"><ion-icon name="add" ></ion-icon></button>
+    <button ion-fab (click)="notImplemented(fab)"><ion-icon name="logo-facebook" ></ion-icon></button>
+    <button ion-fab (click)="notImplemented(fab)"><ion-icon name="logo-googleplus" ></ion-icon></button>
+    <button ion-fab (click)="newAttributesPage(fab)"><ion-icon name="add" ></ion-icon></button>
   </ion-fab-list>
 </ion-fab>
 <ion-content >

@@ -12,5 +12,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-{{info}}
+  <ion-list>
+    <ion-item *ngFor="let key of info | keys">
+      <ion-label>{{key | capitalize}}</ion-label>
+      <ion-input type="text" disabled="true" value="{{info[key]}}"></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>
