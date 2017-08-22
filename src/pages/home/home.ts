@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content} from "ionic-angular";
+import {Content, ModalController} from "ionic-angular";
+import {NewAttributesPage} from "../newAttributes/newAttributes";
 
 
 @Component({
@@ -8,11 +9,21 @@ import {Content} from "ionic-angular";
 })
 export class HomePage {
   @ViewChild(Content) content: Content;
-  constructor() {
+  constructor(public modalCtrl: ModalController) {
     console.log(this.content)
   }
 
   ionViewWillEnter() { // THERE IT IS!!!
     this.content._elementRef.nativeElement.childNodes[1].classList.add("no-header")
+  }
+
+  notImplemented(){
+    alert("not implemented");
+  }
+
+  newAttributesPage(){
+    console.log("hola");
+    let newAttributesModal = this.modalCtrl.create(NewAttributesPage);
+    newAttributesModal.present();
   }
 }
