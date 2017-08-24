@@ -21,9 +21,9 @@ export class HomePage {
     fab.close();
   }
 
-  newAttributesPage(fab: FabContainer){
+  newAttributesPage(fab: FabContainer,type){
     fab.close();
-    let newAttributesModal = this.modalCtrl.create(NewAttributesPage);
+    let newAttributesModal = this.modalCtrl.create(NewAttributesPage,{type:type});
     newAttributesModal.present();
   }
 }

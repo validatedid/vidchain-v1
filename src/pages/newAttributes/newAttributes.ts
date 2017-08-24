@@ -2,7 +2,7 @@
  * Created by alexmarcos on 22/8/17.
  */
 import { Component } from '@angular/core';
-import {ModalController, ViewController} from "ionic-angular";
+import {ModalController, NavParams, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NewAttributeService} from "./newAttributes.service";
 import moment from 'moment';
@@ -22,10 +22,12 @@ export class NewAttributesPage {
         private formBuilder: FormBuilder,
         private newAttributedService : NewAttributeService,
         private validateService : ValidateService,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        public params: NavParams
     ) {
+        let type = params.get('type') || 'other';
         this.formGroup = this.formBuilder.group({
-            typeAttribute: ['email'],
+            typeAttribute: [type],
             email: ['',Validators.email],
             phone: [''],
             key: [''],

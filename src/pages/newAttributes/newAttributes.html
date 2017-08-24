@@ -14,14 +14,14 @@
 <ion-content>
     <ion-list>
         <form [formGroup]="formGroup" (ngSubmit)="addNewAttribute()">
-            <ion-item>
-                <ion-label>Type</ion-label>
-                <ion-select formControlName="typeAttribute">
-                    <ion-option value="email">Email</ion-option>
-                    <ion-option value="phone">Phone</ion-option>
-                    <ion-option value="other">Other</ion-option>
-                </ion-select>
-            </ion-item>
+            <!--<ion-item>-->
+                <!--<ion-label>Type</ion-label>-->
+                <!--<ion-select formControlName="typeAttribute">-->
+                    <!--<ion-option value="email">Email</ion-option>-->
+                    <!--<ion-option value="phone">Phone</ion-option>-->
+                    <!--<ion-option value="other">Other</ion-option>-->
+                <!--</ion-select>-->
+            <!--</ion-item>-->
             <ion-item *ngIf="formGroup.value.typeAttribute === 'email'">
                 <ion-label>Email</ion-label>
                 <ion-input type="email" formControlName="email"></ion-input>
