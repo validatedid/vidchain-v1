@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content, FabContainer, ModalController} from "ionic-angular";
+import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
 
 
@@ -9,7 +9,8 @@ import {NewAttributesPage} from "../newAttributes/newAttributes";
 })
 export class HomePage {
   @ViewChild(Content) content: Content;
-  constructor(public modalCtrl: ModalController) {
+  constructor(public modalCtrl: ModalController,
+              public alertCtrl: AlertController) {
   }
 
   ionViewWillEnter() { // THERE IT IS!!!
@@ -17,7 +18,12 @@ export class HomePage {
   }
 
   notImplemented(fab: FabContainer){
-    alert("not implemented");
+    let alert = this.alertCtrl.create({
+      title: 'Alert!',
+      subTitle: 'not implemented',
+      buttons: ['OK']
+    });
+    alert.present();
     fab.close();
   }
 

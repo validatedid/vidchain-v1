@@ -1,5 +1,5 @@
 import { Component ,OnInit , OnDestroy} from '@angular/core';
-import {ModalController} from "ionic-angular";
+import {AlertController, ModalController} from "ionic-angular";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import {ValidateService} from "../validate/validate.service";
@@ -16,7 +16,8 @@ export class ListPage implements OnInit,OnDestroy{
   public availablesEmptyGroups : Array<string>;
   constructor(public modalCtrl: ModalController,
               private validateService: ValidateService,
-              private newAttributesService: NewAttributeService,) {
+              private newAttributesService: NewAttributeService,
+              public alertCtrl: AlertController) {
 
     this.availablesEmptyGroups = Constants.AVAILABLES_EMPTY_GROUPS;
   }
@@ -38,13 +39,20 @@ export class ListPage implements OnInit,OnDestroy{
     profileModal.present();
   }
   removeItem(key,i){
-    console.log(key);
     this.items[key].splice(i, 1);
     localStorage.setItem('attributes',JSON.stringify(this.items));
   }
   checkShowDivider(group){
     let indexPosibleGroup =this.availablesEmptyGroups.indexOf(group);
     return (this.items[group].length > 0 || indexPosibleGroup > -1);
+  }
+  alertValidate(){
+    let alert = this.alertCtrl.create({
+      title: 'Alert!',
+      subTitle: 'this attribute isn\'t validate',
+      buttons: ['OK']
+    });
+    alert.present();
   }
   ngOnDestroy(){
     this.newAttributesEmitter.unsubscribe();
