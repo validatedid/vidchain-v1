@@ -30,6 +30,7 @@ export class ListPage implements OnInit,OnDestroy{
 
   openModal(val,key,index) {
     let profileModal = this.modalCtrl.create(InfoAttributesPages, { info: val,key:key,index:index});
+
     profileModal.present();
   }
   removeItem(key,i){

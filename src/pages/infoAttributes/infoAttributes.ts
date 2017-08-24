@@ -39,6 +39,12 @@ export class InfoAttributesPages implements OnInit,OnDestroy {
   }
   openModalValidate() {
     let profileModal = this.modalCtrl.create(ValidatePage, { info: this.info,key:this.key,index:this.index});
+    profileModal.onDidDismiss((data)=>{
+      console.log("hola");
+      let items = JSON.parse(localStorage.getItem('attributes')) || {};
+      this.info = items[this.key][this.index];
+      this.checkValidationInterval();
+    });
     profileModal.present();
   }
 

@@ -9,8 +9,8 @@ import {AlertController} from "ionic-angular";
   templateUrl: 'login.html'
 })
 export class LoginPage {
-
-  private URL_HOST = "http://192.168.1.6:8818/";
+  public IP = "146.185.128.193/vidchain/";
+  private URL_HOST = "http://"+this.IP;
   private URL_CONFIRM_LOGIN = this.URL_HOST + "confirm_login.php";
   constructor(private barcodeScanner: BarcodeScanner,
               private http:Http,
@@ -26,6 +26,8 @@ export class LoginPage {
 
     this.barcodeScanner.scan(options).then((barcodeData) => {
       if(!barcodeData.cancelled && barcodeData.text.indexOf('vidchain') != -1){
+        this.URL_HOST = "http://"+this.IP;
+        this.URL_CONFIRM_LOGIN = this.URL_HOST + "confirm_login.php";
         this.http.get(this.URL_CONFIRM_LOGIN+'?id='+barcodeData.text).map(res => res.json()).subscribe(data => {
           console.log(data);
           let message = "Do you want to send this Attributes: ";

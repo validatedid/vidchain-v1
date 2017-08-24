@@ -47,13 +47,13 @@ export class ValidatePage {
                 vm.checkValidationInterval();
             }
             else{
-                let toast = this.toastCtrl.create({
-                    message: 'Attribute '+this.info.value+' was expired, try again',
+                let toast = vm.toastCtrl.create({
+                    message: 'Attribute '+vm.info.value+' was expired, try again',
                     duration: 3000,
                     position: 'top'
                 });
                 toast.present();
-                this.closeModal();
+                vm.closeModal();
             }
         }, interval);
     }
