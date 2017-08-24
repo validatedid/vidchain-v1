@@ -1,7 +1,7 @@
 <ion-content>
     <ion-list>
         <ion-item-group *ngFor="let groupItems of items | keys;let i = index">
-            <ion-item-divider *ngIf="items[groupItems].length > 0" color="light">{{groupItems | capitalize}}</ion-item-divider>
+            <ion-item-divider *ngIf="checkShowDivider(groupItems)"  color="light">{{groupItems | capitalize}}</ion-item-divider>
             <ion-item-sliding *ngFor="let item of items[groupItems]; let i2 = index">
                 <ion-item>
                     {{ item.value }}

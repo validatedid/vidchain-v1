@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import Constants from "../constants";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,6 +24,8 @@ export class MyApp {
       { title: 'Home', component: HomePage }
     ];
 
+
+
   }
 
   initializeApp() {
@@ -32,6 +35,14 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    //check if exist default attributes
+    let attributes = JSON.parse(localStorage.getItem('attributes'));
+    for(let groupAttr of Constants.AVAILABLES_EMPTY_GROUPS){
+      if(!attributes[groupAttr]){
+        attributes[groupAttr]=[];
+      }
+    }
+    localStorage.setItem('attributes',JSON.stringify(attributes));
   }
 
   openPage(page) {

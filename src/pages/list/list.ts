@@ -3,6 +3,7 @@ import {ModalController} from "ionic-angular";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import {ValidateService} from "../validate/validate.service";
+import Constants from "../../constants";
 
 @Component({
   selector: 'page-list',
@@ -12,15 +13,18 @@ export class ListPage implements OnInit,OnDestroy{
 
   private newAttributesEmitter;
   private attributedValidatedEmitter;
+  public availablesEmptyGroups : Array<string>;
   constructor(public modalCtrl: ModalController,
               private validateService: ValidateService,
               private newAttributesService: NewAttributeService,) {
+
+    this.availablesEmptyGroups = Constants.AVAILABLES_EMPTY_GROUPS;
   }
 
   ngOnInit(){
     this.newAttributesEmitter = this.newAttributesService.attributeAddEmitter.subscribe((val)=>{
       this.items = JSON.parse(localStorage.getItem('attributes')) || {};
-    })
+    });
     this.attributedValidatedEmitter = this.validateService.attributedValidated.subscribe((val)=>{
       this.items = JSON.parse(localStorage.getItem('attributes')) || {};
     });
@@ -37,6 +41,10 @@ export class ListPage implements OnInit,OnDestroy{
     console.log(key);
     this.items[key].splice(i, 1);
     localStorage.setItem('attributes',JSON.stringify(this.items));
+  }
+  checkShowDivider(group){
+    let indexPosibleGroup =this.availablesEmptyGroups.indexOf(group);
+    return (this.items[group].length > 0 || indexPosibleGroup > -1);
   }
   ngOnDestroy(){
     this.newAttributesEmitter.unsubscribe();
