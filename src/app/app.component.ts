@@ -37,6 +37,9 @@ export class MyApp {
     });
     //check if exist default attributes
     let attributes = JSON.parse(localStorage.getItem('attributes'));
+    if(!attributes){
+      attributes = {};
+    }
     for(let groupAttr of Constants.AVAILABLES_EMPTY_GROUPS){
       if(!attributes[groupAttr]){
         attributes[groupAttr]=[];

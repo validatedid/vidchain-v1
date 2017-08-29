@@ -26,11 +26,12 @@ export class NewAttributesPage {
         public params: NavParams
     ) {
         let type = params.get('type') || 'other';
+        let name = params.get('key') || '';
         this.formGroup = this.formBuilder.group({
             typeAttribute: [type],
             email: ['',Validators.email],
             phone: [''],
-            key: [''],
+            key: [name],
             value: ['']
 
         });

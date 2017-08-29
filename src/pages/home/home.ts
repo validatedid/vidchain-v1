@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
+import {SendAttributesPage} from "../sendAttributes/sendAttributes";
 
 
 @Component({

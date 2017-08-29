@@ -49,7 +49,7 @@ export class ListPage implements OnInit,OnDestroy{
   alertValidate(){
     let alert = this.alertCtrl.create({
       title: 'Alert!',
-      subTitle: 'this attribute isn\'t validate',
+      subTitle: 'this attribute is not validate',
       buttons: ['OK']
     });
     alert.present();

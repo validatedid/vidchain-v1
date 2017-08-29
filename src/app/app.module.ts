@@ -17,6 +17,7 @@ import {NewAttributeService} from "../pages/newAttributes/newAttributes.service"
 import {CapitalizePipe} from "../pipes/CapitalizePipe";
 import {KeysPipe} from "../pipes/KeysPipe";
 import {ValidatePage} from "../pages/validate/validate";
+import {SendAttributesPage} from "../pages/sendAttributes/sendAttributes";
 import {ValidateService} from "../pages/validate/validate.service";
 import {HttpModule} from "@angular/http";
 
@@ -31,6 +32,7 @@ import {HttpModule} from "@angular/http";
     InfoAttributesPages,
     NewAttributesPage,
     ValidatePage,
+    SendAttributesPage,
     CapitalizePipe,
     KeysPipe
   ],
@@ -62,6 +64,7 @@ import {HttpModule} from "@angular/http";
     InfoAttributesPages,
     NewAttributesPage,
     ValidatePage,
+    SendAttributesPage
   ],
   providers: [
     StatusBar,
