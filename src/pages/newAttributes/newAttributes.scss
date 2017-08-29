@@ -1,0 +1,44 @@
+@import "../../theme/constant";
+
+new-attributes{
+
+  ion-header{
+    ion-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 90px 1px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      z-index: -1;
+      img {
+        height: 33px;
+      }
+    }
+    ion-buttons{
+      ion-icon{
+        font-size: 4vh;
+      }
+    }
+  }
+
+  ion-content{
+    ion-list{
+      margin-top: 5vh;
+      .content-button-send{
+        margin-top: 2vh;
+        text-align: center;
+        ion-icon{
+          margin-left: 4vh;
+        }
+      }
+    }
+    .info-new-attribute{
+      text-align: center;
+      margin-top: 5vh;
+      font-size: 3vh;
+      color: $blueVidChain;
+    }
+  }
+}

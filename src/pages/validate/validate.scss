@@ -1,9 +1,61 @@
+@import "../../theme/constant";
+@import "../../theme/sass-flexbox";
+
 validate-page{
-  .content-time-to-validate{
-    text-align: center;
-    .time-validate{
-      font-size: 15vh;
+  ion-header{
+    ion-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 90px 1px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      z-index: -1;
+      img {
+        height: 33px;
+      }
+    }
+    ion-buttons{
+      ion-icon{
+        font-size: 4vh;
+      }
     }
   }
+  ion-content{
+
+    ion-item{
+      margin-top: 5vh!important;
+    }
+    .content-time-to-validate{
+      text-align: center;
+      margin-top: 2vh;
+      .time-validate{
+        font-size: 4vh;
+      }
+    }
+    .info-send{
+      font-weight: bold;
+      font-size: 3vh;
+      text-align: center;
+      margin: 4vh 0vh;
+    }
+    .sub-info-send{
+      font-size: 2vh;
+      text-align: center;
+      color:grey;
+      margin: 4vh 0vh;
+    }
+    .content-button-send{
+      padding-left: 6vh;
+      padding-right: 6vh;
+      @include flex-content(row,center,space-around);
+      #resend-button{
+        text-decoration: underline;
+        color:grey;
+      }
+    }
+  }
+
 
 }

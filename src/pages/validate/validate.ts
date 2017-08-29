@@ -67,6 +67,7 @@ export class ValidatePage {
     refreshTimeToValidator(){
         let list = JSON.parse(localStorage.getItem('attributes'));
         list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
+        this.info.timeToValidate = list[this.key][this.index].timeToValidate;
         this.info=list[this.key][this.index];
         localStorage.setItem('attributes',JSON.stringify(list));
     }
