@@ -1,7 +1,7 @@
 /**
  * Created by alexmarcos on 22/8/17.
  */
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NavParams, ToastController, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidateService} from "./validate.service";
@@ -11,13 +11,14 @@ import moment from 'moment';
     selector: 'validate-page',
     templateUrl: 'validate.html'
 })
-export class ValidatePage {
+export class ValidatePage implements OnDestroy{
 
     public info;
     public key;
     public index;
     public showInvalidCode = false;
     public timeToValidate;
+    public timeOutValidation;
     private formGroup : FormGroup;
     constructor(public params: NavParams,
                 public viewCtrl: ViewController,
@@ -41,7 +42,7 @@ export class ValidatePage {
     checkValidationInterval(){
         let interval = 1000;
         let vm = this;
-        setTimeout(function(){
+        this.timeOutValidation = setTimeout(function(){
             vm.timeToValidate = vm.validateService.checkValidation(vm.info.timeToValidate);
             if(vm.timeToValidate != 'expired'){
                 vm.checkValidationInterval();
@@ -91,5 +92,7 @@ export class ValidatePage {
     closeModal(){
         this.viewCtrl.dismiss();
     }
-
+    ngOnDestroy(){
+        clearTimeout( this.timeOutValidation);
+    }
 }

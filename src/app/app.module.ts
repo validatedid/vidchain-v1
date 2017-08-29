@@ -20,7 +20,13 @@ import {ValidatePage} from "../pages/validate/validate";
 import {SendAttributesPage} from "../pages/sendAttributes/sendAttributes";
 import {ValidateService} from "../pages/validate/validate.service";
 import {HttpModule} from "@angular/http";
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '2fad95ab'
+  }
+};
 
 @NgModule({
   declarations: [
@@ -42,6 +48,7 @@ import {HttpModule} from "@angular/http";
     IonicModule.forRoot(MyApp, {
 
     }),
+    CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

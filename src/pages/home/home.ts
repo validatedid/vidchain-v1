@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
-import {SendAttributesPage} from "../sendAttributes/sendAttributes";
+import { Auth, User } from '@ionic/cloud-angular';
 
 
 @Component({
@@ -11,7 +11,8 @@ import {SendAttributesPage} from "../sendAttributes/sendAttributes";
 export class HomePage {
   @ViewChild(Content) content: Content;
   constructor(public modalCtrl: ModalController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public auth: Auth, public user: User) {
   }
 
   ionViewWillEnter() { // THERE IT IS!!!
@@ -32,5 +33,15 @@ export class HomePage {
     fab.close();
     let newAttributesModal = this.modalCtrl.create(NewAttributesPage,{type:type});
     newAttributesModal.present();
+  }
+  loginGoogle(){
+    this.auth.login('google').then( val =>{
+      console.log(val);
+    });
+  }
+  loginFacebook(){
+    this.auth.login('facebook').then( val =>{
+      console.log(val);
+    });
   }
 }

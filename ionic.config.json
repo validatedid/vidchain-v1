@@ -1,6 +1,6 @@
 {
-  "name": "sidemenu",
-  "app_id": "",
+  "name": "vidchain",
+  "app_id": "2fad95ab",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
