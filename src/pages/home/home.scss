@@ -1,3 +1,5 @@
+@import "../../theme/constant";
+
 page-home {
   overflow: hidden;
   ion-fab[top][edge]{
@@ -10,32 +12,28 @@ page-home {
     margin-top: 0!important;
     overflow: hidden;
     .content-profile{
-      padding-top: 44px;
+      padding-top: 10vh;
+      position: absolute;
+      width: 100%;
+      z-index: 2;
     }
   }
   .content-profile{
     //position: absolute;
     //top: 0;
     height: 30vh;
-    background: rgba(40,147,247,1);
-    background: -moz-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(40,147,247,1)), color-stop(100%, rgba(133,189,245,1)));
-    background: -webkit-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
-    background: -o-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
-    background: -ms-linear-gradient(top, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
-    background: linear-gradient(to bottom, rgba(40,147,247,1) 0%, rgba(133,189,245,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2893f7', endColorstr='#85bdf5', GradientType=0 );
-
+    background: $blueVidChain;
     .profile-avatar{
       background-color: white;
-      background-image: url(../../assets/img/empty_profile.png);
-      width: 17vh;
-      height: 17vh;
+      background-image: url(../assets/img/empty_profile.png);
+      width: 24vh;
+      height: 24vh;
       background-size: contain;
       background-position: center;
       border-radius: 50%;
       background-repeat: no-repeat;
       margin: 0 auto;
+      border : 5px solid white;
     }
   }
   ion-header{
@@ -52,6 +50,38 @@ page-home {
     }
     &::after {
       background-image: none!important;
+    }
+    ion-title{
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 90px 1px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      img{
+        height: 33px;
+      }
+    }
+  }
+  ion-fab{
+    button[color="secondary"]{
+      ion-icon{
+        color:white;
+      }
+
+    }
+    ion-icon{
+      color: $blueVidChain;
+    }
+  }
+
+  ion-tabs{
+    .tab-button[aria-selected=true]{
+      color: $greenVidChain!important;
+    }
+    .tab-button{
+      color: $blueVidChain!important;
     }
   }
 }
