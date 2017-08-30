@@ -13,11 +13,11 @@
     <ion-toolbar color="primary">
         <ion-buttons >
             <button ion-button >
-                <ion-icon *ngIf="formGroup.value.typeAttribute === 'email'" start name="mail"></ion-icon>
-                <ion-icon *ngIf="formGroup.value.typeAttribute === 'phone'" start name="call"></ion-icon>
+                <ion-icon *ngIf="formGroup.value.type === 'email'" start name="mail"></ion-icon>
+                <ion-icon *ngIf="formGroup.value.type === 'phone'" start name="call"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title> New {{formGroup.value.typeAttribute === 'other'? 'Attribute':(formGroup.value.typeAttribute | capitalize)}}</ion-title>
+        <ion-title> New {{formGroup.value.type === 'other'? 'Attribute':(formGroup.value.type | capitalize)}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -33,32 +33,28 @@
                     <!--<ion-option value="other">Other</ion-option>-->
                 <!--</ion-select>-->
             <!--</ion-item>-->
-            <ion-item *ngIf="formGroup.value.typeAttribute === 'email'">
-                <ion-label>Type your email address</ion-label>
-                <ion-input type="email" formControlName="email"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="formGroup.value.typeAttribute === 'phone'">
-                <ion-label>Type your phone</ion-label>
-                <ion-input type="phone" formControlName="phone"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="formGroup.value.typeAttribute === 'other'">
+            <ion-item *ngIf="formGroup.value.type === 'other'">
                 <ion-label>Type your custom Key</ion-label>
                 <ion-input type="text" formControlName="key"></ion-input>
             </ion-item>
-            <ion-item *ngIf="formGroup.value.typeAttribute === 'other'">
-                <ion-label>Value</ion-label>
+            <ion-item>
+                <ion-label *ngIf="formGroup.value.type === 'email'" >Type your email address</ion-label>
+                <ion-label *ngIf="formGroup.value.type === 'phone'" >Type your phone</ion-label>
+                <ion-label *ngIf="formGroup.value.type === 'other'" >Value</ion-label>
                 <ion-input type="text" formControlName="value"></ion-input>
             </ion-item>
-            <div class="info-new-attribute" *ngIf="formGroup.value.typeAttribute === 'email'">
+
+
+            <div class="info-new-attribute" *ngIf="formGroup.value.type === 'email'">
                 You’ll receive a verification code in your inbox
             </div>
-            <div class="info-new-attribute"  *ngIf="formGroup.value.typeAttribute === 'phone'">
+            <div class="info-new-attribute"  *ngIf="formGroup.value.type === 'phone'">
                 You’ll receive a verification code in your mobile
             </div>
             <div class="content-button-send">
                 <button ion-button color="secondary" type="submit" [disabled]="checkSubmit()">Send now!
-                    <ion-icon *ngIf="formGroup.value.typeAttribute === 'email'" start name="mail"></ion-icon>
-                    <ion-icon *ngIf="formGroup.value.typeAttribute === 'phone'" start name="call"></ion-icon>
+                    <ion-icon *ngIf="formGroup.value.type === 'email'" start name="mail"></ion-icon>
+                    <ion-icon *ngIf="formGroup.value.type === 'phone'" start name="call"></ion-icon>
                 </button>
             </div>
 

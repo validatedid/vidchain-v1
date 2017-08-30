@@ -1,22 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import Constants from "../constants";
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnDestroy{
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public push: Push) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -24,7 +28,16 @@ export class MyApp {
       { title: 'Home', component: HomePage }
     ];
 
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
 
+    this.push.rx.notification()
+        .subscribe((msg) => {
+          alert(msg.title + ': ' + msg.text);
+        });
 
   }
 
@@ -52,5 +65,9 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  ngOnDestroy(){
+
   }
 }

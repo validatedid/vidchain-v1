@@ -16,7 +16,7 @@ import {ValidateService} from "../validate/validate.service";
 
 export class NewAttributesPage {
     private formGroup : FormGroup;
-    public typeAttribute;
+    public type;
     constructor(
         public viewCtrl: ViewController,
         private formBuilder: FormBuilder,
@@ -27,80 +27,37 @@ export class NewAttributesPage {
     ) {
         let type = params.get('type') || 'other';
         let name = params.get('key') || '';
+
+        let validator = type==='email'?Validators.email:'';
         this.formGroup = this.formBuilder.group({
-            typeAttribute: [type],
-            email: ['',Validators.email],
-            phone: [''],
-            key: [name],
-            value: ['']
+            type: [type],
+            key: [type ==='email'?type:type=='phone'?type:name],
+            value: ['',validator]
 
         });
+
 
     }
 
     checkSubmit(){
-        let checkFn = {};
-        checkFn['email'] = ()=>{
-            if(this.formGroup.value.email !== '' && this.formGroup.valid){
-                return false
-            }
-            return true;
-        };
-        checkFn['phone'] = ()=>{
-            if(this.formGroup.value.phone !== ''){
-                return false
-            }
-            return true;
-        };
-        checkFn['other'] = () =>{
-            if(this.formGroup.value.key !== '' && this.formGroup.value.value !=='' && (this.formGroup.value.key !== 'email' && this.formGroup.value.key !== 'phone')){
-                return false
-            }
-            return true;
-        };
-        return checkFn[this.formGroup.value.typeAttribute]();
+
+        if(this.formGroup.value.key !== '' && this.formGroup.value.value !=='' && this.formGroup.valid){
+            return false
+        }
+        return true;
+
     }
 
     addFormatAttribute(){
-        let checkFn = {};
-        checkFn['email'] = ()=>{
-            return {
-                type : this.formGroup.value.typeAttribute,
-                key : this.formGroup.value.typeAttribute,
-                value : this.formGroup.value.email,
-                timeToValidate : 'expired',
-                validated : false,
-                source : 'manual',
-                createdAt:moment(new Date()).unix()
-            };
-        };
-        checkFn['phone'] = ()=>{
-            return {
-                type : this.formGroup.value.typeAttribute,
-                key : this.formGroup.value.typeAttribute,
-                value : this.formGroup.value.phone,
-                timeToValidate : 'expired',
-                validated : false,
-                source : 'manual',
-                createdAt:moment(new Date()).unix()
-            };
-        };
-        checkFn['other'] = () =>{
-            return {
-                type : this.formGroup.value.key,
-                key : this.formGroup.value.key,
-                value : this.formGroup.value.value,
-                validated : true,
-                source : 'manual',
-                createdAt:moment(new Date()).unix()
-            };
-        };
+
 
         let listAttributes = JSON.parse(localStorage.getItem('attributes'));
+
         if(!listAttributes){
             listAttributes = {}
         }
-        let value = checkFn[this.formGroup.value.typeAttribute]();
+
+        let value = this.newAttributedService.createNewAttribute(this.formGroup.value);
 
         if(!listAttributes[value.type]){
             listAttributes[value.type] = []
@@ -115,8 +72,7 @@ export class NewAttributesPage {
         }
 
         if(value.type === 'phone' || value.type === 'email'){
-
-            let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:value.key,index:listAttributes[this.formGroup.value.typeAttribute].length-1});
+            let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:value.key,index:listAttributes[this.formGroup.value.type].length-1});
             profileModal.present();
         }
 

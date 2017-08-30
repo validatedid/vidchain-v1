@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
-import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
+import { FacebookAuth, Auth, User,UserSocialDetails } from '@ionic/cloud-angular';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class HomePage {
               public user: User,
               public facebookAuth: FacebookAuth) {
 
-
+          console.log(user);
 
   }
 
@@ -43,6 +43,7 @@ export class HomePage {
     this.auth.login('google').then();
   }
   loginFacebook(){
+    this.facebookAuth.logout();
     this.facebookAuth.login().then( val =>{
       console.log(val);
     }).catch(err =>{

@@ -13,8 +13,9 @@ import {ListPage} from "../list/list";
 })
 export class TabsPage {
 
-    tab1Root = ListPage;
-    tab2Root = LoginPage;
+
+    tab1Root = LoginPage;
+    tab2Root = ListPage;
 
     constructor(public navCtrl: NavController) {
 

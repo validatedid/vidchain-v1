@@ -28,7 +28,22 @@ const cloudSettings: CloudSettings = {
   },
   'auth': {
     'facebook': {
-      'scope': ['user_about_me']
+      'scope': ['user_about_me','email','public_profile','user_birthday','user_hometown']
+    }
+  },
+  'push': {
+    'sender_id': '636222461475',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434',
+        'forceShow': true,
+        'sound': true,
+        'vibrate' : true
+      }
     }
   }
 };
