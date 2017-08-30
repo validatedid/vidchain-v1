@@ -25,17 +25,9 @@
 
     <ion-list padding="">
         <form [formGroup]="formGroup" (ngSubmit)="addNewAttribute()">
-            <!--<ion-item>-->
-                <!--<ion-label>Type</ion-label>-->
-                <!--<ion-select formControlName="typeAttribute">-->
-                    <!--<ion-option value="email">Email</ion-option>-->
-                    <!--<ion-option value="phone">Phone</ion-option>-->
-                    <!--<ion-option value="other">Other</ion-option>-->
-                <!--</ion-select>-->
-            <!--</ion-item>-->
             <ion-item *ngIf="formGroup.value.type === 'other'">
                 <ion-label>Type your custom Key</ion-label>
-                <ion-input type="text" formControlName="key"></ion-input>
+                <ion-input type="text" formControlName="key" disabled="true"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label *ngIf="formGroup.value.type === 'email'" >Type your email address</ion-label>

@@ -81,6 +81,7 @@ export class SendAttributesPage {
             'Accept': 'q=0.8;application/json;q=0.9' });
         let options = new RequestOptions({ headers: headers });
         let vm = this;
+        this.result['token'] = JSON.parse(localStorage['ionic_push_token'])['token'];
         this.http.post(CONSTANT.URL.URL_CONFIRM_LOGIN, JSON.stringify(this.result), options).toPromise()
             .then((val)=>{
                 console.log(val);

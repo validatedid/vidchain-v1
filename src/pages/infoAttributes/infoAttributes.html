@@ -22,11 +22,13 @@
       <!--<ion-input type="text" disabled="true" value="{{info[key]}}"></ion-input>-->
     <!--</ion-item>-->
   <!--<ion-list >-->
-
+  <img *ngIf="info.key == 'photo'" src="{{info.value}}">
   <ion-list >
     <ion-item >
       <ion-label>{{info.key | capitalize}}</ion-label>
-      <ion-input disabled="true" value="{{info.value}}"></ion-input>
+      <ion-input *ngIf="info.key != 'photo'" disabled="true" value="{{info.value}}"></ion-input>
+      {{info.value}}
+      <img *ngIf="info.key == 'photo'" src="{{info.value}}">
     </ion-item>
     <ion-item >
       <ion-label>Create Date</ion-label>

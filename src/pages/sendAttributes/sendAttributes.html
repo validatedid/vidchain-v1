@@ -1,18 +1,30 @@
 <ion-header color="primary">
     <ion-navbar color="primary">
-        <ion-title>
-            Send Attributes to {{attrToSend.requester}}
-        </ion-title>
-        <ion-buttons start>
+        <ion-buttons >
             <button ion-button (click)="closeModal()">
                 <span ion-text color="primary" showWhen="ios">Cancel</span>
-                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+                <ion-icon name="arrow-round-back" showWhen="android,windows"></ion-icon>
             </button>
         </ion-buttons>
+        <ion-title>
+            <img src="assets/img/ViDChain-negativo-sin-cuadro.png">
+        </ion-title>
     </ion-navbar>
+    <ion-toolbar color="primary">
+        <ion-buttons >
+            <button ion-button >
+                <ion-icon start name="alert"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title> Permission request </ion-title>
+    </ion-toolbar>
 </ion-header>
+
 <ion-content>
     <ion-list>
+        <ion-item>
+            <img [src]="attrToSend.requester?.image">
+        </ion-item>
         <ion-item *ngFor="let attr of attrToSend.userinfo">
             <ion-label>{{attr}}</ion-label>
             <ion-label *ngIf="checkEmptyAttr(attr)"> Any value</ion-label>

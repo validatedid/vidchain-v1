@@ -51,27 +51,23 @@ export class NewAttributesPage {
     addFormatAttribute(){
 
 
-        let listAttributes = JSON.parse(localStorage.getItem('attributes'));
-
-        if(!listAttributes){
-            listAttributes = {}
-        }
+        let listAttributes = this.newAttributedService.getListAttribute();
 
         let value = this.newAttributedService.createNewAttribute(this.formGroup.value);
 
-        if(!listAttributes[value.type]){
-            listAttributes[value.type] = []
+        if(!listAttributes[value.key]){
+            listAttributes[value.key] = []
         }
 
         // condition of one phone
-        if(value.type === 'phone'){
-            listAttributes[value.type][0] = value;
+        if(value.key === 'phone'){
+            listAttributes[value.key][0] = value;
         }
         else{
-            listAttributes[value.type].push(value);
+            listAttributes[value.key].push(value);
         }
 
-        if(value.type === 'phone' || value.type === 'email'){
+        if(value.key === 'phone' || value.key === 'email'){
             let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:value.key,index:listAttributes[this.formGroup.value.type].length-1});
             profileModal.present();
         }
