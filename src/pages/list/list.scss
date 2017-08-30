@@ -1,3 +1,6 @@
+@import "../../theme/constant.scss";
+@import "../../theme/sass-flexbox";
+
 page-list {
 
   .info-attribute{
@@ -5,5 +8,56 @@ page-list {
   }
   ion-list{
     padding-top: 5vh;
+  }
+  ion-item-sliding{
+      border-left: 4px solid $greenVidChain;
+    &.selected {
+      border-left: 8px solid $greenVidChain;
+      ion-item{
+        background-color: #eee;
+        .item-inner{
+          border-bottom-style: dashed!important;
+        }
+      }
+    }
+
+    ion-item{
+
+      ion-avatar{
+        ion-icon{
+          &[name="checkbox-outline"]{
+            color: $greenVidChain;
+          }
+          &[name="time"]{
+            color: yellow;
+          }
+          font-size: 6vh;
+        }
+      }
+      .type-item{
+        margin-top: 2%;
+        @include flex-content(row,center,flex-start);
+        ion-icon{
+          font-size: 4vh;
+          margin-right: 2vh;
+        }
+      }
+      ion-label{
+        margin: 10px 8px 10px 0!important;
+      }
+      &.sub-description{
+        font-size: 2vh;
+        //padding-left: 0;
+        border-top:1px dashed #aaaaaa!important;
+        h2{
+          @include flex-content(row,center,flex-start);
+        }
+        .title-desplegated{
+          font-weight: bold;
+          //margin-right: 4%;
+          width: 35%;
+        }
+      }
+    }
   }
 }

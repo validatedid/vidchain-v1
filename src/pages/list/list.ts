@@ -4,6 +4,8 @@ import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import {ValidateService} from "../validate/validate.service";
 import Constants from "../../constants";
+import moment from 'moment';
+import {ValidatePage} from "../validate/validate";
 
 @Component({
   selector: 'page-list',
@@ -13,6 +15,10 @@ export class ListPage implements OnInit,OnDestroy{
 
   private newAttributesEmitter;
   private attributedValidatedEmitter;
+  public listOpened={
+    group:-1,
+    item:-1
+  };
   public availablesEmptyGroups : Array<string>;
   constructor(public modalCtrl: ModalController,
               private validateService: ValidateService,
@@ -54,6 +60,30 @@ export class ListPage implements OnInit,OnDestroy{
     });
     alert.present();
   }
+
+  openList(i,i2){
+    if(this.listOpened.group == i && this.listOpened.item == i2){
+      i=-1;i2=-1;
+    }
+    this.listOpened={
+      group:i,
+      item:i2
+    };
+  }
+  formatDate(value){
+    if(value){
+      return moment(value).format("DD/MM/YYYY - HH:mm:ss");
+    }
+    return "";
+  }
+  openModalValidate(item,index) {
+    let profileModal = this.modalCtrl.create(ValidatePage, { info: item,key:item.key,index:index});
+    profileModal.onDidDismiss((data)=>{
+      this.items = JSON.parse(localStorage.getItem('attributes')) || {};
+    });
+    profileModal.present();
+  }
+
   ngOnDestroy(){
     this.newAttributesEmitter.unsubscribe();
     this.attributedValidatedEmitter.unsubscribe();

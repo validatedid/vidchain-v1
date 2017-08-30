@@ -37,6 +37,7 @@ export class MyApp implements OnDestroy{
     this.push.rx.notification()
         .subscribe((msg) => {
           alert(msg.title + ': ' + msg.text);
+          alert(JSON.stringify(msg));
         });
 
   }

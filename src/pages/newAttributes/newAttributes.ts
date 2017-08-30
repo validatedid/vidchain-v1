@@ -33,19 +33,16 @@ export class NewAttributesPage {
             type: [type],
             key: [type ==='email'?type:type=='phone'?type:name],
             value: ['',validator]
-
         });
 
 
     }
 
     checkSubmit(){
-
         if(this.formGroup.value.key !== '' && this.formGroup.value.value !=='' && this.formGroup.valid){
             return false
         }
         return true;
-
     }
 
     addFormatAttribute(){
@@ -68,6 +65,7 @@ export class NewAttributesPage {
         }
 
         if(value.key === 'phone' || value.key === 'email'){
+            value.validated = false;
             let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:value.key,index:listAttributes[this.formGroup.value.type].length-1});
             profileModal.present();
         }
