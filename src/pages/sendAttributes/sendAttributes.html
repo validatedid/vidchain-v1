@@ -22,9 +22,11 @@
 
 <ion-content>
     <ion-list>
-        <ion-item>
-            <img [src]="attrToSend.requester?.image">
-        </ion-item>
+        <div class="content-description-requester">
+            <img class="image-requester" [src]="attrToSend.requester?.image">
+            <div class="description-send">Allow {{attrToSend.requester?.name}} to get following attributes?</div>
+        </div>
+
         <ion-item *ngFor="let attr of attrToSend.userinfo">
             <ion-label>{{attr}}</ion-label>
             <ion-label *ngIf="checkEmptyAttr(attr)"> Any value</ion-label>
@@ -36,8 +38,11 @@
             </ion-select>
         </ion-item>
 
-        <button ion-button (click)="sendAttributes()" color="primary" type="submit" [disabled]="checkSubmit()" full>SEND</button>
+        <div class="content-button-send">
+            <button ion-button color="secondary" (click)="sendAttributes()"  type="submit" [disabled]="checkSubmit()">Allow!</button>
+            <div id="resend-button" (click)="closeModal()">Not Allow</div>
 
+        </div>
     </ion-list>
 </ion-content>
 

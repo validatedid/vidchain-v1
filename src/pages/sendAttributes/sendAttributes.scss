@@ -9,6 +9,9 @@ send-attributes{
       height: 100%;
       text-align: center;
       z-index: -1;
+      .toolbar-title{
+        font-size: 2.5vh;
+      }
       img {
         height: 33px;
       }
@@ -22,5 +25,30 @@ send-attributes{
 
   .label{
     color:#999;
+  }
+
+  .content-description-requester{
+    width: 100%;
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    img{
+      text-align: center;
+      width: 30%;
+      margin-bottom: 5%;
+    }
+    .description-send{
+      font-size: 2.7vh;
+    }
+  }
+  .content-button-send{
+    padding-left: 6vh;
+    padding-right: 6vh;
+    margin-top: 7%;
+    @include flex-content(row,center,space-around);
+    #resend-button{
+      text-decoration: underline;
+      color:grey;
+    }
   }
 }

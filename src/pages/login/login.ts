@@ -29,16 +29,31 @@ export class LoginPage {
       if(!barcodeData.cancelled && barcodeData.text.indexOf('vidchain') != -1){
         this.URL_CONFIRM_LOGIN = CONSTANT.URL.URL_CONFIRM_LOGIN;
         this.http.get(this.URL_CONFIRM_LOGIN+'?id='+barcodeData.text).map(res => res.json()).subscribe(data => {
-
-          let newAttributesModal = this.modalCtrl.create(SendAttributesPage,{attrToSend:data});
-          newAttributesModal.present();
-
+          let sendAttributesModal = this.modalCtrl.create(SendAttributesPage,{attrToSend:data});
+          sendAttributesModal.present();
         });
       }
     }, (err) => {
       // An error occurred
     });
+  }
 
+  openModal(){
+    let val = {
+      "requester": {
+        "id": "1",
+        "name": "UPC",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_UPC.svg/245px-Logo_UPC.svg.png"
+      },
+      "userinfo": [
+        "name",
+        "email",
+        "nif",
+        "phone"
+      ]
+    };
+    let newAttributesModal = this.modalCtrl.create(SendAttributesPage,{attrToSend:val});
+    newAttributesModal.present();
 
   }
 }

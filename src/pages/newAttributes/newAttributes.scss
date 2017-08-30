@@ -12,6 +12,9 @@ new-attributes{
       height: 100%;
       text-align: center;
       z-index: -1;
+      .toolbar-title{
+        font-size: 2.5vh;
+      }
       img {
         height: 33px;
       }

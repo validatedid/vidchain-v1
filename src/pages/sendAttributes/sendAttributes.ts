@@ -40,7 +40,6 @@ export class SendAttributesPage {
                 return true;
             }
         }
-        console.log(result);
         return result;
     }
     newAttribute(value){
