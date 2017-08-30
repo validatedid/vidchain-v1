@@ -30,6 +30,7 @@
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "1.1.4",
+        "cordova-plugin-facebook4": "^1.7.4",
         "cordova-plugin-inappbrowser": "^1.7.1",
         "cordova-plugin-splashscreen": "~4.0.1",
         "cordova-plugin-statusbar": "2.2.2",
@@ -60,7 +61,11 @@
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
             "phonegap-plugin-barcodescanner": {},
-            "cordova-plugin-inappbrowser": {}
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-facebook4": {
+                "APP_ID": "2011955215702503",
+                "APP_NAME": "vidchain"
+            }
         },
         "platforms": [
             "android"

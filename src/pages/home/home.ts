@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
-import { Auth, User } from '@ionic/cloud-angular';
+import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
 
 
 @Component({
@@ -12,7 +12,12 @@ export class HomePage {
   @ViewChild(Content) content: Content;
   constructor(public modalCtrl: ModalController,
               public alertCtrl: AlertController,
-              public auth: Auth, public user: User) {
+              public auth: Auth,
+              public user: User,
+              public facebookAuth: FacebookAuth) {
+
+
+
   }
 
   ionViewWillEnter() { // THERE IT IS!!!
@@ -35,13 +40,14 @@ export class HomePage {
     newAttributesModal.present();
   }
   loginGoogle(){
-    this.auth.login('google').then( val =>{
-      console.log(val);
-    });
+    this.auth.login('google').then();
   }
   loginFacebook(){
-    this.auth.login('facebook').then( val =>{
+    this.facebookAuth.login().then( val =>{
       console.log(val);
+    }).catch(err =>{
+      console.log(err);
     });
+
   }
 }

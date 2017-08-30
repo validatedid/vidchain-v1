@@ -45,7 +45,7 @@
         <div class="alert alert-danger" *ngIf="showInvalidCode">Invalid Code</div>
 
         <div class="content-button-send">
-            <button ion-button  color="secondary" type="submit" [disabled]="!formGroup.valid">Validate!</button>
+            <button ion-button  color="secondary" type="submit" [disabled]="!formGroup.valid || timeToValidate === 'expired' ">Validate!</button>
             <div id="resend-button" (click)="refreshTimeToValidator()">Resend code</div>
         </div>
 

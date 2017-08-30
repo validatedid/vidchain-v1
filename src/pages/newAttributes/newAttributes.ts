@@ -68,7 +68,7 @@ export class NewAttributesPage {
                 type : this.formGroup.value.typeAttribute,
                 key : this.formGroup.value.typeAttribute,
                 value : this.formGroup.value.email,
-                timeToValidate : moment(new Date()).add(5, 'minutes').unix(),
+                timeToValidate : 'expired',
                 validated : false,
                 source : 'manual',
                 createdAt:moment(new Date()).unix()
@@ -79,7 +79,7 @@ export class NewAttributesPage {
                 type : this.formGroup.value.typeAttribute,
                 key : this.formGroup.value.typeAttribute,
                 value : this.formGroup.value.phone,
-                timeToValidate : moment(new Date()).add(5, 'minutes').unix(),
+                timeToValidate : 'expired',
                 validated : false,
                 source : 'manual',
                 createdAt:moment(new Date()).unix()
@@ -115,7 +115,7 @@ export class NewAttributesPage {
         }
 
         if(value.type === 'phone' || value.type === 'email'){
-            this.validateService.sendValidator();
+
             let profileModal = this.modalCtrl.create(ValidatePage, { info: value,key:value.key,index:listAttributes[this.formGroup.value.typeAttribute].length-1});
             profileModal.present();
         }

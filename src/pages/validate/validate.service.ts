@@ -7,11 +7,15 @@
  */
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
+import {Http, RequestOptions, Headers} from '@angular/http';
 
 @Injectable()
 export class ValidateService {
     private interval = 1000;
     public attributedValidated : EventEmitter<any> = new EventEmitter();
+    constructor( private http:Http){
+
+    }
     checkValidation(timeToFinish){
         let diffTime = timeToFinish - moment(new Date()).unix();
         let duration= moment.duration(diffTime*1000, 'milliseconds');
@@ -24,9 +28,28 @@ export class ValidateService {
             return 'expired'
         }
     }
-
-    sendValidator(){
+    sendSmsCode(numTelefono){
         //todo falta hacer
+        let headers = new Headers({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
+            'Accept': 'q=0.8;application/json;q=0.9' });
+        let options = new RequestOptions({ headers: headers });
+        let data = {
+            "sms": {
+                "from": "VIDChain",
+                "to": "+34"+numTelefono,
+                "text": "Your activation code is %token%"
+            },
+            "tokenLength": 6
+        };
+        return this.http.post('https://api.instasent.com/verify/', JSON.stringify(data), options).toPromise()
+    }
+    validateSmsCode(value, id){
+        //todo falta hacer
+        let headers = new Headers({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
+            'Accept': 'q=0.8;application/json;q=0.9' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get('https://api.instasent.com/verify/'+id+'?token='+value,options).toPromise()
     }
 
 }

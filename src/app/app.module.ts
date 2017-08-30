@@ -25,6 +25,11 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '2fad95ab'
+  },
+  'auth': {
+    'facebook': {
+      'scope': ['user_about_me']
+    }
   }
 };
 

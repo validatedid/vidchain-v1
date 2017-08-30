@@ -54,7 +54,7 @@ export class ValidatePage implements OnDestroy{
                     position: 'top'
                 });
                 toast.present();
-                vm.closeModal();
+                // vm.closeModal();
             }
         }, interval);
     }
@@ -67,26 +67,54 @@ export class ValidatePage implements OnDestroy{
     }
     refreshTimeToValidator(){
         let list = JSON.parse(localStorage.getItem('attributes'));
-        list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
-        this.info.timeToValidate = list[this.key][this.index].timeToValidate;
-        this.info=list[this.key][this.index];
-        localStorage.setItem('attributes',JSON.stringify(list));
-    }
-    validateValue(){
-        if(+this.formGroup.value.code === 6666){
-            let toast = this.toastCtrl.create({
-                message: 'Attribute '+this.info.value+' was validated',
-                duration: 3000,
-                position: 'top'
+        if(this.info.key === 'phone'){
+            this.validateService.sendSmsCode(this.info.value)
+                .then(res => {let body = res.json();return body || [];})
+                .then((val)=>{
+                console.log(val);
+                list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
+                list[this.key][this.index].idValidate = val['entity']['id'];
+                this.info.timeToValidate = list[this.key][this.index].timeToValidate;
+                this.info.idValidate = list[this.key][this.index].idValidate;
+                this.info=list[this.key][this.index];
+                localStorage.setItem('attributes',JSON.stringify(list));
+            }).catch(val=>{
+                console.log(val);
+                alert('error sending sms');
             });
-            this.saveValidateValue();
-            toast.present();
-            this.closeModal();
-
         }
         else{
-            this.showInvalidCode = true;
+            //todo hay que poner lo de los emails
+            list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
+            this.info.timeToValidate = list[this.key][this.index].timeToValidate;
+            this.info=list[this.key][this.index];
+            localStorage.setItem('attributes',JSON.stringify(list));
         }
+
+    }
+
+
+    validateValue(){
+        this.validateService.validateSmsCode(this.formGroup.value.code,this.info.idValidate)
+            .then(res => {let body = res.json();return body || [];})
+            .then(val =>{
+            if(val['entity']['status'] === 'verified'){
+                let toast = this.toastCtrl.create({
+                    message: 'Attribute '+this.info.value+' was validated',
+                    duration: 3000,
+                    position: 'top'
+                });
+                this.saveValidateValue();
+                toast.present();
+                this.closeModal();
+            }
+            else{
+                this.showInvalidCode = true;
+            }
+        }).catch(val =>{
+            this.showInvalidCode = true;
+        })
+
     }
 
     closeModal(){
