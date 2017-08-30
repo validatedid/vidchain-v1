@@ -6,6 +6,7 @@ import {NavParams, ToastController, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidateService} from "./validate.service";
 import moment from 'moment';
+import {NewAttributeService} from "../newAttributes/newAttributes.service";
 
 @Component({
     selector: 'validate-page',
@@ -24,7 +25,9 @@ export class ValidatePage implements OnDestroy{
                 public viewCtrl: ViewController,
                 private formBuilder: FormBuilder,
                 private validateService : ValidateService,
+                private newAttributeService : NewAttributeService,
                 private toastCtrl: ToastController) {
+
         this.info = params.get('info');
         this.key = params.get('key');
         this.index = params.get('index');
@@ -54,7 +57,7 @@ export class ValidatePage implements OnDestroy{
                     position: 'top'
                 });
                 toast.present();
-                // vm.closeModal();
+                vm.closeModal();
             }
         }, interval);
     }
@@ -78,6 +81,7 @@ export class ValidatePage implements OnDestroy{
                 this.info.idValidate = list[this.key][this.index].idValidate;
                 this.info=list[this.key][this.index];
                 localStorage.setItem('attributes',JSON.stringify(list));
+                this.newAttributeService.attributeAddEmitter.emit(this.info);
             }).catch(val=>{
                 console.log(val);
                 alert('error sending sms');
