@@ -30,10 +30,9 @@
                 <ion-input type="text" formControlName="key" disabled="true"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label *ngIf="formGroup.value.type === 'email'" >Type your email address</ion-label>
-                <ion-label *ngIf="formGroup.value.type === 'phone'" >Type your phone</ion-label>
-                <ion-label *ngIf="formGroup.value.type === 'other'" >Value</ion-label>
-                <ion-input type="text" formControlName="value"></ion-input>
+                <ion-input  *ngIf="formGroup.value.type === 'email'" placeholder="Type your email address" type="text" formControlName="value"></ion-input>
+                <ion-input  *ngIf="formGroup.value.type === 'phone'" pladeholder="Type your phone" type="text" formControlName="value"></ion-input>
+                <ion-input  *ngIf="formGroup.value.type === 'other'" placeholder="Type your value" type="text" formControlName="value"></ion-input>
             </ion-item>
 
 
