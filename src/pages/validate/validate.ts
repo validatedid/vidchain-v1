@@ -38,8 +38,6 @@ export class ValidatePage implements OnDestroy{
             code: ['',Validators.required],
         });
         this.timeToValidate= this.validateService.checkValidation(this.info.timeToValidate);
-        console.log(this.info);
-        alert(123);
         if(this.timeToValidate === 'expired' ||  this.timeToValidate === 'never'){
             this.refreshTimeToValidator();
         }

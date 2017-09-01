@@ -29,9 +29,18 @@
                 <ion-label>Type your custom Key</ion-label>
                 <ion-input type="text" formControlName="key" disabled="true"></ion-input>
             </ion-item>
-            <ion-item>
+            <div class="content-phone-values"  *ngIf="formGroup.value.type === 'phone'">
+                <!--phone inputs-->
+                <ion-item class="prefix-phone-value">
+                    <ion-input id="prefix-plus-phone"   disabled="true" value="+"></ion-input>
+                    <ion-input id="prefix-value-phone"  type="text" formControlName="prefix"></ion-input>
+                </ion-item>
+                <ion-item class="phone-value"><ion-input id="prefix-number-phone" placeholder="Type your phone" type="text" formControlName="value"></ion-input></ion-item>
+            </div>
+            <ion-item *ngIf="formGroup.value.type === 'email' || formGroup.value.type === 'other'"  >
+                <!--email inputs-->
                 <ion-input  *ngIf="formGroup.value.type === 'email'" placeholder="Type your email address" type="text" formControlName="value"></ion-input>
-                <ion-input  *ngIf="formGroup.value.type === 'phone'" pladeholder="Type your phone" type="text" formControlName="value"></ion-input>
+                <!--other values inputs-->
                 <ion-input  *ngIf="formGroup.value.type === 'other'" placeholder="Type your value" type="text" formControlName="value"></ion-input>
             </ion-item>
 

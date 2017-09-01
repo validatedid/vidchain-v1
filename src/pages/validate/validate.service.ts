@@ -37,7 +37,7 @@ export class ValidateService {
         let data = {
             "sms": {
                 "from": "VIDChain",
-                "to": "+34"+numTelefono,
+                "to": numTelefono,
                 "text": "Your activation code is %token%"
             },
             "tokenLength": 6

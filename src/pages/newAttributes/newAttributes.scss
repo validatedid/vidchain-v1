@@ -44,4 +44,34 @@ new-attributes{
       color: $blueVidChain;
     }
   }
+  .content-phone-values{
+    @include flex-content('row',center,flex-start);
+    .prefix-phone-value{
+      width: 30%;
+    }
+    .phone-value{
+      padding: 0;
+      margin-left: 4%;
+    }
+    .item-input.input-has-focus{
+      box-shadow:none!important;
+    }
+    .item-input:last-child{
+      border:0;
+    }
+
+  }
+  //ion-input{
+  //  &#prefix-plus-phone,
+  //  &#prefix-value-phone{
+  //    flex:none;
+  //  }
+  //  &#prefix-plus-phone{
+  //    width: 7%;
+  //  }
+  //  &#prefix-value-phone{
+  //    width: 10%;
+  //    margin-right: 2%;
+  //  }
+  //}
 }

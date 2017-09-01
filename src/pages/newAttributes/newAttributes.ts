@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
 import {ModalController, NavParams, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NewAttributeService} from "./newAttributes.service";
-import moment from 'moment';
 import {ValidatePage} from "../validate/validate";
 import {ValidateService} from "../validate/validate.service";
 
@@ -30,6 +29,7 @@ export class NewAttributesPage {
 
         let validator = type==='email'?Validators.email:'';
         this.formGroup = this.formBuilder.group({
+            prefix: [34],
             type: [type],
             key: [type ==='email'?type:type=='phone'?type:name],
             value: ['',validator]
@@ -58,6 +58,7 @@ export class NewAttributesPage {
 
         // condition of one phone
         if(value.key === 'phone'){
+            value.value = '+'+ this.formGroup.value.prefix +value.value;
             listAttributes[value.key][0] = value;
         }
         else{
