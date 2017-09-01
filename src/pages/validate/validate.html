@@ -28,7 +28,7 @@
     <form [formGroup]="formGroup" (ngSubmit)="validateValue()">
         <ion-item>
             <ion-label>Type your verification code</ion-label>
-            <ion-input type="number" formControlName="code"></ion-input>
+            <ion-input placeholder="Type Here" type="number" formControlName="code"></ion-input>
         </ion-item>
         <div class="content-time-to-validate">
             <span class="time-validate">({{timeToValidate}} remain)</span>

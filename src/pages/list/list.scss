@@ -24,6 +24,9 @@ page-list {
     ion-item{
 
       ion-avatar{
+        top: 2%;
+        position: absolute;
+        right: 0%;
         ion-icon{
           &[name="checkbox-outline"]{
             color: $greenVidChain;
@@ -34,22 +37,28 @@ page-list {
           font-size: 6vh;
         }
       }
-      .type-item{
-        margin-top: 2%;
-        @include flex-content(row,center,flex-start);
-        ion-icon{
-          font-size: 4vh;
-          margin-right: 2vh;
+
+      ion-label{
+        h2{
+          font-size: 2.5vh!important;
+        }
+
+        margin: 10px 8px 10px 0!important;
+        .type-item{
+          margin-top: 2%;
+          @include flex-content(row,center,flex-start);
+          ion-icon{
+            font-size: 3.5vh;
+            margin-right: 2vh;
+          }
         }
       }
-      ion-label{
-        margin: 10px 8px 10px 0!important;
-      }
       &.sub-description{
-        font-size: 2vh;
-        //padding-left: 0;
+
+        padding-left: 0;
         border-top:1px dashed #aaaaaa!important;
         h2{
+          font-size: 2.2vh;
           @include flex-content(row,center,flex-start);
         }
         .title-desplegated{

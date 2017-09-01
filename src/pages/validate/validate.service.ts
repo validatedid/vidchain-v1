@@ -8,6 +8,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
 import {Http, RequestOptions, Headers} from '@angular/http';
+import CONSTANT from '../../constants';
 
 @Injectable()
 export class ValidateService {
@@ -52,4 +53,18 @@ export class ValidateService {
         return this.http.get('https://api.instasent.com/verify/'+id+'?token='+value,options).toPromise()
     }
 
+    sendEmailCode(email){
+        //todo falta hacer
+        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9' });
+        let data = {
+            "email": email,
+        };
+        return this.http.post(CONSTANT.URL.URL_CONFIRM_EMAIL, JSON.stringify(data),headers).toPromise()
+    }
+
+    validateEmailCode(value,id){
+        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(CONSTANT.URL.URL_CONFIRM_EMAIL+"?verification_code="+value+"&request_id="+id,options).toPromise()
+    }
 }

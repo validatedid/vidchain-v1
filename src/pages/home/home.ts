@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
-import { FacebookAuth, Auth, User,UserSocialDetails } from '@ionic/cloud-angular';
+import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
 
@@ -71,7 +71,7 @@ export class HomePage {
     let attributes = this.newAttributesService.getListAttribute();
     if(attributes['photo']){
       if(attributes['photo'].length>0){
-        let value = attributes['photo'][0].value
+        let value = attributes['photo'][0].value;
         return 'url('+value+')';
       }
     }

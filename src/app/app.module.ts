@@ -40,7 +40,7 @@ const cloudSettings: CloudSettings = {
       },
       'android': {
         'iconColor': '#343434',
-        'forceShow': true,
+        'forceShow': false,
         'sound': true,
         'vibrate' : true
       }

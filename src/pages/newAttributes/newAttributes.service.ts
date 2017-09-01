@@ -19,7 +19,7 @@ export class NewAttributeService {
             type : obj.type === 'email'?obj.type:obj.type === 'phone'?obj.type:'other',
             key : obj.key,
             value : obj.value,
-            timeToValidate : obj.timetoValidate || 'expired',
+            timeToValidate : obj.timetoValidate || 'never',
             validated : obj.validate || true,
             source : obj.source || 'manual',
             createdAt : moment().unix()*1000

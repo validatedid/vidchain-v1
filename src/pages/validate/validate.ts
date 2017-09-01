@@ -2,7 +2,7 @@
  * Created by alexmarcos on 22/8/17.
  */
 import {Component, OnDestroy} from '@angular/core';
-import {NavParams, ToastController, ViewController} from "ionic-angular";
+import {LoadingController, NavParams, ToastController, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidateService} from "./validate.service";
 import moment from 'moment';
@@ -21,12 +21,14 @@ export class ValidatePage implements OnDestroy{
     public timeToValidate;
     public timeOutValidation;
     private formGroup : FormGroup;
+    public loading;
     constructor(public params: NavParams,
                 public viewCtrl: ViewController,
                 private formBuilder: FormBuilder,
                 private validateService : ValidateService,
                 private newAttributeService : NewAttributeService,
-                private toastCtrl: ToastController) {
+                private toastCtrl: ToastController,
+                public loadingCtrl: LoadingController) {
 
         this.info = params.get('info');
         this.key = params.get('key');
@@ -36,10 +38,15 @@ export class ValidatePage implements OnDestroy{
             code: ['',Validators.required],
         });
         this.timeToValidate= this.validateService.checkValidation(this.info.timeToValidate);
-        if(this.timeToValidate === 'expired' ){
+        console.log(this.info);
+        alert(123);
+        if(this.timeToValidate === 'expired' ||  this.timeToValidate === 'never'){
             this.refreshTimeToValidator();
         }
-        this.checkValidationInterval();
+        if(this.timeToValidate !== 'expired'){
+            this.checkValidationInterval();
+        }
+
     }
 
     checkValidationInterval(){
@@ -50,14 +57,14 @@ export class ValidatePage implements OnDestroy{
             if(vm.timeToValidate != 'expired'){
                 vm.checkValidationInterval();
             }
-            else{
+            else if('expired'){
                 let toast = vm.toastCtrl.create({
                     message: 'Attribute '+vm.info.value+' was expired, try again',
                     duration: 3000,
                     position: 'top'
                 });
                 toast.present();
-                vm.closeModal();
+                // vm.closeModal();
             }
         }, interval);
     }
@@ -69,51 +76,91 @@ export class ValidatePage implements OnDestroy{
         this.validateService.attributedValidated.emit(list[this.key][this.index]);
     }
     refreshTimeToValidator(){
-        let list = JSON.parse(localStorage.getItem('attributes'));
+        this.showLoading();
         if(this.info.key === 'phone'){
             this.validateService.sendSmsCode(this.info.value)
                 .then(res => {let body = res.json();return body || [];})
                 .then((val)=>{
                 console.log(val);
-                list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
-                list[this.key][this.index].idValidate = val['entity']['id'];
-                this.info.timeToValidate = list[this.key][this.index].timeToValidate;
-                this.info.idValidate = list[this.key][this.index].idValidate;
-                this.info=list[this.key][this.index];
-                localStorage.setItem('attributes',JSON.stringify(list));
+                this.refreshTimeAndId(val['entity']['id']);
                 this.newAttributeService.attributeAddEmitter.emit(this.info);
+                this.toastCtrl.create({
+                    message: 'SMS was sent, see your inbox :'+this.info.value,
+                    duration: 3000,
+                    position: 'top'
+                }).present();
             }).catch(val=>{
                 console.log(val);
+                this.loading.dismiss();
                 alert('error sending sms');
             });
         }
         else{
-            //todo hay que poner lo de los emails
-            list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
-            this.info.timeToValidate = list[this.key][this.index].timeToValidate;
-            this.info=list[this.key][this.index];
-            localStorage.setItem('attributes',JSON.stringify(list));
+            this.validateService.sendEmailCode(this.info.value)
+                .then(res => {let body = res.json();return body || [];})
+                .then((val)=>{
+                if(val.result){
+                    this.refreshTimeAndId(val.request_id);
+                    this.newAttributeService.attributeAddEmitter.emit(this.info);
+                    this.toastCtrl.create({
+                        message: 'Email with code was sent, see your inbox :'+this.info.value,
+                        duration: 3000,
+                        position: 'top'
+                    }).present()
+                }
+                else{
+                    this.loading.dismiss();
+                    alert('error sending email');
+                }
+            }).catch(val=>{
+                console.log(val);
+                this.loading.dismiss();
+                alert('error sending email');
+            });
+
         }
 
     }
 
-    resendCode(){
+    refreshTimeAndId(id){
+        let list = JSON.parse(localStorage.getItem('attributes'));
+        list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
+        list[this.key][this.index].idValidate = id ;
+        this.info.timeToValidate = list[this.key][this.index].timeToValidate;
+        this.info.idValidate = list[this.key][this.index].idValidate;
+        this.info=list[this.key][this.index];
+        localStorage.setItem('attributes',JSON.stringify(list));
+        this.loading.dismiss();
 
+        this.checkValidationInterval();
+    }
+
+    resendCode(){
         this.refreshTimeToValidator()
     }
     validateValue(){
+        this.showLoading();
         if(this.info.key === 'email'){
-            if(this.formGroup.value.code === '6666'){
-               this.showToastValidate()
-            }
-            else{
-                this.showInvalidCode = false;
-            }
+            this.validateService.validateEmailCode(this.formGroup.value.code,this.info.idValidate)
+                .then(res => {let body = res.json();return body || [];})
+                .then(val =>{
+                    this.loading.dismiss();
+                    if(val['result'] === 'verified'){
+                        this.showToastValidate();
+                    }
+                    else{
+                        this.showInvalidCode = true;
+                    }
+                }).catch(val =>{
+                    this.loading.dismiss();
+                    this.showInvalidCode = true;
+                })
         }
         else{
             this.validateService.validateSmsCode(this.formGroup.value.code,this.info.idValidate)
                 .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
+                    this.loading.dismiss();
                     if(val['entity']['status'] === 'verified'){
                        this.showToastValidate();
                     }
@@ -121,8 +168,9 @@ export class ValidatePage implements OnDestroy{
                         this.showInvalidCode = true;
                     }
                 }).catch(val =>{
-                this.showInvalidCode = true;
-            })
+                    this.loading.dismiss();
+                    this.showInvalidCode = true;
+                })
         }
 
 
@@ -140,6 +188,12 @@ export class ValidatePage implements OnDestroy{
     }
     closeModal(){
         this.viewCtrl.dismiss();
+    }
+    showLoading(){
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.loading.present()
     }
     ngOnDestroy(){
         clearTimeout( this.timeOutValidation);

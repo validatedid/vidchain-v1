@@ -60,7 +60,7 @@ page-home {
       height: 100%;
       text-align: center;
       img{
-        height: 33px;
+        height: 27px;
       }
     }
   }
@@ -79,6 +79,7 @@ page-home {
   ion-tabs{
     .tab-button[aria-selected=true]{
       color: $greenVidChain!important;
+      border-bottom: 5px solid $greenVidChain !important;
     }
     .tab-button{
       color: $blueVidChain!important;

@@ -9,7 +9,7 @@
                 <ion-item>
                     <ion-avatar item-end >
                         <ion-icon name="time" *ngIf="!item.validated" (click)="openModalValidate(item,i2)"></ion-icon>
-                        <ion-icon name="checkbox-outline" *ngIf="item.validated" (click)="openModalValidate(item,i2)" ></ion-icon>
+                        <ion-icon name="checkbox-outline" *ngIf="item.validated"  ></ion-icon>
                     </ion-avatar>
                     <h2 class="value-item">
                         {{ item.value }}
@@ -21,29 +21,30 @@
                         <ion-icon name="logo-google" *ngIf="item.key !=='phone' && item.key !=='email' && item.source =='GOOGLE'"></ion-icon>
                         {{item.key | capitalize}}
                     </p>
+                    <ion-item *ngIf="listOpened?.group == i && listOpened?.item == i2" class="sub-description">
+                        <h2>
+                            <div class="title-desplegated">Type</div>
+                            <div class="value-desplegated">{{item.key}}</div>
+                        </h2>
+                        <h2>
+                            <div class="title-desplegated">Create Date</div>
+                            <div class="value-desplegated">{{formatDate(item.createdAt)}}</div>
+                        </h2>
+                        <h2>
+                            <div class="title-desplegated">Create Date</div>
+                            <div class="value-desplegated">{{formatDate(item.createdAt)}}</div>
+                        </h2>
+                        <h2>
+                            <div class="title-desplegated">Source</div>
+                            <div class="value-desplegated">{{item.source}}</div>
+                        </h2>
+                        <h2>
+                            <div class="title-desplegated">Status</div>
+                            <div class="value-desplegated">{{item.validated?'Validated':'No Validated'}}</div>
+                        </h2>
+                    </ion-item>
                 </ion-item>
-                <ion-item *ngIf="listOpened?.group == i && listOpened?.item == i2" class="sub-description">
-                    <h2>
-                        <div class="title-desplegated">Type</div>
-                        <div class="value-desplegated">{{item.key}}</div>
-                    </h2>
-                    <h2>
-                        <div class="title-desplegated">Create Date</div>
-                        <div class="value-desplegated">{{formatDate(item.createdAt)}}</div>
-                    </h2>
-                    <h2>
-                        <div class="title-desplegated">Create Date</div>
-                        <div class="value-desplegated">{{formatDate(item.createdAt)}}</div>
-                    </h2>
-                    <h2>
-                        <div class="title-desplegated">Source</div>
-                        <div class="value-desplegated">{{item.source}}</div>
-                    </h2>
-                    <h2>
-                        <div class="title-desplegated">Status</div>
-                        <div class="value-desplegated">{{item.validated?'Validated':'No Validated'}}</div>
-                    </h2>
-                </ion-item>
+
                 <ion-item-options side="right" >
                     <button color="danger" ion-button expandable (click)="removeItem(groupItems,i2)">
                         <ion-icon name="trash"></ion-icon>

@@ -38,22 +38,4 @@ export class LoginPage {
     });
   }
 
-  openModal(){
-    let val = {
-      "requester": {
-        "id": "1",
-        "name": "UPC",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_UPC.svg/245px-Logo_UPC.svg.png"
-      },
-      "userinfo": [
-        "name",
-        "email",
-        "nif",
-        "phone"
-      ]
-    };
-    let newAttributesModal = this.modalCtrl.create(SendAttributesPage,{attrToSend:val});
-    newAttributesModal.present();
-
-  }
 }
