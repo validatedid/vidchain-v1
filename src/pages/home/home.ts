@@ -42,7 +42,8 @@ export class HomePage {
     let newAttributesModal = this.modalCtrl.create(NewAttributesPage,{type:type});
     newAttributesModal.present();
   }
-  loginGoogle(){
+  loginGoogle(fab){
+    fab.close();
     this.auth.login('google').then(val =>{
       this.user.load().then(val =>{
         this.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.GOOGLE,this.user);
@@ -50,8 +51,8 @@ export class HomePage {
       })
     });
   }
-  loginFacebook(){
-
+  loginFacebook(fab){
+    fab.close();
     try{
       this.facebookAuth.logout();
     }
