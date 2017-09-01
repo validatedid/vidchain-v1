@@ -30,12 +30,16 @@
         <ion-item *ngFor="let attr of attrToSend.userinfo">
             <ion-label>{{attr}}</ion-label>
             <ion-label *ngIf="checkEmptyAttr(attr)"> Any value</ion-label>
-            <button ion-button clear item-end *ngIf="checkEmptyAttr(attr)" (click)="newAttribute(attr)">
-                <ion-icon name="add" ></ion-icon>
+            <!--si no hay ninguno, warning-->
+            <button ion-button clear color="warning" item-end *ngIf="checkEmptyAttr(attr)">
+                warning
             </button>
-            <ion-select [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr)" >
+            <!--mas de uno hay select-->
+            <ion-select [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length > 1">
                 <ion-option *ngFor="let localAttr of attributesSaved[attr]; let i = index" value="{{localAttr?.value}}">{{localAttr?.value}}</ion-option>
             </ion-select>
+            <!--si es solo uno , no hay select-->
+            <ion-input disabled="true" [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length == 1"  value="{{attributesSaved[attr][0]?.value}}"></ion-input>
         </ion-item>
 
         <div class="content-button-send">
