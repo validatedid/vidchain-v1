@@ -21,7 +21,7 @@ export class NewAttributeService {
             value : obj.value,
             timeToValidate : obj.timetoValidate || 'never',
             validated : obj.validate || true,
-            source : obj.source || 'manual',
+            source : obj.source || 'user',
             createdAt : moment().unix()*1000
         }
     }
@@ -127,7 +127,6 @@ export class NewAttributeService {
     private accessDataFromPropertyString(data,property){
         let res;
         let propertySplit = property.split('.');
-        let i=0;
         for(let p of propertySplit){
             res = data[p];
             data = res;

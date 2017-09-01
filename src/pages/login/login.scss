@@ -4,15 +4,15 @@ page-login {
   ion-content .scroll-content{
     @include flex-content(column, center, center);
   }
+  p{
+    position: absolute;
+    top: 10vh;
+    color: $blueVidChain;
+    font-size: 2.2vh;
+  }
   .social-button{
     height: 9vh;
     font-size: 2.2vh;
-    &.google{
-      background-color: #d34836;
-    }
-    &.facebook{
-      background-color: #3b5998;
-    }
     &.qr-scan{
       background-color: #78B800;
       color:white;
