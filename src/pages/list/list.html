@@ -6,7 +6,8 @@
             <ion-item-sliding *ngFor="let item of items[groupItems]; let i2 = index"
                               [ngClass]="{selected : listOpened?.group == i && listOpened?.item == i2}"
                               (click)="openList(i,i2)">
-                <ion-item>
+                <!--don't want show photos-->
+                <ion-item *ngIf="item.type !== 'photo'">
                     <ion-avatar item-end >
                         <ion-icon name="time" *ngIf="!item.validated" (click)="openModalValidate(item,i2)"></ion-icon>
                         <ion-icon name="checkbox-outline" *ngIf="item.validated"  ></ion-icon>
@@ -25,10 +26,6 @@
                         <h2>
                             <div class="title-desplegated">Type</div>
                             <div class="value-desplegated">{{item.key}}</div>
-                        </h2>
-                        <h2>
-                            <div class="title-desplegated">Create Date</div>
-                            <div class="value-desplegated">{{formatDate(item.createdAt)}}</div>
                         </h2>
                         <h2>
                             <div class="title-desplegated">Create Date</div>
