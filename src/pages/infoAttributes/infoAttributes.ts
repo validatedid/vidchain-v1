@@ -8,55 +8,22 @@ import moment from 'moment';
   selector: 'page-info-attributtes',
   templateUrl: 'infoAttributes.html'
 })
-export class InfoAttributesPages implements OnInit,OnDestroy {
-  private info;
-  private attributedValidatedEmitter;
-  public key;
+export class InfoAttributesPages implements OnInit{
+  public type;
   public index;
   public timeToValidate;
   constructor(public params: NavParams,
-              public viewCtrl: ViewController,
-              public modalCtrl: ModalController,
-              private validateService : ValidateService) {
-    this.info = params.get('info');
-    this.key = params.get('key');
-    this.index = params.get('index');
+              public viewCtrl: ViewController,) {
+    this.type = params.get('type');
 
-    if(!this.info.validated){
-      this.timeToValidate= this.validateService.checkValidation(this.info.timeToValidate);
-      if(this.timeToValidate != 'expired' ){
-        this.checkValidationInterval();
-      }
-    }
   }
   ngOnInit(){
-    this.attributedValidatedEmitter = this.validateService.attributedValidated.subscribe((val)=>{
-      this.info = val;
-    });
+
+
   }
   closeModal(){
     this.viewCtrl.dismiss();
   }
 
 
-  formatDate(value){
-    if(value){
-      return moment(value).format("DD/MM/YYYY - HH:mm:ss");
-    }
-    return "";
-  }
-  checkValidationInterval(){
-    let interval = 1000;
-    let vm = this;
-    setTimeout(function(){
-      vm.timeToValidate = vm.validateService.checkValidation(vm.info.timeToValidate);
-      if(vm.timeToValidate != 'expired'){
-        vm.checkValidationInterval();
-      }
-    }, interval);
-  }
-  ngOnDestroy(){
-    this.attributedValidatedEmitter.unsubscribe();
-
-  }
 }

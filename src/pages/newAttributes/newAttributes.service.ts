@@ -62,7 +62,11 @@ export class NewAttributeService {
                             {
                                 text: 'Yes',
                                 handler: () => {
-                                    listAttributes[attribute.name][0] = object
+                                    this.saveAttributeWithEthereum(object).then(object => {
+                                        listAttributes[attribute.name][0] = object;
+                                        this.saveAttributes(listAttributes);
+                                    });
+
                                 }
                             }
                         ]
@@ -73,11 +77,16 @@ export class NewAttributeService {
             else{
                 let index = this.searchAttribute(listAttributes[attribute.name],value);
                 if(index > -1){
-                    listAttributes[attribute.name][index] = object;
-
+                    this.saveAttributeWithEthereum(object).then(object => {
+                        listAttributes[attribute.name][index] = object;
+                        this.saveAttributes(listAttributes);
+                    });
                 }
                 else{
-                    listAttributes[attribute.name].push(object);
+                    this.saveAttributeWithEthereum(object).then(object => {
+                        listAttributes[attribute.name].push(object);
+                        this.saveAttributes(listAttributes);
+                    });
                 }
 
             }
@@ -92,17 +101,15 @@ export class NewAttributeService {
                         alertsWaiting[i+1].present();
                     }
                     else{
-                        this.saveAttributes(listAttributes);
                         this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
                     }
                 });
             }
         }
         else{
-            this.saveAttributes(listAttributes);
             this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
         }
-        console.log(listAttributes);
+
 
     }
     public saveAttributeWithEthereum(object){
@@ -131,7 +138,8 @@ export class NewAttributeService {
         localStorage.setItem('attributes',JSON.stringify(listAttributes));
         this.attributeAddEmitter.emit("all");
     }
-    private searchAttribute(list,value){
+
+    public searchAttribute(list,value){
         let res = -1;
         for(let i=0;i<list.length;i++){
             if(list[i].value === value){

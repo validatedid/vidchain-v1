@@ -29,10 +29,9 @@
 
         <ion-item *ngFor="let attr of attrToSend.userinfo">
             <ion-label>{{attr}}</ion-label>
-            <ion-label *ngIf="checkEmptyAttr(attr)"> Any value</ion-label>
             <!--si no hay ninguno, warning-->
             <button ion-button clear color="warning" item-end *ngIf="checkEmptyAttr(attr)">
-                warning
+                Any value
             </button>
             <!--mas de uno hay select-->
             <ion-select [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length > 1">
@@ -45,7 +44,6 @@
         <div class="content-button-send">
             <button ion-button color="secondary" (click)="sendAttributes()"  type="submit" [disabled]="checkSubmit()">Allow!</button>
             <div id="resend-button" (click)="closeModal()">Not Allow</div>
-
         </div>
     </ion-list>
 </ion-content>

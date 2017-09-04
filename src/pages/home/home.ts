@@ -4,6 +4,7 @@ import {NewAttributesPage} from "../newAttributes/newAttributes";
 import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
+import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 
 
 @Component({
@@ -75,4 +76,5 @@ export class HomePage {
 
     return '';
   }
+
 }

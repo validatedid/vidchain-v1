@@ -35,11 +35,11 @@ export class SendAttributesPage {
     }
     checkSubmit(){
         let result = false;
-        for(let attr of this.attrToSend.userinfo){
-            if(!this.result[attr]){
-                return true;
-            }
-        }
+        // for(let attr of this.attrToSend.userinfo){
+        //     if(!this.result[attr]){
+        //         return true;
+        //     }
+        // }
         return result;
     }
     newAttribute(value){

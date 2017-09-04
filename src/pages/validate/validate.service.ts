@@ -53,7 +53,7 @@ export class ValidateService {
 
     sendEmailCode(email){
         //todo falta hacer
-        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9' });
+        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
         let data = {
             "email": email,
         };
@@ -61,7 +61,7 @@ export class ValidateService {
     }
 
     validateEmailCode(value,id){
-        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9' });
+        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(CONSTANT.URL.URL_CONFIRM_EMAIL+"?verification_code="+value+"&request_id="+id,options).toPromise()
     }

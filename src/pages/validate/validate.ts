@@ -2,11 +2,12 @@
  * Created by alexmarcos on 22/8/17.
  */
 import {Component, OnDestroy} from '@angular/core';
-import {LoadingController, NavParams, ToastController, ViewController} from "ionic-angular";
+import {LoadingController, ModalController, NavParams, ToastController, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidateService} from "./validate.service";
 import moment from 'moment';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
+import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 
 @Component({
     selector: 'validate-page',
@@ -28,6 +29,7 @@ export class ValidatePage implements OnDestroy{
                 private validateService : ValidateService,
                 private newAttributeService : NewAttributeService,
                 private toastCtrl: ToastController,
+                private modalCtrl: ModalController,
                 public loadingCtrl: LoadingController) {
 
         this.info = params.get('info');
@@ -186,22 +188,18 @@ export class ValidatePage implements OnDestroy{
     }
 
     showToastValidate(){
-        let toast = this.toastCtrl.create({
-            message: 'Attribute '+this.info.value+' was validated',
-            duration: 3000,
-            position: 'top'
-        });
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{type:this.info.key});
         this.validateService.saveValueEthereum(this.info.value)
             .then(res => {let body = res.json();return body || [];})
             .then(val =>{
                 console.log(val);
                 this.saveValidateValue(val.result);
-                toast.present();
+                infoModal.present();
                 this.closeModal();
             })
             .catch(err =>{
                 this.saveValidateValue();
-                toast.present();
+                infoModal.present();
                 this.closeModal();
             })
     }

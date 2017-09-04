@@ -11,40 +11,14 @@
     </ion-title>
   </ion-navbar>
   <ion-toolbar color="primary">
-    <ion-title> Description </ion-title>
+    <ion-title> GREAT </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!--<ion-list>-->
-    <!--<ion-item *ngFor="let key of info | keys">-->
-      <!--<ion-label>{{key | capitalize}}</ion-label>-->
-      <!--<ion-input type="text" disabled="true" value="{{info[key]}}"></ion-input>-->
-    <!--</ion-item>-->
-  <!--<ion-list >-->
-  <img *ngIf="info.key == 'photo'" src="{{info.value}}">
-  <ion-list >
-    <ion-item >
-      <ion-label>{{info.key | capitalize}}</ion-label>
-      <ion-input *ngIf="info.key != 'photo'" disabled="true" value="{{info.value}}"></ion-input>
-      {{info.value}}
-      <img *ngIf="info.key == 'photo'" src="{{info.value}}">
-    </ion-item>
-    <ion-item >
-      <ion-label>Create Date</ion-label>
-      <ion-input disabled="true" value="{{formatDate(info.createdAt)}}"></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-label>Source</ion-label>
-      <ion-input disabled="true" value="{{info?.source}}"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="info.type === 'email' || info.type === 'phone'">
-      <ion-label>Validated</ion-label>
-      <ion-input disabled="true" value="{{info.validated}}"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="(info.type === 'email' || info.type === 'phone') && info.validated === false">
-      <ion-label>Time to Validate</ion-label>
-      <ion-input disabled="true" value="{{timeToValidate}}"></ion-input>
-      <button item-end (click)="openModalValidate()">Validate</button>
-    </ion-item>
-  </ion-list>
+  <div class="message-login-done">
+    Your {{type==='phone'?'Phone':'Email address'}} has been successfully validated and it was included in your ViDChain Wallet
+  </div>
+  <div class="content-button-send">
+    <button ion-button color="secondary" (click)="closeModal()"  type="submit" >Return!</button>
+  </div>
 </ion-content>
