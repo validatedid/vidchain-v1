@@ -20,7 +20,8 @@ export class MyApp implements OnDestroy{
   pushNotificationSubscribe;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public push: Push) {
+  constructor(public platform: Platform,
+              public statusBar: StatusBar, public splashScreen: SplashScreen,public push: Push) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -28,11 +29,8 @@ export class MyApp implements OnDestroy{
       { title: 'Home', component: HomePage }
     ];
 
-    this.push.register().then((t: PushToken) => {
-      return this.push.saveToken(t);
-    }).then((t: PushToken) => {
-      console.log('Token saved:', t.token);
-    });
+
+
 
 
   }
@@ -43,11 +41,22 @@ export class MyApp implements OnDestroy{
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.pushNotificationSubscribe = this.push.rx.notification()
-          .subscribe((msg) => {
-            alert(msg.title + ': ' + msg.text);
-            console.log(JSON.stringify(msg));
-          });
+
+      if (this.platform.is('cordova')) {
+
+        this.push.register().then((t: PushToken) => {
+          return this.push.saveToken(t);
+        }).then((t: PushToken) => {
+          console.log('Token saved:', t.token);
+        });
+
+        this.pushNotificationSubscribe = this.push.rx.notification()
+            .subscribe((msg) => {
+              alert(msg.title + ': ' + msg.text);
+              console.log(JSON.stringify(msg));
+            });
+      }
+
     });
     //check if exist default attributes
     let attributes = JSON.parse(localStorage.getItem('attributes'));

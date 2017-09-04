@@ -27,6 +27,12 @@ page-list {
         top: 2%;
         position: absolute;
         right: 0%;
+        width: 20%;
+        text-align: end;
+        @include flex-content('row',center,flex-end);
+        img{
+          margin-right: 10%;
+        }
         ion-icon{
           &[name="checkbox-outline"]{
             color: $greenVidChain;

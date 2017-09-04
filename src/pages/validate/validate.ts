@@ -101,28 +101,36 @@ export class ValidatePage implements OnDestroy{
                 .then(res => {let body = res.json();return body || [];})
                 .then((val)=>{
                 if(val.result){
-                    this.refreshTimeAndId(val.request_id);
-                    this.newAttributeService.attributeAddEmitter.emit(this.info);
-                    this.toastCtrl.create({
-                        message: 'Email with code was sent, see your inbox :'+this.info.value,
-                        duration: 3000,
-                        position: 'top'
-                    }).present()
+                    this.emailWasSendedToast(val);
                 }
                 else{
                     this.loading.dismiss();
                     alert('error sending email');
                 }
             }).catch(val=>{
-                console.log(val);
-                this.loading.dismiss();
-                alert('error sending email');
+                if(val.status === 0){
+                    this.emailWasSendedToast(val);
+                }
+                else{
+                    console.log(val);
+                    this.loading.dismiss();
+                    alert('error sending email');
+                }
             });
 
         }
 
     }
 
+    emailWasSendedToast(val){
+        this.refreshTimeAndId(val.request_id);
+        this.newAttributeService.attributeAddEmitter.emit(this.info);
+        this.toastCtrl.create({
+            message: 'Email with code was sent, see your inbox :'+this.info.value,
+            duration: 3000,
+            position: 'top'
+        }).present()
+    }
     refreshTimeAndId(id){
         let list = JSON.parse(localStorage.getItem('attributes'));
         list[this.key][this.index].timeToValidate = moment(new Date()).add(5, 'minutes').unix();
@@ -186,6 +194,7 @@ export class ValidatePage implements OnDestroy{
         this.validateService.saveValueEthereum(this.info.value)
             .then(res => {let body = res.json();return body || [];})
             .then(val =>{
+                console.log(val);
                 this.saveValidateValue(val.result);
                 toast.present();
                 this.closeModal();

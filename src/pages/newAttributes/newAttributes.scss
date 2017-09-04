@@ -49,6 +49,14 @@ new-attributes{
     .prefix-phone-value{
       width: 30%;
     }
+    #prefix-plus-phone input{
+      text-align: center;
+    }
+    #prefix-value-phone input{
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
     .phone-value{
       padding: 0;
       margin-left: 4%;

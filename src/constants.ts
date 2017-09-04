@@ -9,7 +9,8 @@ let CONSTANT = {
     AVAILABLES_EMPTY_GROUPS : AVAILABLES_EMPTY_GROUPS,
     URL : {
         URL_CONFIRM_LOGIN : " http://vidchainpoc.azurewebsites.net/confirm_login.php",
-        URL_CONFIRM_EMAIL : " http://vidchainpoc.azurewebsites.net/validate_email.php"
+        URL_CONFIRM_EMAIL : " http://vidchainpoc.azurewebsites.net/validate_email.php",
+        URL_ETHEREUM :"http://vps391817.ovh.net/api/chainevidences",
     },
     SOCIAL_LOGINS:{
         'FACEBOOK':'FACEBOOK',

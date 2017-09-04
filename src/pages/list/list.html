@@ -7,9 +7,9 @@
                               [ngClass]="{selected : listOpened?.group == i && listOpened?.item == i2}"
                               (click)="openList(i,i2)">
                 <!--don't want show photos-->
-                <ion-item *ngIf="item.type !== 'photo'">
+                <ion-item *ngIf="item.key !== 'photo'">
                     <ion-avatar item-end >
-                        <ion-icon name="link" *ngIf="item.urlEthereum" (click)="openInAppBrowser(item.urlEthereum)"></ion-icon>
+                        <img src="assets/img/ethereum.png" *ngIf="item.urlEthereum" (click)="openInAppBrowser(item.urlEthereum)"/>
                         <ion-icon name="time" *ngIf="!item.validated" (click)="openModalValidate(item,i2)"></ion-icon>
                         <ion-icon name="checkbox-outline" *ngIf="item.validated"  ></ion-icon>
                     </ion-avatar>

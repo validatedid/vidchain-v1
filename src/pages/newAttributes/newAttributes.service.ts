@@ -62,9 +62,7 @@ export class NewAttributeService {
                             {
                                 text: 'Yes',
                                 handler: () => {
-                                    this.saveAttributeWithEthereum(object).then(object =>{
-                                        listAttributes[attribute.name][0] = object
-                                    });
+                                    listAttributes[attribute.name][0] = object
                                 }
                             }
                         ]
@@ -75,16 +73,11 @@ export class NewAttributeService {
             else{
                 let index = this.searchAttribute(listAttributes[attribute.name],value);
                 if(index > -1){
-                    this.saveAttributeWithEthereum(object).then(object =>{
-                        listAttributes[attribute.name][index] = object;
-                    });
+                    listAttributes[attribute.name][index] = object;
 
                 }
                 else{
-                    this.saveAttributeWithEthereum(object).then(object =>{
-                        listAttributes[attribute.name].push(object);
-                    });
-
+                    listAttributes[attribute.name].push(object);
                 }
 
             }
@@ -109,7 +102,7 @@ export class NewAttributeService {
             this.saveAttributes(listAttributes);
             this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
         }
-
+        console.log(listAttributes);
 
     }
     public saveAttributeWithEthereum(object){

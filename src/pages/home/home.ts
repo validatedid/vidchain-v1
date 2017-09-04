@@ -53,14 +53,10 @@ export class HomePage {
   }
   loginFacebook(fab){
     fab.close();
-    try{
-      this.facebookAuth.logout();
-    }
-    catch (ex){}
-    this.facebookAuth.login().then( val =>{
+
+    this.auth.login('facebook').then( val =>{
       this.user.load().then(val =>{
         this.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,this.user);
-        this.facebookAuth.logout();
         this.auth.logout();
       })
     }).catch(err =>{

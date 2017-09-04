@@ -1,13 +1,11 @@
-/**
- * Created by alexmarcos on 22/8/17.
- */
+
 
 /**
  * Created by alexmarcos on 22/8/17.
  */
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import {Http, RequestOptions,Request, Headers, RequestMethod} from '@angular/http';
 import CONSTANT from '../../constants';
 
 @Injectable()
@@ -70,10 +68,20 @@ export class ValidateService {
 
     saveValueEthereum(value){
         //todo falta hacer
-        let headers = new Headers({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
-            'Accept': 'q=0.8;application/json;q=0.9' });
+        let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({ headers: headers });
         let data =  {"ViDText":value};
-        return this.http.post('http://vps391817.ovh.net/api/chainevidences/', JSON.stringify(data), options).toPromise()
+        console.log(value);
+
+
+        let requestOptions = new RequestOptions({
+            method : RequestMethod.Post,
+            url : CONSTANT.URL.URL_ETHEREUM,
+            headers: headers,
+            body: JSON.stringify(data)
+        });
+        let request = new Request(requestOptions);
+        return this.http.request(request).toPromise()
+        // return this.http.post('http://vps391817.ovh.net/api/chainevidences', JSON.stringify(data)).toPromise()
     }
 }
