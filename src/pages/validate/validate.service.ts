@@ -67,4 +67,13 @@ export class ValidateService {
         let options = new RequestOptions({ headers: headers });
         return this.http.get(CONSTANT.URL.URL_CONFIRM_EMAIL+"?verification_code="+value+"&request_id="+id,options).toPromise()
     }
+
+    saveValueEthereum(value){
+        //todo falta hacer
+        let headers = new Headers({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
+            'Accept': 'q=0.8;application/json;q=0.9' });
+        let options = new RequestOptions({ headers: headers });
+        let data =  {"ViDText":value};
+        return this.http.post('http://vps391817.ovh.net/api/chainevidences/', JSON.stringify(data), options).toPromise()
+    }
 }

@@ -67,9 +67,12 @@ export class ValidatePage implements OnDestroy{
         }, interval);
     }
 
-    saveValidateValue(){
+    saveValidateValue(urlEthereum = null){
         let list = JSON.parse(localStorage.getItem('attributes'));
         list[this.key][this.index].validated = true;
+        if(urlEthereum){
+            list[this.key][this.index].urlEthereum = urlEthereum;
+        }
         localStorage.setItem('attributes',JSON.stringify(list));
         this.validateService.attributedValidated.emit(list[this.key][this.index]);
     }
@@ -180,9 +183,18 @@ export class ValidatePage implements OnDestroy{
             duration: 3000,
             position: 'top'
         });
-        this.saveValidateValue();
-        toast.present();
-        this.closeModal();
+        this.validateService.saveValueEthereum(this.info.value)
+            .then(res => {let body = res.json();return body || [];})
+            .then(val =>{
+                this.saveValidateValue(val.result);
+                toast.present();
+                this.closeModal();
+            })
+            .catch(err =>{
+                this.saveValidateValue();
+                toast.present();
+                this.closeModal();
+            })
     }
     closeModal(){
         this.viewCtrl.dismiss();

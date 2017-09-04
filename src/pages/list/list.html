@@ -9,6 +9,7 @@
                 <!--don't want show photos-->
                 <ion-item *ngIf="item.type !== 'photo'">
                     <ion-avatar item-end >
+                        <ion-icon name="link" *ngIf="item.urlEthereum" (click)="openInAppBrowser(item.urlEthereum)"></ion-icon>
                         <ion-icon name="time" *ngIf="!item.validated" (click)="openModalValidate(item,i2)"></ion-icon>
                         <ion-icon name="checkbox-outline" *ngIf="item.validated"  ></ion-icon>
                     </ion-avatar>

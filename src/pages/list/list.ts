@@ -6,6 +6,7 @@ import {ValidateService} from "../validate/validate.service";
 import Constants from "../../constants";
 import moment from 'moment';
 import {ValidatePage} from "../validate/validate";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @Component({
   selector: 'page-list',
@@ -23,7 +24,8 @@ export class ListPage implements OnInit,OnDestroy{
   constructor(public modalCtrl: ModalController,
               private validateService: ValidateService,
               private newAttributesService: NewAttributeService,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              private iab: InAppBrowser) {
 
     this.availablesEmptyGroups = Constants.AVAILABLES_EMPTY_GROUPS;
   }
@@ -83,7 +85,10 @@ export class ListPage implements OnInit,OnDestroy{
     });
     profileModal.present();
   }
-
+  openInAppBrowser(url){
+    let browser = this.iab.create(url, '_blank', 'location=no');
+    browser.show();
+  }
   ngOnDestroy(){
     this.newAttributesEmitter.unsubscribe();
     this.attributedValidatedEmitter.unsubscribe();

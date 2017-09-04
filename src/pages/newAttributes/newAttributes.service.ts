@@ -5,6 +5,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
 import CONSTANTS from '../../constants';
 import {AlertController} from "ionic-angular";
+import {ValidateService} from "../validate/validate.service";
 
 
 @Injectable()
@@ -12,7 +13,8 @@ export class NewAttributeService {
 
     public attributeAddEmitter : EventEmitter<any> = new EventEmitter();
 
-    constructor(private alertCtrl: AlertController){}
+    constructor(private alertCtrl: AlertController,
+                private validateService: ValidateService){}
 
     public createNewAttribute(obj){
         return {
@@ -60,7 +62,9 @@ export class NewAttributeService {
                             {
                                 text: 'Yes',
                                 handler: () => {
-                                    listAttributes[attribute.name][0] = object
+                                    this.saveAttributeWithEthereum(object).then(object =>{
+                                        listAttributes[attribute.name][0] = object
+                                    });
                                 }
                             }
                         ]
@@ -71,10 +75,16 @@ export class NewAttributeService {
             else{
                 let index = this.searchAttribute(listAttributes[attribute.name],value);
                 if(index > -1){
-                    listAttributes[attribute.name][index] = object;
+                    this.saveAttributeWithEthereum(object).then(object =>{
+                        listAttributes[attribute.name][index] = object;
+                    });
+
                 }
                 else{
-                    listAttributes[attribute.name].push(object);
+                    this.saveAttributeWithEthereum(object).then(object =>{
+                        listAttributes[attribute.name].push(object);
+                    });
+
                 }
 
             }
@@ -102,7 +112,20 @@ export class NewAttributeService {
 
 
     }
+    public saveAttributeWithEthereum(object){
+        return new Promise((resolve, reject) => {
+            this.validateService.saveValueEthereum(object.value)
+                .then(res => {let body = res.json();return body || [];})
+                .then(val =>{
+                    object.urlEthereum = val.result;
+                    resolve(object)
+                })
+                .catch(err =>{
+                    resolve(object);
+                })
+        });
 
+    }
     public getListAttribute(){
         let listAttributes = JSON.parse(localStorage.getItem('attributes'));
 
