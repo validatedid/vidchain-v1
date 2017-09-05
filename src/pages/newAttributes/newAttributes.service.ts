@@ -4,17 +4,20 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
 import CONSTANTS from '../../constants';
-import {AlertController} from "ionic-angular";
+import {AlertController, LoadingController, ModalController} from "ionic-angular";
 import {ValidateService} from "../validate/validate.service";
+import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 
 
 @Injectable()
 export class NewAttributeService {
 
     public attributeAddEmitter : EventEmitter<any> = new EventEmitter();
-
+    public loading;
     constructor(private alertCtrl: AlertController,
-                private validateService: ValidateService){}
+                private validateService: ValidateService,
+                public loadingCtrl: LoadingController,
+                private modalCtrl: ModalController){}
 
     public createNewAttribute(obj){
         return {
@@ -32,6 +35,7 @@ export class NewAttributeService {
         let attr = CONSTANTS.SOCIAL_LOGIN_ATTRIBUTES[social];
         let listAttributes = this.getListAttribute();
         let alertsWaiting = [];
+        this.showLoading();
         for (let attribute of attr){
             let value = this.accessDataFromPropertyString(data,attribute.value);
             if(attribute.name === 'photo'){
@@ -91,7 +95,7 @@ export class NewAttributeService {
 
             }
         }
-
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:social.toLowerCase()+'attributes'});
         if(alertsWaiting.length>0){
             alertsWaiting[0].present();
             for(let i=0;i<alertsWaiting.length;i++){
@@ -101,13 +105,17 @@ export class NewAttributeService {
                         alertsWaiting[i+1].present();
                     }
                     else{
-                        this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
+                        this.hideLoading();
+                        infoModal.present();
+                        // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
                     }
                 });
             }
         }
         else{
-            this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
+            this.hideLoading();
+            infoModal.present();
+            // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
         }
 
 
@@ -138,7 +146,39 @@ export class NewAttributeService {
         localStorage.setItem('attributes',JSON.stringify(listAttributes));
         this.attributeAddEmitter.emit("all");
     }
-
+    createNewEducation(msg){
+        this.showLoading();
+        let obj = this.createNewAttribute({
+            'key':'education',
+            'value':msg.raw.additionalData.payload.attribute,
+            'validated': true,
+            'source': msg.raw.additionalData.payload.requester.name
+        });
+        let listValues = this.getListAttribute();
+        let index = this.searchAttribute(listValues['education'],obj.value);
+        if(index > -1){
+            if(listValues['education'][index].source === obj.source){
+                this.hideLoading();
+                this.alertCtrl.create({title: 'You already have this education', buttons: [{text: 'Ok'},]}).present();
+            }
+            else{
+                this.saveAttributeWithEthereum(obj).then(val=>{
+                    listValues['education'].push(val);
+                    this.saveAttributes(listValues);
+                    this.hideLoading();
+                    this.alertCtrl.create({title: 'Education Sync Done', buttons: [{text: 'Ok'},]}).present();
+                })
+            }
+        }
+        else{
+            this.saveAttributeWithEthereum(obj).then(val=>{
+                listValues['education'].push(val);
+                this.saveAttributes(listValues);
+                this.hideLoading();
+                this.alertCtrl.create({title: 'Education Sync Done', buttons: [{text: 'Ok'},]}).present();
+            })
+        }
+    }
     public searchAttribute(list,value){
         let res = -1;
         for(let i=0;i<list.length;i++){
@@ -147,6 +187,15 @@ export class NewAttributeService {
             }
         }
         return res;
+    }
+    public showLoading(){
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.loading.present()
+    }
+    public hideLoading(){
+        this.loading.dismiss();
     }
     private accessDataFromPropertyString(data,property){
         let res;

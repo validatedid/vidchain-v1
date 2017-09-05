@@ -70,7 +70,7 @@ export class MyApp implements OnDestroy{
                   {
                     text: 'Yes',
                     handler: () => {
-                      this.generateNewEducation(msg);
+                      this.newAttributeService.createNewEducation(msg);
                     }
                   }
                 ]
@@ -94,35 +94,7 @@ export class MyApp implements OnDestroy{
     localStorage.setItem('attributes',JSON.stringify(attributes));
   }
 
-  generateNewEducation(msg){
-    let obj = this.newAttributeService.createNewAttribute({
-      'key':'education',
-      'value':msg.raw.additionalData.payload.attribute,
-      'validated': true,
-      'source': msg.raw.additionalData.payload.requester.name
-    });
-    let listValues = this.newAttributeService.getListAttribute();
-    let index = this.newAttributeService.searchAttribute(listValues['education'],obj.value);
-    if(index > -1){
-      if(listValues['education'][index].source === obj.source){
-        this.alertCtrl.create({title: 'You already have this education', buttons: [{text: 'Ok'},]}).present();
-      }
-      else{
-        this.newAttributeService.saveAttributeWithEthereum(obj).then(val=>{
-          listValues['education'].push(val);
-          this.newAttributeService.saveAttributes(listValues);
-          this.alertCtrl.create({title: 'Education Sync Done', buttons: [{text: 'Ok'},]}).present();
-        })
-      }
-    }
-    else{
-      this.newAttributeService.saveAttributeWithEthereum(obj).then(val=>{
-        listValues['education'].push(val);
-        this.newAttributeService.saveAttributes(listValues);
-        this.alertCtrl.create({title: 'Education Sync Done', buttons: [{text: 'Ok'},]}).present();
-      })
-    }
-  }
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

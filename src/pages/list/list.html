@@ -7,20 +7,21 @@
                               [ngClass]="{selected : listOpened?.group == i && listOpened?.item == i2}"
                               (click)="openList(i,i2)">
                 <!--don't want show photos-->
-                <ion-item *ngIf="item.key !== 'photo'">
+                <ion-item>
                     <ion-avatar item-end >
-                        <img src="assets/img/ethereum.png" *ngIf="item.urlEthereum" (click)="openInAppBrowser(item.urlEthereum)"/>
+
                         <ion-icon name="time" *ngIf="!item.validated" (click)="openModalValidate(item,i2)"></ion-icon>
                         <ion-icon name="checkbox-outline" *ngIf="item.validated"  ></ion-icon>
                     </ion-avatar>
-                    <h2 class="value-item">
-                        {{ item.value }}
+                    <h2 class="value-item" >
+                        <span *ngIf="item.key !== 'photo'">{{ item.value }}</span>
                     </h2>
                     <p class="type-item">
                         <ion-icon name="mail" *ngIf="item.key ==='email'"></ion-icon>
                         <ion-icon name="phone-portrait" *ngIf="item.key ==='phone'"></ion-icon>
                         <ion-icon name="logo-facebook" *ngIf="item.key !=='phone' && item.key !=='email' && item.source =='FACEBOOK'"></ion-icon>
                         <ion-icon name="logo-google" *ngIf="item.key !=='phone' && item.key !=='email' && item.source =='GOOGLE'"></ion-icon>
+                        <ion-icon name="school" *ngIf="item.key ==='education'"></ion-icon>
                         {{item.key | capitalize}}
                     </p>
                     <ion-item *ngIf="listOpened?.group == i && listOpened?.item == i2" class="sub-description">
@@ -39,6 +40,9 @@
                         <h2>
                             <div class="title-desplegated">Status</div>
                             <div class="value-desplegated">{{item.validated?'Validated':'No Validated'}}</div>
+                        </h2>
+                        <h2 *ngIf="item.urlEthereum" (click)="openInAppBrowser(item.urlEthereum)">
+                            <div class="title-desplegated">Ethereum <img src="assets/img/ethereum.png"  /> </div>
                         </h2>
                     </ion-item>
                 </ion-item>

@@ -38,7 +38,7 @@ page-list {
             color: $greenVidChain;
           }
           &[name="time"]{
-            color: yellow;
+            color: #dcdc03;
           }
           font-size: 6vh;
         }
@@ -47,6 +47,7 @@ page-list {
       ion-label{
         h2{
           font-size: 2.5vh!important;
+          min-height: 2.5vh;
         }
 
         margin: 10px 8px 10px 0!important;
@@ -71,6 +72,10 @@ page-list {
           font-weight: bold;
           //margin-right: 4%;
           width: 35%;
+          @include flex-content(row,center,flex-start);
+          img{
+            width: 4vh;
+          }
         }
       }
     }

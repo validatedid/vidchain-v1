@@ -22,15 +22,13 @@ export class ValidatePage implements OnDestroy{
     public timeToValidate;
     public timeOutValidation;
     private formGroup : FormGroup;
-    public loading;
     constructor(public params: NavParams,
                 public viewCtrl: ViewController,
                 private formBuilder: FormBuilder,
                 private validateService : ValidateService,
                 private newAttributeService : NewAttributeService,
                 private toastCtrl: ToastController,
-                private modalCtrl: ModalController,
-                public loadingCtrl: LoadingController) {
+                private modalCtrl: ModalController) {
 
         this.info = params.get('info');
         this.key = params.get('key');
@@ -79,7 +77,7 @@ export class ValidatePage implements OnDestroy{
         this.validateService.attributedValidated.emit(list[this.key][this.index]);
     }
     refreshTimeToValidator(){
-        this.showLoading();
+        this.newAttributeService.showLoading();
         if(this.info.key === 'phone'){
             this.validateService.sendSmsCode(this.info.value)
                 .then(res => {let body = res.json();return body || [];})
@@ -94,7 +92,7 @@ export class ValidatePage implements OnDestroy{
                 }).present();
             }).catch(val=>{
                 console.log(val);
-                this.loading.dismiss();
+                this.newAttributeService.hideLoading();
                 alert('error sending sms');
             });
         }
@@ -106,7 +104,7 @@ export class ValidatePage implements OnDestroy{
                     this.emailWasSendedToast(val);
                 }
                 else{
-                    this.loading.dismiss();
+                    this.newAttributeService.hideLoading();
                     alert('error sending email');
                 }
             }).catch(val=>{
@@ -115,7 +113,7 @@ export class ValidatePage implements OnDestroy{
                 }
                 else{
                     console.log(val);
-                    this.loading.dismiss();
+                    this.newAttributeService.hideLoading();
                     alert('error sending email');
                 }
             });
@@ -141,7 +139,7 @@ export class ValidatePage implements OnDestroy{
         this.info.idValidate = list[this.key][this.index].idValidate;
         this.info=list[this.key][this.index];
         localStorage.setItem('attributes',JSON.stringify(list));
-        this.loading.dismiss();
+        this.newAttributeService.hideLoading();
 
         this.checkValidationInterval();
     }
@@ -150,12 +148,12 @@ export class ValidatePage implements OnDestroy{
         this.refreshTimeToValidator()
     }
     validateValue(){
-        this.showLoading();
+        this.newAttributeService.showLoading();
         if(this.info.key === 'email'){
             this.validateService.validateEmailCode(this.formGroup.value.code,this.info.idValidate)
                 .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
-                    this.loading.dismiss();
+                    this.newAttributeService.hideLoading();
                     if(val['result'] === 'verified'){
                         this.showToastValidate();
                     }
@@ -163,7 +161,7 @@ export class ValidatePage implements OnDestroy{
                         this.showInvalidCode = true;
                     }
                 }).catch(val =>{
-                    this.loading.dismiss();
+                    this.newAttributeService.hideLoading();
                     this.showInvalidCode = true;
                 })
         }
@@ -171,7 +169,7 @@ export class ValidatePage implements OnDestroy{
             this.validateService.validateSmsCode(this.formGroup.value.code,this.info.idValidate)
                 .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
-                    this.loading.dismiss();
+                    this.newAttributeService.hideLoading();
                     if(val['entity']['status'] === 'verified'){
                        this.showToastValidate();
                     }
@@ -179,7 +177,7 @@ export class ValidatePage implements OnDestroy{
                         this.showInvalidCode = true;
                     }
                 }).catch(val =>{
-                    this.loading.dismiss();
+                    this.newAttributeService.hideLoading()
                     this.showInvalidCode = true;
                 })
         }
@@ -188,7 +186,7 @@ export class ValidatePage implements OnDestroy{
     }
 
     showToastValidate(){
-        let infoModal = this.modalCtrl.create(InfoAttributesPages,{type:this.info.key});
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:this.info.key==='phone'?'Phone':'Email address'});
         this.validateService.saveValueEthereum(this.info.value)
             .then(res => {let body = res.json();return body || [];})
             .then(val =>{
@@ -206,12 +204,7 @@ export class ValidatePage implements OnDestroy{
     closeModal(){
         this.viewCtrl.dismiss();
     }
-    showLoading(){
-        this.loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        this.loading.present()
-    }
+
     ngOnDestroy(){
         clearTimeout( this.timeOutValidation);
     }

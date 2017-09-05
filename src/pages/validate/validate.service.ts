@@ -34,7 +34,7 @@ export class ValidateService {
         let options = new RequestOptions({ headers: headers });
         let data = {
             "sms": {
-                "from": "VIDChain",
+                "from": "ViDChain",
                 "to": numTelefono,
                 "text": "Your activation code is %token%"
             },
