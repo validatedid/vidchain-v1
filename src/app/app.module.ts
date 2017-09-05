@@ -22,7 +22,7 @@ import {SendAttributesPage} from "../pages/sendAttributes/sendAttributes";
 import {ValidateService} from "../pages/validate/validate.service";
 import {HttpModule} from "@angular/http";
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-
+import { Facebook } from '@ionic-native/facebook';
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '2fad95ab'
@@ -87,6 +87,7 @@ const cloudSettings: CloudSettings = {
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    Facebook,
     NewAttributeService,
     ValidateService,
     InAppBrowser,

@@ -17,17 +17,38 @@ let CONSTANT = {
         'GOOGLE':'GOOGLE'
     },
     SOCIAL_LOGIN_ATTRIBUTES:{
-      "FACEBOOK":[{
+      // "FACEBOOK":[{
+      //     name : 'name',
+      //     value : "social.facebook.data.full_name",
+      //     unique : true,
+      // },{
+      //     name : "email",
+      //     value : "social.facebook.data.email",
+      //     unique : false,
+      // },{
+      //     name : "photo",
+      //     value : "social.facebook.uid",
+      //     unique : true,
+      // }],
+        "FACEBOOK":[{
           name : 'name',
-          value : "social.facebook.data.full_name",
+          value : "name",
           unique : true,
       },{
           name : "email",
-          value : "social.facebook.data.email",
+          value : "email",
           unique : false,
       },{
           name : "photo",
-          value : "social.facebook.uid",
+          value : "id",
+          unique : true,
+      },{
+          name : "gender",
+          value : "gender",
+          unique : true,
+      },{
+          name : "birthday",
+          value : "birthday",
           unique : true,
       }],
       "GOOGLE":[{

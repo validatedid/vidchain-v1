@@ -53,7 +53,7 @@ export class NewAttributeService {
                 listAttributes[attribute.name] = [];
             }
             if(attribute.unique && listAttributes[attribute.name].length>0){
-                if(value !==  listAttributes[attribute.name][0].value){
+                if(value !==  listAttributes[attribute.name][0].value || social !== listAttributes[attribute.name][0].source){
                     let alert = this.alertCtrl.create({
                         title: 'Do you want overwrite the Attribute?',
                         message: 'Actual value : '+listAttributes[attribute.name][0].value+
