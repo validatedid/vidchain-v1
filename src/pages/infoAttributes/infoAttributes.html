@@ -15,8 +15,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="message-login-done">
+  <div class="message-login-done" *ngIf="type == 'attributes'">
     Your {{text}} has been successfully validated and it was included in your ViDChain Wallet
+  </div>
+  <div class="message-login-done" *ngIf="type == 'login'">
+    QR Login Successful
   </div>
   <div class="content-button-send">
     <button ion-button color="secondary" (click)="closeModal()"  type="submit" >Return!</button>

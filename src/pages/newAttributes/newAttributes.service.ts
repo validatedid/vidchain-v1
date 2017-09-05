@@ -95,7 +95,7 @@ export class NewAttributeService {
 
             }
         }
-        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:social.toLowerCase()+'attributes'});
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:social.toLowerCase()+' attributes'});
         if(alertsWaiting.length>0){
             alertsWaiting[0].present();
             for(let i=0;i<alertsWaiting.length;i++){

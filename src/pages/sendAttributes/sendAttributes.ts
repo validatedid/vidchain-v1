@@ -6,6 +6,7 @@ import {AlertController, ModalController, NavParams, ViewController} from "ionic
 import {NewAttributesPage} from "../newAttributes/newAttributes";
 import {Http, RequestOptions, Headers} from '@angular/http';
 import CONSTANT from "../../constants";
+import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 @Component({
     selector: 'send-attributes',
     templateUrl: 'sendAttributes.html'
@@ -20,8 +21,7 @@ export class SendAttributesPage {
         public viewCtrl: ViewController,
         public modalCtrl: ModalController,
         public params: NavParams,
-        private http:Http,
-        private alertCtrl: AlertController
+        private http:Http
     ) {
         this.attrToSend = params.get('attrToSend') ;
         // this.attrToSend = params.get('url') ;
@@ -78,18 +78,8 @@ export class SendAttributesPage {
         this.result['token'] = JSON.parse(localStorage['ionic_push_token'])['token'];
         this.http.post(CONSTANT.URL.URL_CONFIRM_LOGIN, JSON.stringify(this.result), options).toPromise()
             .then((val)=>{
-                console.log(val);
-                let alert = this.alertCtrl.create({
-                    title: 'Login',
-                    subTitle: 'Login Done',
-                    buttons: [{
-                        text : 'Accept',
-                        handler: () => {
-                            vm.closeModal();
-                        }
-                    }]
-                });
-                alert.present();
+                let infoModal = vm.modalCtrl.create(InfoAttributesPages,{ type:'login'});
+                infoModal.present();
             });
     }
 }

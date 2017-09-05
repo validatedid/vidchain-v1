@@ -10,11 +10,12 @@ import moment from 'moment';
 })
 export class InfoAttributesPages implements OnInit{
   public text;
-  public index;
+  public type;
   public timeToValidate;
   constructor(public params: NavParams,
               public viewCtrl: ViewController,) {
     this.text = params.get('text');
+    this.type = params.get('type') || 'attributes';
 
   }
   ngOnInit(){
