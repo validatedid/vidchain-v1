@@ -24,6 +24,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="OverrideUserAgent" value="Mozilla/5.0 Google" />
+    <preference name="loadUrlTimeoutValue" value="60000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />

@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
 import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
-import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
+// import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
@@ -19,8 +19,9 @@ export class HomePage {
               public auth: Auth,
               public user: User,
               public newAttributesService : NewAttributeService,
+              // public fb : Facebook
               public facebookAuth: FacebookAuth,
-              public fb : Facebook) {
+              ) {
 
           console.log(user);
 
@@ -55,48 +56,40 @@ export class HomePage {
     });
   }
 
-  loginFacebook(fab){
-    fab.close();
-    let vm = this;
-
-    this.fb.login(['user_about_me','email','public_profile','user_birthday','user_hometown'])
-        .then((res) => {
-            console.log('Logged into Facebook!', res);
-             this.fb.api("/me?fields=name,gender,email,birthday",['user_about_me','email','public_profile','user_birthday','user_hometown'])
-              .then(function(profile) {
-                vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,profile);
-                vm.fb.logout();
-              });
-          })
-        .catch(e => console.log('Error logging into Facebook', e));
-  }
   // loginFacebook(fab){
   //   fab.close();
-  //
-  //   try{
-  //     this.facebookAuth.logout();
-  //     this.auth.logout();
-  //   }
-  //   catch (ex){}
-  //
-  //   this.auth.login('facebook',null,{
-  //     remember:false,
-  //     inAppBrowserOptions:{
-  //       enableViewportScale:true,
-  //       fullscreen:true,
-  //       clearsessioncache:true,
-  //       clearcache:true,
-  //       location:true,
-  //     }
-  //   }).then( val =>{
-  //     this.user.load().then(val =>{
-  //       this.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,this.user);
-  //       this.auth.logout();
-  //     })
-  //   }).catch(err =>{
-  //     console.log(err);
-  //   });
+  //   let vm = this;
+
+  //   this.fb.login(['user_about_me','email','public_profile','user_birthday','user_hometown'])
+  //       .then((res) => {
+  //           console.log('Logged into Facebook!', res);
+  //            this.fb.api("/me?fields=name,gender,email,birthday",['user_about_me','email','public_profile','user_birthday','user_hometown'])
+  //             .then(function(profile) {
+  //               vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,profile);
+  //               vm.fb.logout();
+  //             });
+  //         })
+  //       .catch(e => console.log('Error logging into Facebook', e));
   // }
+
+  loginFacebook(fab){
+    fab.close();
+
+    try{
+      this.facebookAuth.logout();
+      this.auth.logout();
+    }
+    catch (ex){}
+
+    this.auth.login('facebook').then( val =>{
+      this.user.load().then(val =>{
+        this.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,this.user);
+        this.auth.logout();
+      })
+    }).catch(err =>{
+      console.log(err);
+    });
+  }
 
   checkImageAvatar(){
     let attributes = this.newAttributesService.getListAttribute();
