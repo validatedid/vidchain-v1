@@ -1,5 +1,5 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {AlertController, Nav, Platform} from 'ionic-angular';
+import {AlertController, ModalController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,6 +10,7 @@ import {
   PushToken
 } from '@ionic/cloud-angular';
 import {NewAttributeService} from "../pages/newAttributes/newAttributes.service";
+import {ChangeAttributesPage} from "../pages/changeAttributes/changeAttributes";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp implements OnDestroy{
               public splashScreen: SplashScreen,
               public push: Push,
               public newAttributeService : NewAttributeService,
-              private alertCtrl: AlertController) {
+              private modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -57,24 +58,13 @@ export class MyApp implements OnDestroy{
 
         this.pushNotificationSubscribe = this.push.rx.notification()
             .subscribe((msg) => {
-              // alert(msg.title + ': ' + msg.text);
-              let alert = this.alertCtrl.create({
+
+              let alert = this.modalCtrl.create(ChangeAttributesPage,{
                 title: 'Education Title',
                 message: 'The ' +msg.raw.additionalData.payload.requester.name+' want to send to you a '+
-                msg.raw.additionalData.payload.attribute+' education, do you want to save this education?',
-                buttons: [
-                  {
-                    text: 'No',
-                    role: 'No',
-                  },
-                  {
-                    text: 'Yes',
-                    handler: () => {
-                      this.newAttributeService.createNewEducation(msg);
-                    }
-                  }
-                ]
-              });
+                msg.raw.additionalData.payload.attribute+' education, do you want to save this education?',callback: () =>{
+                  this.newAttributeService.createNewEducation(msg);
+              }});
               alert.present();
             });
 

@@ -16,37 +16,37 @@
                 <ion-icon start name="alert"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title> Change Value? </ion-title>
+        <ion-title> {{title}} </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <div class="title-header">
-        {{title}}
+        {{message}}
     </div>
     <ion-list>
-        <ion-list-header>
+        <ion-list-header *ngIf="newValues">
             Actual Values
         </ion-list-header>
-        <ion-item>
+        <ion-item *ngIf="newValues">
             <div item-start>Value</div>
             <div item-end *ngIf="newValues.key != 'photo' ">{{newValues?.value}}</div>
             <img item-end *ngIf="newValues.key == 'photo' " [src]="newValues?.value" >
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="newValues">
             <div item-start>Source</div>
             <div item-end>{{newValues?.source}}</div>
         </ion-item>
 
-        <ion-list-header class="second-header">
+        <ion-list-header *ngIf="oldValues" class="second-header">
             New Values
         </ion-list-header>
-        <ion-item>
+        <ion-item *ngIf="oldValues">
             <div item-start>Value</div>
             <div item-end *ngIf="oldValues.key != 'photo' ">{{oldValues?.value}}</div>
             <img item-end *ngIf="oldValues.key == 'photo' " [src]="oldValues?.value" >
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="oldValues">
             <div item-start>Source</div>
             <div item-end>{{oldValues?.source}}</div>
         </ion-item>

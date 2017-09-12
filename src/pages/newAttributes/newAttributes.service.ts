@@ -172,17 +172,18 @@ export class NewAttributeService {
         });
         let listValues = this.getListAttribute();
         let index = this.searchAttribute(listValues['education'],obj.value);
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text: 'Education , '+obj.value+' '});
         if(index > -1){
             if(listValues['education'][index].source === obj.source){
+                infoModal.present();
                 this.hideLoading();
-                this.alertCtrl.create({title: 'You already have this education', buttons: [{text: 'Ok'},]}).present();
             }
             else{
                 this.saveAttributeWithEthereum(obj).then(val=>{
                     listValues['education'].push(val);
                     this.saveAttributes(listValues);
+                    infoModal.present();
                     this.hideLoading();
-                    this.alertCtrl.create({title: 'Education Sync Done', buttons: [{text: 'Ok'},]}).present();
                 })
             }
         }
@@ -190,8 +191,8 @@ export class NewAttributeService {
             this.saveAttributeWithEthereum(obj).then(val=>{
                 listValues['education'].push(val);
                 this.saveAttributes(listValues);
+                infoModal.present();
                 this.hideLoading();
-                this.alertCtrl.create({title: 'Education Sync Done', buttons: [{text: 'Ok'},]}).present();
             })
         }
     }
