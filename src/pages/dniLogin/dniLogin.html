@@ -1,0 +1,35 @@
+<ion-header color="primary">
+  <ion-navbar color="primary">
+    <ion-buttons >
+      <button ion-button (click)="closeModal()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="arrow-round-back" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/img/ViDChain-negativo-sin-cuadro.png">
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-title> Read DNIe attributes </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div class="content-image-can-code">
+    <img class="image-can-code" src="assets/img/cancode.png" />
+  </div>
+  <div class="content-description" *ngIf="textLoading">
+
+    <ion-spinner name="bubbles"></ion-spinner>
+    <div>{{textLoading}}</div>
+  </div>
+  <form [formGroup]="formGroup" (ngSubmit)="getDataDni()">
+    <ion-item>
+      <ion-input placeholder="Type your CAN code" type="number" formControlName="code"></ion-input>
+    </ion-item>
+    <div class="content-button-send" >
+      <button ion-button  color="secondary" *ngIf="showButton" type="submit" [disabled]="!formGroup.valid">Start</button>
+    </div>
+  </form>
+</ion-content>

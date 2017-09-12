@@ -31,7 +31,7 @@ export class NewAttributeService {
         }
     }
 
-    public createSocialAttributes(social,data){
+    public createSocialAttributes(social,data,cb=null){
         let attr = CONSTANTS.SOCIAL_LOGIN_ATTRIBUTES[social];
         let listAttributes = this.getListAttribute();
         let alertsWaiting = [];
@@ -39,7 +39,17 @@ export class NewAttributeService {
         for (let attribute of attr){
             let value = this.accessDataFromPropertyString(data,attribute.value);
             if(attribute.name === 'photo'){
-                value = social === CONSTANTS.SOCIAL_LOGINS.GOOGLE? value + '&sz=200': "http://graph.facebook.com/" + value + "/picture?type=large";
+                switch (social){
+                    case CONSTANTS.SOCIAL_LOGINS.FACEBOOK:
+                        value = "http://graph.facebook.com/" + value + "/picture?type=large";
+                        break;
+                    case CONSTANTS.SOCIAL_LOGINS.GOOGLE:
+                        value = value + '&sz=200';
+                        break;
+                    case CONSTANTS.SOCIAL_LOGINS.DNI:
+                        value = 'data:image/jpeg;base64,'+value;
+                }
+
             }
             let object = this.createNewAttribute({
                     'type': attribute.name,
@@ -105,6 +115,9 @@ export class NewAttributeService {
                         alertsWaiting[i+1].present();
                     }
                     else{
+                        if(cb){
+                            cb();
+                        }
                         this.hideLoading();
                         infoModal.present();
                         // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
@@ -113,6 +126,9 @@ export class NewAttributeService {
             }
         }
         else{
+            if(cb){
+                cb();
+            }
             this.hideLoading();
             infoModal.present();
             // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
@@ -188,11 +204,17 @@ export class NewAttributeService {
         }
         return res;
     }
-    public showLoading(){
+    public showLoading(text = 'Please wait...'){
         this.loading = this.loadingCtrl.create({
-            content: 'Please wait...'
+            content: text
         });
+        console.log(this.loading);
         this.loading.present()
+    }
+    public changeTextLoading(text){
+        if(this.loading){
+            this.loading.setContent(text);
+        }
     }
     public hideLoading(){
         this.loading.dismiss();

@@ -33,9 +33,9 @@
                 <!--phone inputs-->
                 <ion-item class="prefix-phone-value">
                     <ion-input id="prefix-plus-phone"   disabled="true" value="+"></ion-input>
-                    <ion-input id="prefix-value-phone"  type="text" formControlName="prefix"></ion-input>
+                    <ion-input id="prefix-value-phone"  type="number" formControlName="prefix"></ion-input>
                 </ion-item>
-                <ion-item class="phone-value"><ion-input id="prefix-number-phone" placeholder="Type your phone" type="text" formControlName="value"></ion-input></ion-item>
+                <ion-item class="phone-value"><ion-input id="prefix-number-phone" placeholder="Type your phone" type="number" formControlName="value"></ion-input></ion-item>
             </div>
             <ion-item *ngIf="formGroup.value.type === 'email' || formGroup.value.type === 'other'"  >
                 <!--email inputs-->

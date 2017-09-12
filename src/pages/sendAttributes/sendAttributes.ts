@@ -35,6 +35,11 @@ export class SendAttributesPage {
     }
     checkSubmit(){
         let result = false;
+        for(let attr of this.attrToSend.userinfo){
+            if(!this.result[attr]){
+                return true;
+            }
+        }
         return result;
     }
     newAttribute(value){
@@ -78,6 +83,7 @@ export class SendAttributesPage {
         this.result['token'] = JSON.parse(localStorage['ionic_push_token'])['token'];
         this.http.post(CONSTANT.URL.URL_CONFIRM_LOGIN, JSON.stringify(this.result), options).toPromise()
             .then((val)=>{
+                this.closeModal();
                 let infoModal = vm.modalCtrl.create(InfoAttributesPages,{ type:'login'});
                 infoModal.present();
             });

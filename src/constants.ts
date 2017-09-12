@@ -14,7 +14,8 @@ let CONSTANT = {
     },
     SOCIAL_LOGINS:{
         'FACEBOOK':'FACEBOOK',
-        'GOOGLE':'GOOGLE'
+        'GOOGLE':'GOOGLE',
+        'DNI':'DNI'
     },
     SOCIAL_LOGIN_ATTRIBUTES:{
       "FACEBOOK":[{
@@ -30,27 +31,39 @@ let CONSTANT = {
           value : "social.facebook.uid",
           unique : true,
       }],
-      //   "FACEBOOK":[{
-      //     name : 'name',
-      //     value : "name",
-      //     unique : true,
-      // },{
-      //     name : "email",
-      //     value : "email",
-      //     unique : false,
-      // },{
-      //     name : "photo",
-      //     value : "id",
-      //     unique : true,
-      // },{
-      //     name : "gender",
-      //     value : "gender",
-      //     unique : true,
-      // },{
-      //     name : "birthday",
-      //     value : "birthday",
-      //     unique : true,
-      // }],
+        "DNI":[{
+          name : 'name',
+          value : "Name",
+          unique : true,
+      },{
+          name : "surname",
+          value : "Surname",
+          unique : true,
+      },{
+          name : "photo",
+          value : "PhotoB64",
+          unique : true,
+      },{
+          name : "gender",
+          value : "Sex",
+          unique : true,
+      },{
+          name : "birthday",
+          value : "DateOfBirth",
+          unique : true,
+      },{
+          name : "nationality",
+          value : "Nationality",
+          unique : true,
+      },{
+          name : "city",
+          value : "City",
+          unique : true,
+      },{
+          name : "nif",
+          value : "DniNumber",
+          unique : true,
+      }],
       "GOOGLE":[{
           name : 'name',
           value : "social.google.data.full_name",

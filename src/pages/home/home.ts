@@ -6,6 +6,8 @@ import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
+import {DniLoginPage} from "../dniLogin/dniLogin";
+
 
 
 @Component({
@@ -56,6 +58,11 @@ export class HomePage {
     });
   }
 
+  loginDni(fab){
+    fab.close();
+    let dniPageModal = this.modalCtrl.create(DniLoginPage);
+    dniPageModal.present();
+  }
   // loginFacebook(fab){
   //   fab.close();
   //   let vm = this;
