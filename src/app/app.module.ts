@@ -23,6 +23,7 @@ import {ValidateService} from "../pages/validate/validate.service";
 import {HttpModule} from "@angular/http";
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import {DniLoginPage} from "../pages/dniLogin/dniLogin";
+import {ChangeAttributesPage} from "../pages/changeAttributes/changeAttributes";
 // import { Facebook } from '@ionic-native/facebook';
 const cloudSettings: CloudSettings = {
   'core': {
@@ -62,6 +63,7 @@ const cloudSettings: CloudSettings = {
     ValidatePage,
     SendAttributesPage,
     DniLoginPage,
+    ChangeAttributesPage,
     CapitalizePipe,
     KeysPipe
   ],
@@ -84,13 +86,13 @@ const cloudSettings: CloudSettings = {
     NewAttributesPage,
     ValidatePage,
     SendAttributesPage,
-    DniLoginPage
+    DniLoginPage,
+    ChangeAttributesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
-    // Facebook,
     NewAttributeService,
     ValidateService,
     InAppBrowser,

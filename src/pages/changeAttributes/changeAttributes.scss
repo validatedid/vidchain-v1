@@ -1,5 +1,5 @@
 @import "../../theme/sass-flexbox.scss";
-send-attributes{
+change-attributes{
   ion-header{
     ion-title {
       position: absolute;
@@ -23,36 +23,33 @@ send-attributes{
       }
     }
   }
-
-  .label{
-    color:#999;
-  }
-
-  .content-description-requester{
-    width: 100%;
+  .title-header{
     text-align: center;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    img{
-      text-align: center;
-      width: 30%;
-      margin-bottom: 5%;
+    font-size: 3vh;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+  ion-list{
+    ion-list-header{
+      border: none!important;
+      font-size: 2.7vh!important;
+      margin: 0vh!important;
+      &.second-header{
+        margin-top: 2vh!important;
+      }
     }
-    .description-send{
-      font-size: 2.7vh;
+    img{
+      width: 50%;
     }
   }
   .content-button-send{
     padding-left: 6vh;
     padding-right: 6vh;
-    margin-top: 7%;
+    margin-top: 7vh;
     @include flex-content(row,center,space-around);
     #resend-button{
       text-decoration: underline;
       color:grey;
     }
-  }
-  ion-input input{
-    text-align:right;
   }
 }

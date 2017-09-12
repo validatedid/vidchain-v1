@@ -27,7 +27,9 @@ export class DniLoginPage implements OnInit{
 
   }
   closeModal(){
-    cordova.plugins.DniScanner.resetUsingNFC();
+    if (typeof cordova !== 'undefined') {
+      cordova.plugins.DniScanner.resetUsingNFC();
+    }
     this.viewCtrl.dismiss();
   }
 

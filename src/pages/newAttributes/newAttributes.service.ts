@@ -7,6 +7,7 @@ import CONSTANTS from '../../constants';
 import {AlertController, LoadingController, ModalController} from "ionic-angular";
 import {ValidateService} from "../validate/validate.service";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
+import {ChangeAttributesPage} from "../changeAttributes/changeAttributes";
 
 
 @Injectable()
@@ -76,27 +77,14 @@ export class NewAttributeService {
             }
             if(attribute.unique && listAttributes[attribute.name].length>0){
                 if(value !==  listAttributes[attribute.name][0].value || social !== listAttributes[attribute.name][0].source){
-                    let alert = this.alertCtrl.create({
-                        title: 'Do you want overwrite the Attribute?',
-                        message: 'Actual value : '+listAttributes[attribute.name][0].value+
-                        '<br/>New Value: '+value,
-                        buttons: [
-                            {
-                                text: 'No',
-                                role: 'No',
-                            },
-                            {
-                                text: 'Yes',
-                                handler: () => {
-                                    this.saveAttributeWithEthereum(object).then(object => {
-                                        listAttributes[attribute.name][0] = object;
-                                        this.saveAttributes(listAttributes);
-                                    });
 
-                                }
-                            }
-                        ]
-                    });
+                    let alert = this.modalCtrl.create(ChangeAttributesPage,{newValues:object,oldValues:listAttributes[attribute.name][0],callback: () =>{
+                        this.saveAttributeWithEthereum(object).then(object => {
+                            listAttributes[attribute.name][0] = object;
+                            this.saveAttributes(listAttributes);
+                        });
+                    }});
+
                     alertsWaiting.push(alert);
                 }
             }

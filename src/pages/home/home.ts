@@ -7,6 +7,7 @@ import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {DniLoginPage} from "../dniLogin/dniLogin";
+import {ChangeAttributesPage} from "../changeAttributes/changeAttributes";
 
 
 
@@ -62,6 +63,7 @@ export class HomePage {
     fab.close();
     let dniPageModal = this.modalCtrl.create(DniLoginPage);
     dniPageModal.present();
+
   }
   // loginFacebook(fab){
   //   fab.close();
