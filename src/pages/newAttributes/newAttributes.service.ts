@@ -38,6 +38,7 @@ export class NewAttributeService {
         this.showLoading();
         for (let attribute of attr){
             let value = this.accessDataFromPropertyString(data,attribute.value);
+            //special for foto.
             if(attribute.name === 'photo'){
                 switch (social){
                     case CONSTANTS.SOCIAL_LOGINS.FACEBOOK:
@@ -50,6 +51,17 @@ export class NewAttributeService {
                         value = 'data:image/jpeg;base64,'+value;
                 }
 
+            }
+            //special join data for DNI Attributes
+            if(social === CONSTANTS.SOCIAL_LOGINS.DNI){
+                switch (attribute.name){
+                    case 'name':
+                        value += ' '+data['Surname'];
+                        break;
+                    case 'Address':
+                        value += ' '+data['City'];
+                        break;
+                }
             }
             let object = this.createNewAttribute({
                     'type': attribute.name,

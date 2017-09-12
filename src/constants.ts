@@ -36,10 +36,6 @@ let CONSTANT = {
           value : "Name",
           unique : true,
       },{
-          name : "surname",
-          value : "Surname",
-          unique : true,
-      },{
           name : "photo",
           value : "PhotoB64",
           unique : true,
@@ -58,6 +54,10 @@ let CONSTANT = {
       },{
           name : "city",
           value : "City",
+          unique : true,
+      },{
+          name : "address",
+          value : "Address",
           unique : true,
       },{
           name : "nif",
