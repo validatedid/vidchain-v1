@@ -58,11 +58,12 @@ export class MyApp implements OnDestroy{
 
         this.pushNotificationSubscribe = this.push.rx.notification()
             .subscribe((msg) => {
-
               let alert = this.modalCtrl.create(ChangeAttributesPage,{
                 title: 'Education Title',
                 message: 'The ' +msg.raw.additionalData.payload.requester.name+' want to send to you a '+
-                msg.raw.additionalData.payload.attribute+' education, do you want to save this education?',callback: () =>{
+                msg.raw.additionalData.payload.attribute+' education, do you want to save this education?',
+                image : msg.raw.additionalData.payload.requester.image,
+                callback: () =>{
                   this.newAttributeService.createNewEducation(msg);
               }});
               alert.present();

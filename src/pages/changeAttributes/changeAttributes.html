@@ -21,12 +21,26 @@
 </ion-header>
 
 <ion-content>
-    <div class="title-header">
-        {{message}}
+    <div class="content-description-requester">
+        <img class="image-requester" *ngIf="image" [src]="image">
+        <div class="description-send">{{message}}</div>
     </div>
     <ion-list>
         <ion-list-header *ngIf="newValues">
-            Actual Values
+            Actual Value
+        </ion-list-header>
+        <ion-item *ngIf="oldValues">
+            <div item-start>Value</div>
+            <div item-end *ngIf="oldValues.key != 'photo' ">{{oldValues?.value}}</div>
+            <img item-end *ngIf="oldValues.key == 'photo' " [src]="oldValues?.value" >
+        </ion-item>
+        <ion-item *ngIf="oldValues">
+            <div item-start>Source</div>
+            <div item-end>{{oldValues?.source}}</div>
+        </ion-item>
+
+        <ion-list-header *ngIf="oldValues" class="second-header">
+            New Value
         </ion-list-header>
         <ion-item *ngIf="newValues">
             <div item-start>Value</div>
@@ -38,22 +52,10 @@
             <div item-end>{{newValues?.source}}</div>
         </ion-item>
 
-        <ion-list-header *ngIf="oldValues" class="second-header">
-            New Values
-        </ion-list-header>
-        <ion-item *ngIf="oldValues">
-            <div item-start>Value</div>
-            <div item-end *ngIf="oldValues.key != 'photo' ">{{oldValues?.value}}</div>
-            <img item-end *ngIf="oldValues.key == 'photo' " [src]="oldValues?.value" >
-        </ion-item>
-        <ion-item *ngIf="oldValues">
-            <div item-start>Source</div>
-            <div item-end>{{oldValues?.source}}</div>
-        </ion-item>
     </ion-list>
     <div class="content-button-send">
-        <button ion-button color="secondary" (click)="changeValue()"  type="submit" >Allow!</button>
-        <div id="resend-button" (click)="closeModal()">Not Allow</div>
+        <button ion-button color="secondary" (click)="changeValue()"  type="submit" >Yes</button>
+        <div id="resend-button" (click)="closeModal()">No</div>
     </div>
 </ion-content>
 

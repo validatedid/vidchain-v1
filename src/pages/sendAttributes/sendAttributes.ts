@@ -2,7 +2,7 @@
  * Created by alexmarcos on 22/8/17.
  */
 import { Component } from '@angular/core';
-import {AlertController, ModalController, NavParams, ViewController} from "ionic-angular";
+import {ModalController, NavParams, ViewController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
 import {Http, RequestOptions, Headers} from '@angular/http';
 import CONSTANT from "../../constants";
@@ -30,14 +30,18 @@ export class SendAttributesPage {
     }
     checkInit(){
         for(let attr of this.attrToSend.userinfo){
-            this.addAttributeToResult(attr);
+            if(this.checkIfnotFotoDni(attr)){
+                this.addAttributeToResult(attr);
+            }
         }
     }
     checkSubmit(){
         let result = false;
         for(let attr of this.attrToSend.userinfo){
-            if(!this.result[attr]){
-                return true;
+            if(this.checkIfnotFotoDni(attr)){
+                if(!this.result[attr]){
+                    return true;
+                }
             }
         }
         return result;
@@ -87,5 +91,15 @@ export class SendAttributesPage {
                 let infoModal = vm.modalCtrl.create(InfoAttributesPages,{ type:'login'});
                 infoModal.present();
             });
+    }
+    checkIfnotFotoDni(attr){
+        if(attr == 'photo'){
+            if(this.attributesSaved[attr].length > 0){
+                if(this.attributesSaved[attr][0].source == CONSTANT.SOCIAL_LOGINS.DNI){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

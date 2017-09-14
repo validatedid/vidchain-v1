@@ -15,6 +15,7 @@ export class ChangeAttributesPage {
     public callback;
     public title;
     public message;
+    public image;
     constructor(
         public viewCtrl: ViewController,
         public modalCtrl: ModalController,
@@ -23,6 +24,7 @@ export class ChangeAttributesPage {
         this.newValues = this.params.get('newValues');
         this.oldValues = this.params.get('oldValues');
         this.callback = this.params.get('callback');
+        this.image = this.params.get('image');
         this.message = this.params.get('message') || "Do you want overwrite the Attribute?";
         this.title = this.params.get('title') || "Change Value?";
     }
