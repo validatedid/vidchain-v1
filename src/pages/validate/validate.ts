@@ -2,7 +2,7 @@
  * Created by alexmarcos on 22/8/17.
  */
 import {Component, OnDestroy} from '@angular/core';
-import {LoadingController, ModalController, NavParams, ToastController, ViewController} from "ionic-angular";
+import {ModalController, NavParams, ToastController, ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidateService} from "./validate.service";
 import moment from 'moment';

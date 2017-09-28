@@ -1,14 +1,11 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {AlertController, ModalController, Nav, Platform} from 'ionic-angular';
+import { ModalController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import Constants from "../constants";
-import {
-  Push,
-  PushToken
-} from '@ionic/cloud-angular';
+import {Push, PushToken} from '@ionic/cloud-angular';
 import {NewAttributeService} from "../pages/newAttributes/newAttributes.service";
 import {ChangeAttributesPage} from "../pages/changeAttributes/changeAttributes";
 

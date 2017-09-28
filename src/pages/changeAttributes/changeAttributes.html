@@ -32,7 +32,7 @@
         <ion-item *ngIf="oldValues">
             <div item-start>Value</div>
             <div item-end *ngIf="oldValues.key != 'photo' ">{{oldValues?.value}}</div>
-            <img item-end *ngIf="oldValues.key == 'photo' " [src]="oldValues?.value" >
+            <img item-end *ngIf="oldValues.key == 'photo' " [src]="checkImage(oldValues)" >
         </ion-item>
         <ion-item *ngIf="oldValues">
             <div item-start>Source</div>
@@ -45,7 +45,7 @@
         <ion-item *ngIf="newValues">
             <div item-start>Value</div>
             <div item-end *ngIf="newValues.key != 'photo' ">{{newValues?.value}}</div>
-            <img item-end *ngIf="newValues.key == 'photo' " [src]="newValues?.value" >
+            <img item-end *ngIf="newValues.key == 'photo' " [src]="checkImage(newValues)" >
         </ion-item>
         <ion-item *ngIf="newValues">
             <div item-start>Source</div>

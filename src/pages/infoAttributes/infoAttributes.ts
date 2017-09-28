@@ -1,9 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ModalController, NavParams, ViewController} from "ionic-angular";
-import {ValidateService} from "../validate/validate.service";
-import {ValidatePage} from "../validate/validate";
-import moment from 'moment';
-
+import {Component, OnInit} from '@angular/core';
+import {NavParams, ViewController} from "ionic-angular";
 @Component({
   selector: 'page-info-attributtes',
   templateUrl: 'infoAttributes.html'

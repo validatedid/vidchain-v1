@@ -2,12 +2,10 @@ import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
 import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
-// import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {DniLoginPage} from "../dniLogin/dniLogin";
-import {ChangeAttributesPage} from "../changeAttributes/changeAttributes";
 
 
 
@@ -104,11 +102,11 @@ export class HomePage {
     let attributes = this.newAttributesService.getListAttribute();
     if(attributes['photo']){
       if(attributes['photo'].length>0){
-        let value = attributes['photo'][0].value;
+        let prefix = attributes['photo'][0].source === CONSTANTS.SOCIAL_LOGINS.DNI? 'data:image/jpeg;base64,' : '';
+        let value = prefix+attributes['photo'][0].value;
         return 'url('+value+')';
       }
     }
-
     return '';
   }
   openTab(){

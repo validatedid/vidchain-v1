@@ -25,23 +25,21 @@
         <div class="content-description-requester">
             <img class="image-requester" [src]="attrToSend.requester?.image">
             <div class="description-send">Allow {{attrToSend.requester?.name}} to get following attributes?</div>
-        </div >
-        <div class="content-ion-item" *ngFor="let attr of attrToSend.userinfo">
-            <ion-item *ngIf="checkIfnotFotoDni(attr)" >
-                <ion-label>{{attr}}</ion-label>
-                <!--si no hay ninguno, warning-->
-                <button ion-button clear color="warning" item-end *ngIf="checkEmptyAttr(attr)">
-                    Any value
-                </button>
-                <!--mas de uno hay select-->
-                <ion-select [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length > 1">
-                    <ion-option *ngFor="let localAttr of attributesSaved[attr]; let i = index" value="{{localAttr?.value}}">{{localAttr?.value}}</ion-option>
-                </ion-select>
-                <!--si es solo uno , no hay select-->
-                <ion-input disabled="true" [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length == 1"  value="{{attributesSaved[attr][0]?.value}}"></ion-input>
-            </ion-item>
         </div>
 
+        <ion-item *ngFor="let attr of attrToSend.userinfo">
+            <ion-label>{{attr}}</ion-label>
+            <!--si no hay ninguno, warning-->
+            <button ion-button clear color="warning" item-end *ngIf="checkEmptyAttr(attr)">
+                Any value
+            </button>
+            <!--mas de uno hay select-->
+            <ion-select [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length > 1">
+                <ion-option *ngFor="let localAttr of attributesSaved[attr]; let i = index" value="{{localAttr?.value}}">{{localAttr?.value}}</ion-option>
+            </ion-select>
+            <!--si es solo uno , no hay select-->
+            <ion-input disabled="true" [(ngModel)]="result[attr]" *ngIf="!checkEmptyAttr(attr) && attributesSaved[attr].length == 1"  value="{{attributesSaved[attr][0]?.value}}"></ion-input>
+        </ion-item>
 
         <div class="content-button-send">
             <button ion-button color="secondary" (click)="sendAttributes()"  type="submit" [disabled]="checkSubmit()">Allow!</button>

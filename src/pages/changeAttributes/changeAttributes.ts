@@ -3,6 +3,7 @@
  */
 import { Component } from '@angular/core';
 import {ModalController, NavParams, ViewController} from "ionic-angular";
+import CONSTANTS from "../../constants";
 @Component({
     selector: 'change-attributes',
     templateUrl: 'changeAttributes.html'
@@ -27,6 +28,12 @@ export class ChangeAttributesPage {
         this.image = this.params.get('image');
         this.message = this.params.get('message') || "Do you want overwrite the Attribute?";
         this.title = this.params.get('title') || "Change Value?";
+    }
+    checkImage(attr){
+
+        let prefix = attr.source === CONSTANTS.SOCIAL_LOGINS.DNI ? 'data:image/jpeg;base64,' : '';
+        let value = prefix+attr.value;
+        return value;
     }
 
     changeValue(){

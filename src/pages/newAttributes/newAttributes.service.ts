@@ -48,8 +48,6 @@ export class NewAttributeService {
                     case CONSTANTS.SOCIAL_LOGINS.GOOGLE:
                         value = value + '&sz=200';
                         break;
-                    case CONSTANTS.SOCIAL_LOGINS.DNI:
-                        value = 'data:image/jpeg;base64,'+value;
                 }
 
             }

@@ -24,7 +24,6 @@ import {HttpModule} from "@angular/http";
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import {DniLoginPage} from "../pages/dniLogin/dniLogin";
 import {ChangeAttributesPage} from "../pages/changeAttributes/changeAttributes";
-// import { Facebook } from '@ionic-native/facebook';
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '2fad95ab'

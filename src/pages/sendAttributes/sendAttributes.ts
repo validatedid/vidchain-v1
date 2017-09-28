@@ -30,19 +30,17 @@ export class SendAttributesPage {
     }
     checkInit(){
         for(let attr of this.attrToSend.userinfo){
-            if(this.checkIfnotFotoDni(attr)){
-                this.addAttributeToResult(attr);
-            }
+            this.addAttributeToResult(attr);
+
         }
     }
     checkSubmit(){
         let result = false;
         for(let attr of this.attrToSend.userinfo){
-            if(this.checkIfnotFotoDni(attr)){
-                if(!this.result[attr]){
-                    return true;
-                }
+            if(!this.result[attr]){
+                return true;
             }
+
         }
         return result;
     }
@@ -92,14 +90,5 @@ export class SendAttributesPage {
                 infoModal.present();
             });
     }
-    checkIfnotFotoDni(attr){
-        if(attr == 'photo'){
-            if(this.attributesSaved[attr].length > 0){
-                if(this.attributesSaved[attr][0].source == CONSTANT.SOCIAL_LOGINS.DNI){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+
 }
