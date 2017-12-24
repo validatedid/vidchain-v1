@@ -4,7 +4,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
 import CONSTANTS from '../../constants';
-import {AlertController, LoadingController, ModalController} from "ionic-angular";
+import {LoadingController, ModalController} from "ionic-angular";
 import {ValidateService} from "../validate/validate.service";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {ChangeAttributesPage} from "../changeAttributes/changeAttributes";
@@ -15,8 +15,7 @@ export class NewAttributeService {
 
     public attributeAddEmitter : EventEmitter<any> = new EventEmitter();
     public loading;
-    constructor(private alertCtrl: AlertController,
-                private validateService: ValidateService,
+    constructor(private validateService: ValidateService,
                 public loadingCtrl: LoadingController,
                 private modalCtrl: ModalController){}
 
@@ -139,12 +138,13 @@ export class NewAttributeService {
             this.validateService.saveValueEthereum(object.value)
                 .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
-                    object.urlEthereum = val.result;
+                    object.urlEthereum = CONSTANTS.URL.URL_SHOW_ETHEREUM + val.tx;
                     resolve(object)
                 })
                 .catch(err =>{
                     resolve(object);
                 })
+
         });
 
     }

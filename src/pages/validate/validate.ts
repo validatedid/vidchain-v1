@@ -177,7 +177,7 @@ export class ValidatePage implements OnDestroy{
                         this.showInvalidCode = true;
                     }
                 }).catch(val =>{
-                    this.newAttributeService.hideLoading()
+                    this.newAttributeService.hideLoading();
                     this.showInvalidCode = true;
                 })
         }
@@ -187,6 +187,7 @@ export class ValidatePage implements OnDestroy{
 
     showToastValidate(){
         let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:this.info.key==='phone'?'Phone':'Email address'});
+
         this.validateService.saveValueEthereum(this.info.value)
             .then(res => {let body = res.json();return body || [];})
             .then(val =>{
@@ -199,7 +200,7 @@ export class ValidatePage implements OnDestroy{
                 this.saveValidateValue();
                 infoModal.present();
                 this.closeModal();
-            })
+            });
     }
     closeModal(){
         this.viewCtrl.dismiss();

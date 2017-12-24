@@ -6,6 +6,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
 import {Http, RequestOptions,Request, Headers, RequestMethod} from '@angular/http';
+import * as shajs from 'sha.js'
 import CONSTANT from '../../constants';
 
 @Injectable()
@@ -67,21 +68,8 @@ export class ValidateService {
     }
 
     saveValueEthereum(value){
-        //todo falta hacer
-        let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
-        let data =  {"ViDText":value};
-        console.log(value);
+        return this.http.get(CONSTANT.URL.URL_ETHEREUM+shajs('sha256').update(JSON.stringify(value)).digest('hex')).toPromise();
 
-
-        let requestOptions = new RequestOptions({
-            method : RequestMethod.Post,
-            url : CONSTANT.URL.URL_ETHEREUM,
-            headers: headers,
-            body: JSON.stringify(data)
-        });
-        let request = new Request(requestOptions);
-        return this.http.request(request).toPromise()
         // return this.http.post('http://vps391817.ovh.net/api/chainevidences', JSON.stringify(data)).toPromise()
     }
 }

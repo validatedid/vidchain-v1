@@ -1,4 +1,4 @@
-import {Http, RequestOptions, Headers} from '@angular/http';
+import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Component } from '@angular/core';
