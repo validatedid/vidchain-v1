@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+        "spec": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+        "type": "directory"
+      },
+      "/Users/alexmarcos/Documents/Projects/VIDChain/VidChainApp/node_modules"
+    ]
+  ],
+  "_from": "../DniScanner",
+  "_id": "DniScanner@0.0.6",
+  "_inCache": true,
+  "_location": "/DniScanner",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+    "spec": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+    "type": "directory"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "file:../DniScanner",
+  "_shasum": "14fbd9606c5e88688100ec10836e0a72070b3770",
+  "_shrinkwrap": null,
+  "_spec": "/Users/alexmarcos/Documents/Projects/VIDChain/DniScanner",
+  "_where": "/Users/alexmarcos/Documents/Projects/VIDChain/VidChainApp/node_modules",
+  "author": "",
+  "cordova": {
+    "id": "cordova-plugin-dni-scanner-nfc",
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "ISC",
+  "name": "DniScanner",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "0.0.6"
+}

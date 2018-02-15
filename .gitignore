@@ -6,7 +6,9 @@
 node_modules/
 www/build/
 platforms/
-plugins/
+plugins/*
+!plugins/cordova-plugin-dni-scanner-nfc/
+
 .DS_Store
 
 ### WebStorm+all ###
