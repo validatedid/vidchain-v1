@@ -39,7 +39,7 @@ export class NewAttributeService {
         for (let attribute of attr){
             let value = this.accessDataFromPropertyString(data,attribute.value);
             //special for foto.
-            if(attribute.name === 'photo'){
+            /*if(attribute.name === 'photo'){
                 switch (social){
                     case CONSTANTS.SOCIAL_LOGINS.FACEBOOK:
                         value = "http://graph.facebook.com/" + value + "/picture?type=large";
@@ -50,6 +50,7 @@ export class NewAttributeService {
                 }
 
             }
+            */
             //special join data for DNI Attributes
             if(social === CONSTANTS.SOCIAL_LOGINS.DNI){
                 switch (attribute.name){
@@ -136,9 +137,8 @@ export class NewAttributeService {
     public saveAttributeWithEthereum(object){
         return new Promise((resolve, reject) => {
             this.validateService.saveValueEthereum(object.value)
-                .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
-                    object.urlEthereum = CONSTANTS.URL.URL_SHOW_ETHEREUM + val.tx;
+                    object.urlEthereum = CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx'];
                     resolve(object)
                 })
                 .catch(err =>{
@@ -162,11 +162,20 @@ export class NewAttributeService {
     }
     createNewEducation(msg){
         this.showLoading();
+        /********* IONIC PUSH NOTIFICATION *********/
+        /*
         let obj = this.createNewAttribute({
             'key':'education',
             'value':msg.raw.additionalData.payload.attribute,
             'validated': true,
             'source': msg.raw.additionalData.payload.requester.name
+        });
+        */
+        let obj = this.createNewAttribute({
+            'key':'education',
+            'value':msg.attribute,
+            'validated': true,
+            'source': msg.requester.name
         });
         let listValues = this.getListAttribute();
         let index = this.searchAttribute(listValues['education'],obj.value);

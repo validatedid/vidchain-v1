@@ -1,6 +1,6 @@
 {
   "name": "vidchain",
-  "app_id": "2fad95ab",
+  "app_id": "be81b42c",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

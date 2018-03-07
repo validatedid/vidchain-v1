@@ -19,69 +19,117 @@ let CONSTANT = {
         'DNI':'DNI'
     },
     SOCIAL_LOGIN_ATTRIBUTES:{
-      "FACEBOOK":[{
+      "FACEBOOK":[
+        
+        /**** DATOS CON FIREBASE*****/
+        /* 
+        {
           name : 'name',
-          value : "social.facebook.data.full_name",
+          value : "additionalUserInfo.profile.name",
           unique : true,
-      },{
-          name : "email",
-          value : "social.facebook.data.email",
-          unique : false,
-      },{
-          name : "photo",
-          value : "social.facebook.uid",
-          unique : true,
-      }],
+        },{
+            name : "email",
+            value : "additionalUserInfo.profile.email",
+            unique : false,
+        },{
+            name : "photo",
+            value : "additionalUserInfo.profile.picture.data.url",
+            unique : true,
+        },{
+            name : "gender",
+            value : "additionalUserInfo.profile.gender",
+            unique : true,
+        },{
+            name : "birthday",
+            value : "additionalUserInfo.profile.birthday",
+            unique : true,
+        }
+        */
+        {
+            name : 'name',
+            value : "name",
+            unique : true,
+        },{
+            name : "email",
+            value : "email",
+            unique : false,
+        },{
+            name : "photo",
+            value : "picture.data.url",
+            unique : true,
+        },{
+            name : "gender",
+            value : "gender",
+            unique : true,
+        },{
+            name : "birthday",
+            value : "birthday",
+            unique : true,
+        }
+        ],
         "DNI":[{
           name : 'name',
           value : "Name",
           unique : true,
-      },{
-          name : "photo",
-          value : "PhotoB64",
-          unique : true,
-      },{
-          name : "gender",
-          value : "Sex",
-          unique : true,
-      },{
-          name : "birthday",
-          value : "DateOfBirth",
-          unique : true,
-      },{
-          name : "nationality",
-          value : "Nationality",
-          unique : true,
-      },{
-          name : "city",
-          value : "City",
-          unique : true,
-      },{
-          name : "address",
-          value : "Address",
-          unique : true,
-      },{
-          name : "nif",
-          value : "DniNumber",
-          unique : true,
-      }],
-      "GOOGLE":[{
-          name : 'name',
-          value : "social.google.data.full_name",
-          unique : true,
-      },{
-          name : "email",
-          value : "social.google.data.email",
-          unique : false,
-      },{
-          name : "photo",
-          value : "social.google.data.profile_picture",
-          unique : true,
-      },{
-          name : "gender",
-          value : "social.google.data.raw_data.gender",
-          unique : true,
-      }],
+        },{
+            name : "photo",
+            value : "PhotoB64",
+            unique : true,
+        },{
+            name : "gender",
+            value : "Sex",
+            unique : true,
+        },{
+            name : "birthday",
+            value : "DateOfBirth",
+            unique : true,
+        },{
+            name : "nationality",
+            value : "Nationality",
+            unique : true,
+        },{
+            name : "city",
+            value : "City",
+            unique : true,
+        },{
+            name : "address",
+            value : "Address",
+            unique : true,
+        },{
+            name : "nif",
+            value : "DniNumber",
+            unique : true,
+        }],
+        "GOOGLE":[
+        /**** DATOS CON FIREBASE *****/
+        /*
+        {
+            name : 'name',
+            value : "additionalUserInfo.profile.name",
+            unique : true,
+        },{
+            name : "email",
+            value : "additionalUserInfo.profile.email",
+            unique : false,
+        },{
+            name : "photo",
+            value : "additionalUserInfo.profile.picture",
+            unique : true,
+        }*/
+        {
+            name : 'name',
+            value : "displayName",
+            unique : true,
+        },{
+            name : "email",
+            value : "email",
+            unique : false,
+        },{
+            name : "photo",
+            value : "imageUrl",
+            unique : true,
+        }
+        ],
     }
 };
 export default CONSTANT;

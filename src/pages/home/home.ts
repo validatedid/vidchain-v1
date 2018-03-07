@@ -1,13 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, Content, FabContainer, ModalController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
-import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
+//import { FacebookAuth, Auth, User } from '@ionic/cloud-angular';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {DniLoginPage} from "../dniLogin/dniLogin";
-
-
+import firebase from 'firebase';
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 @Component({
   selector: 'page-home',
@@ -15,17 +16,17 @@ import {DniLoginPage} from "../dniLogin/dniLogin";
 })
 export class HomePage {
   @ViewChild(Content) content: Content;
+
   constructor(public modalCtrl: ModalController,
               public alertCtrl: AlertController,
-              public auth: Auth,
-              public user: User,
-              public newAttributesService : NewAttributeService,
-              // public fb : Facebook
-              public facebookAuth: FacebookAuth,
+              private facebook: Facebook,
+              private googlePlus: GooglePlus,
+              // public auth: Auth,
+              // public user: User,
+              public newAttributesService : NewAttributeService
               ) {
 
-          console.log(user);
-
+          // console.log(user);
   }
 
   ionViewWillEnter() { // THERE IT IS!!!
@@ -47,14 +48,32 @@ export class HomePage {
     let newAttributesModal = this.modalCtrl.create(NewAttributesPage,{type:type});
     newAttributesModal.present();
   }
+
   loginGoogle(fab){
     fab.close();
-    this.auth.login('google').then(val =>{
-      this.user.load().then(val =>{
-        this.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.GOOGLE,this.user);
-        this.auth.logout();
-      })
+    let vm = this;
+    this.googlePlus.login({
+      'webClientId': '938949312980-f79pafv92qqtr45i7f72orhv8ig0kq3v.apps.googleusercontent.com',
+      'offline': true
+    }).then(function (profile){
+      if(profile){
+        vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.GOOGLE,profile);
+        this.googlePlus.logout();
+      }
+    }).catch(err => console.error(err));
+
+    /***** USO DE FIREBASE (levanta la APP en al web) *****/
+    /*
+    let vm = this;
+    let provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function() {
+      firebase.auth().getRedirectResult().then(function(result) {
+        vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.GOOGLE,result);
+      }).catch(function(error) {
+        alert(error.message);
+      });
     });
+    */
   }
 
   loginDni(fab){
@@ -63,39 +82,45 @@ export class HomePage {
     dniPageModal.present();
 
   }
-  // loginFacebook(fab){
-  //   fab.close();
-  //   let vm = this;
-
-  //   this.fb.login(['user_about_me','email','public_profile','user_birthday','user_hometown'])
-  //       .then((res) => {
-  //           console.log('Logged into Facebook!', res);
-  //            this.fb.api("/me?fields=name,gender,email,birthday",['user_about_me','email','public_profile','user_birthday','user_hometown'])
-  //             .then(function(profile) {
-  //               vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,profile);
-  //               vm.fb.logout();
-  //             });
-  //         })
-  //       .catch(e => console.log('Error logging into Facebook', e));
-  // }
 
   loginFacebook(fab){
     fab.close();
-
+    let vm = this;
     try{
-      this.facebookAuth.logout();
-      this.auth.logout();
-    }
-    catch (ex){}
-
-    this.auth.login('facebook').then( val =>{
-      this.user.load().then(val =>{
-        this.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,this.user);
-        this.auth.logout();
-      })
-    }).catch(err =>{
-      console.log(err);
+      /* ****** USO DE LA API (levanta la APP del movil)*****/
+      this.facebook.login(['public_profile', 'email']).then( (response) => {
+      this.facebook.api("/me?fields=name,gender,picture.type(large),email,birthday",['public_profile', 'email']) 
+      .then(function(profile) {
+        if(profile){
+          vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,profile);
+          vm.facebook.logout();
+        }
+      });
+    }).catch((error) => {
+      alert("ERROR 1: " + JSON.stringify(error));
+      console.log(error) 
     });
+    }catch(e)
+    {
+      alert("ERROR 2: " + e);
+    }
+
+
+    /* ****** USO DE FIREBASE *****/
+    /*
+    let vm = this;
+    let provider = new firebase.auth.FacebookAuthProvider();
+    //provider.addScope('user_birthday');
+    //Operación con PopUp no soportada
+    //firebase.auth().signInWithPopup(provider).then(function(result) {
+    firebase.auth().signInWithRedirect(provider).then(function() {
+      firebase.auth().getRedirectResult().then(function(result) {
+        vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.FACEBOOK,result);
+      }).catch(function(error) {
+        alert(error.message);
+      });
+    });
+    */
   }
 
   checkImageAvatar(){

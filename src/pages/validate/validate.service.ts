@@ -5,7 +5,7 @@
  */
 import {EventEmitter, Injectable} from '@angular/core';
 import moment from 'moment';
-import {Http, RequestOptions,Request, Headers, RequestMethod} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as shajs from 'sha.js'
 import CONSTANT from '../../constants';
 
@@ -13,7 +13,7 @@ import CONSTANT from '../../constants';
 export class ValidateService {
     private interval = 1000;
     public attributedValidated : EventEmitter<any> = new EventEmitter();
-    constructor( private http:Http){
+    constructor( private http:HttpClient){
 
     }
     checkValidation(timeToFinish){
@@ -30,9 +30,8 @@ export class ValidateService {
     }
     sendSmsCode(numTelefono){
         //todo falta hacer
-        let headers = new Headers({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
+        let headers = new HttpHeaders({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
             'Accept': 'q=0.8;application/json;q=0.9' });
-        let options = new RequestOptions({ headers: headers });
         let data = {
             "sms": {
                 "from": "ViDChain",
@@ -41,30 +40,29 @@ export class ValidateService {
             },
             "tokenLength": 6
         };
-        return this.http.post('https://api.instasent.com/verify/', JSON.stringify(data), options).toPromise()
+        return this.http.post('https://api.instasent.com/verify/', JSON.stringify(data), {headers:headers}).toPromise()
     }
     validateSmsCode(value, id){
         //todo falta hacer
-        let headers = new Headers({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
+        let headers = new HttpHeaders({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
             'Accept': 'q=0.8;application/json;q=0.9' });
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.get('https://api.instasent.com/verify/'+id+'?token='+value,options).toPromise()
+
+        return this.http.get('https://api.instasent.com/verify/'+id+'?token='+value,{headers:headers}).toPromise()
     }
 
     sendEmailCode(email){
         //todo falta hacer
-        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
+        let headers = new HttpHeaders({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
         let data = {
             "email": email,
         };
-        return this.http.post(CONSTANT.URL.URL_CONFIRM_EMAIL, JSON.stringify(data),headers).toPromise()
+        return this.http.post(CONSTANT.URL.URL_CONFIRM_EMAIL, JSON.stringify(data),{headers:headers}).toPromise()
     }
 
     validateEmailCode(value,id){
-        let headers = new Headers({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(CONSTANT.URL.URL_CONFIRM_EMAIL+"?verification_code="+value+"&request_id="+id,options).toPromise()
+        let headers = new HttpHeaders({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
+        return this.http.get(CONSTANT.URL.URL_CONFIRM_EMAIL+"?verification_code="+value+"&request_id="+id,{headers:headers}).toPromise()
     }
 
     saveValueEthereum(value){

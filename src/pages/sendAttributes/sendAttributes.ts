@@ -4,9 +4,11 @@
 import { Component } from '@angular/core';
 import {ModalController, NavParams, ViewController} from "ionic-angular";
 import {NewAttributesPage} from "../newAttributes/newAttributes";
-import {Http, RequestOptions, Headers} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import CONSTANT from "../../constants";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
+import { Firebase } from '@ionic-native/firebase';
+
 @Component({
     selector: 'send-attributes',
     templateUrl: 'sendAttributes.html'
@@ -21,7 +23,8 @@ export class SendAttributesPage {
         public viewCtrl: ViewController,
         public modalCtrl: ModalController,
         public params: NavParams,
-        private http:Http
+        private http:HttpClient,
+        private firebase: Firebase
     ) {
         this.attrToSend = params.get('attrToSend') ;
         // this.attrToSend = params.get('url') ;
@@ -78,17 +81,31 @@ export class SendAttributesPage {
     }
 
     sendAttributes(){
-        let headers = new Headers({ 'Content-Type': 'application/json',
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json',
             'Accept': 'q=0.8;application/json;q=0.9' });
-        let options = new RequestOptions({ headers: headers });
         let vm = this;
-        this.result['token'] = JSON.parse(localStorage['ionic_push_token'])['token'];
-        this.http.post(CONSTANT.URL.URL_CONFIRM_LOGIN, JSON.stringify(this.result), options).toPromise()
-            .then((val)=>{
-                this.closeModal();
-                let infoModal = vm.modalCtrl.create(InfoAttributesPages,{ type:'login'});
-                infoModal.present();
-            });
+        //this.result['token'] = JSON.parse(localStorage['ionic_push_token'])['token'];
+        this.firebase.getToken()
+        .then(function (token) {
+            vm.result['token']=token;
+            let response = vm.http.post(CONSTANT.URL.URL_CONFIRM_LOGIN, JSON.stringify(vm.result), { headers: headers }).toPromise()
+            vm.closeModal();
+            let infoModal = vm.modalCtrl.create(InfoAttributesPages,{ type:'login'});
+            infoModal.present();
+        }) // save the token server-side and use it to push notifications to this device
+        .catch(error => console.log('Error getting token', error));
+        
+        this.firebase.onTokenRefresh().subscribe(function(token){
+            
+        });
+        /*
+        this.firebase.onNotificationOpen().subscribe(function(msg){
+            alert("onNotificationOpen");
+            alert(msg);
+        });
+        */
+        
     }
+
 
 }

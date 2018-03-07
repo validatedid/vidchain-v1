@@ -80,7 +80,6 @@ export class ValidatePage implements OnDestroy{
         this.newAttributeService.showLoading();
         if(this.info.key === 'phone'){
             this.validateService.sendSmsCode(this.info.value)
-                .then(res => {let body = res.json();return body || [];})
                 .then((val)=>{
                 console.log(val);
                 this.refreshTimeAndId(val['entity']['id']);
@@ -98,9 +97,8 @@ export class ValidatePage implements OnDestroy{
         }
         else{
             this.validateService.sendEmailCode(this.info.value)
-                .then(res => {let body = res.json();return body || [];})
                 .then((val)=>{
-                if(val.result){
+                if(val['result']){
                     this.emailWasSendedToast(val);
                 }
                 else{
@@ -151,7 +149,6 @@ export class ValidatePage implements OnDestroy{
         this.newAttributeService.showLoading();
         if(this.info.key === 'email'){
             this.validateService.validateEmailCode(this.formGroup.value.code,this.info.idValidate)
-                .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
                     this.newAttributeService.hideLoading();
                     if(val['result'] === 'verified'){
@@ -167,7 +164,6 @@ export class ValidatePage implements OnDestroy{
         }
         else{
             this.validateService.validateSmsCode(this.formGroup.value.code,this.info.idValidate)
-                .then(res => {let body = res.json();return body || [];})
                 .then(val =>{
                     this.newAttributeService.hideLoading();
                     if(val['entity']['status'] === 'verified'){
@@ -189,10 +185,9 @@ export class ValidatePage implements OnDestroy{
         let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:this.info.key==='phone'?'Phone':'Email address'});
 
         this.validateService.saveValueEthereum(this.info.value)
-            .then(res => {let body = res.json();return body || [];})
             .then(val =>{
                 console.log(val);
-                this.saveValidateValue(val.result);
+                this.saveValidateValue(val['result']);
                 infoModal.present();
                 this.closeModal();
             })

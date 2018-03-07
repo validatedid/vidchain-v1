@@ -29,6 +29,6 @@
         <resource-file src="src/android/tcfnmtdroid.aar" target="libs/tcfnmtdroid.aar"/>
         <source-file src="src/android/libs/gson-2.2.2.jar" target-dir="libs" />
         <source-file src="src/android/libs/jpeg2000.jar" target-dir="libs" />
-        <dependency id="cordova-plugin-compat" version="^1.0.0"/>
+        <!--<dependency id="cordova-plugin-compat" version="^1.0.0"/>-->
     </platform>
 </plugin>

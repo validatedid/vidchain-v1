@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "938949312980",
+    "firebase_url": "https://vidchainapp-6854f.firebaseio.com",
+    "project_id": "vidchainapp-6854f",
+    "storage_bucket": "vidchainapp-6854f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938949312980:android:bf332852a3c64789",
+        "android_client_info": {
+          "package_name": "com.ionicframework.vidchain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938949312980-d3f7csd3cstoh3ea73b19s9ple0fjm0b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.vidchain",
+            "certificate_hash": "55d61d0c0f9e5396de136361fdfe684da819e185"
+          }
+        },
+        {
+          "client_id": "938949312980-f79pafv92qqtr45i7f72orhv8ig0kq3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGCcAtv3u6COxHfkpF1y5LdnO43m92bCI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938949312980-f79pafv92qqtr45i7f72orhv8ig0kq3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

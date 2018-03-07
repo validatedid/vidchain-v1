@@ -5,9 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import Constants from "../constants";
-import {Push, PushToken} from '@ionic/cloud-angular';
+// import {Push, PushToken} from '@ionic/cloud-angular';
 import {NewAttributeService} from "../pages/newAttributes/newAttributes.service";
 import {ChangeAttributesPage} from "../pages/changeAttributes/changeAttributes";
+import { Firebase } from '@ionic-native/firebase';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,9 +23,10 @@ export class MyApp implements OnDestroy{
   constructor(public platform: Platform,
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
-              public push: Push,
+              // public push: Push,
+              public firebase: Firebase,
               public newAttributeService : NewAttributeService,
-              private modalCtrl: ModalController) {
+              public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -47,26 +49,44 @@ export class MyApp implements OnDestroy{
 
       if (this.platform.is('cordova')) {
 
-        this.push.register().then((t: PushToken) => {
-          return this.push.saveToken(t);
-        }).then((t: PushToken) => {
-          console.log('Token saved:', t.token);
-        });
+        // this.push.register().then((t: PushToken) => {
+        //   return this.push.saveToken(t);
+        // }).then((t: PushToken) => {
+        //   console.log('Token saved:', t.token);
+        // });
 
-        this.pushNotificationSubscribe = this.push.rx.notification()
-            .subscribe((msg) => {
-              let alert = this.modalCtrl.create(ChangeAttributesPage,{
-                title: 'Education Title',
-                message: 'The ' +msg.raw.additionalData.payload.requester.name+' want to send to you a '+
-                msg.raw.additionalData.payload.attribute+' education, do you want to save this education?',
-                image : msg.raw.additionalData.payload.requester.image,
-                callback: () =>{
-                  this.newAttributeService.createNewEducation(msg);
-              }});
-              alert.present();
-            });
-
+      //   this.pushNotificationSubscribe = this.push.rx.notification()
+      //       .subscribe((msg) => {
+      //         let alert = this.modalCtrl.create(ChangeAttributesPage,{
+      //           title: 'Education Title',
+      //           message: 'The ' +msg.raw.additionalData.payload.requester.name+' want to send to you a '+
+      //           msg.raw.additionalData.payload.attribute+' education, do you want to save this education?',
+      //           image : msg.raw.additionalData.payload.requester.image,
+      //           callback: () =>{
+      //             this.newAttributeService.createNewEducation(msg);
+      //         }});
+      //         alert.present();
+      //       });
+      //
       }
+
+      this.firebase.onTokenRefresh().subscribe(function(token){
+      });
+      let vm = this;
+      this.firebase.onNotificationOpen().subscribe(function(notification){
+          try{
+              let body = JSON.parse(notification.body);
+              let modal = vm.modalCtrl.create(ChangeAttributesPage,{
+                title: notification.title,
+                message: body.message,
+                image : body.payload.requester.image,
+                callback: () =>{
+                  vm.newAttributeService.createNewEducation(body.payload);
+                }
+              });
+              modal.present();
+          }catch(e){alert(e)}
+      });
 
     });
     //check if exist default attributes
