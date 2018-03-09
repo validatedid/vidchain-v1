@@ -81,7 +81,14 @@ export class MyApp implements OnDestroy{
                 message: body.message,
                 image : body.payload.requester.image,
                 callback: () =>{
-                  vm.newAttributeService.createNewEducation(body.payload);
+                  switch (body.payload.requester.id){
+                    case "2":
+                      vm.newAttributeService.createNewEducation(body.payload);
+                      break;
+                    case "3":
+                      vm.newAttributeService.createNewTypeOfWorker(body.payload);
+                      break;
+                  }
                 }
               });
               modal.present();

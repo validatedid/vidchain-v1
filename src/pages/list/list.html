@@ -22,6 +22,7 @@
                         <ion-icon name="logo-facebook" *ngIf="item.key !=='phone' && item.key !=='email' && item.source =='FACEBOOK'"></ion-icon>
                         <ion-icon name="logo-google" *ngIf="item.key !=='phone' && item.key !=='email' && item.source =='GOOGLE'"></ion-icon>
                         <ion-icon name="school" *ngIf="item.key ==='education'"></ion-icon>
+                        <ion-icon name="contact" *ngIf="item.key ==='worker'"></ion-icon>
                         {{item.key | capitalize}}
                     </p>
                     <ion-item *ngIf="listOpened?.group == i && listOpened?.item == i2" class="sub-description">

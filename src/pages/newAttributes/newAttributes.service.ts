@@ -203,6 +203,40 @@ export class NewAttributeService {
             })
         }
     }
+    createNewTypeOfWorker(msg){
+        this.showLoading();
+        let obj = this.createNewAttribute({
+            'key':'worker',
+            'value':msg.attribute,
+            'validated': true,
+            'source': msg.requester.name
+        });
+        let listValues = this.getListAttribute();
+        let index = this.searchAttribute(listValues['worker'],obj.value);
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text: 'Worker , '+obj.value+' '});
+        if(index > -1){
+            if(listValues['worker'][index].source === obj.source){
+                infoModal.present();
+                this.hideLoading();
+            }
+            else{
+                this.saveAttributeWithEthereum(obj).then(val=>{
+                    listValues['worker'].push(val);
+                    this.saveAttributes(listValues);
+                    infoModal.present();
+                    this.hideLoading();
+                })
+            }
+        }
+        else{
+            this.saveAttributeWithEthereum(obj).then(val=>{
+                listValues['worker'].push(val);
+                this.saveAttributes(listValues);
+                infoModal.present();
+                this.hideLoading();
+            })
+        }
+    }
     public searchAttribute(list,value){
         let res = -1;
         for(let i=0;i<list.length;i++){
