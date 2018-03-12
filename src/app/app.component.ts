@@ -86,7 +86,7 @@ export class MyApp implements OnDestroy{
                       vm.newAttributeService.createNewEducation(body.payload);
                       break;
                     case "3":
-                      vm.newAttributeService.createNewTypeOfWorker(body.payload);
+                      vm.newAttributeService.createNewProfession(body.payload);
                       break;
                   }
                 }

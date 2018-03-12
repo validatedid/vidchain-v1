@@ -203,25 +203,25 @@ export class NewAttributeService {
             })
         }
     }
-    createNewTypeOfWorker(msg){
+    createNewProfession(msg){
         this.showLoading();
         let obj = this.createNewAttribute({
-            'key':'worker',
+            'key':'profession',
             'value':msg.attribute,
             'validated': true,
             'source': msg.requester.name
         });
         let listValues = this.getListAttribute();
-        let index = this.searchAttribute(listValues['worker'],obj.value);
-        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text: 'Worker , '+obj.value+' '});
+        let index = this.searchAttribute(listValues['profession'],obj.value);
+        let infoModal = this.modalCtrl.create(InfoAttributesPages,{text: 'Profession , '+obj.value+' '});
         if(index > -1){
-            if(listValues['worker'][index].source === obj.source){
+            if(listValues['profession'][index].source === obj.source){
                 infoModal.present();
                 this.hideLoading();
             }
             else{
                 this.saveAttributeWithEthereum(obj).then(val=>{
-                    listValues['worker'].push(val);
+                    listValues['profession'].push(val);
                     this.saveAttributes(listValues);
                     infoModal.present();
                     this.hideLoading();
@@ -230,7 +230,7 @@ export class NewAttributeService {
         }
         else{
             this.saveAttributeWithEthereum(obj).then(val=>{
-                listValues['worker'].push(val);
+                listValues['profession'].push(val);
                 this.saveAttributes(listValues);
                 infoModal.present();
                 this.hideLoading();

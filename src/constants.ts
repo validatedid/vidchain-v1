@@ -3,7 +3,7 @@
  */
 
 
-let AVAILABLES_EMPTY_GROUPS = ['email','phone','numberID','name','education','photo', 'worker'];
+let AVAILABLES_EMPTY_GROUPS = ['email','phone','numberID','name','education','photo', 'profession'];
 
 let CONSTANT = {
     AVAILABLES_EMPTY_GROUPS : AVAILABLES_EMPTY_GROUPS,
