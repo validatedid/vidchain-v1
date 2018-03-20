@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { InfoAttributesPages } from '../pages/infoAttributes/infoAttributes';
 import { ListPage } from '../pages/list/list';
 import { NewAttributesPage } from "../pages/newAttributes/newAttributes";
+import { FacialBiometricsPage } from "../pages/facial-biometrics/facial-biometrics";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,6 +32,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Firebase } from '@ionic-native/firebase';
 
 import { Pro } from '@ionic/pro';
+import { Camera } from '@ionic-native/camera';
 
 
 Pro.init('be81b42c', {
@@ -102,6 +104,7 @@ firebase.initializeApp({
     ListPage,
     InfoAttributesPages,
     NewAttributesPage,
+    FacialBiometricsPage,
     ValidatePage,
     SendAttributesPage,
     DniLoginPage,
@@ -126,6 +129,7 @@ firebase.initializeApp({
     ListPage,
     InfoAttributesPages,
     NewAttributesPage,
+    FacialBiometricsPage,
     ValidatePage,
     SendAttributesPage,
     DniLoginPage,
@@ -142,6 +146,7 @@ firebase.initializeApp({
     Firebase,
     InAppBrowser,
     IonicErrorHandler,
+    Camera,
     [{ provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })

@@ -10,6 +10,7 @@ let CONSTANT = {
     URL : {
         URL_CONFIRM_LOGIN : " http://vidchainpoc.azurewebsites.net/confirm_login.php",
         URL_CONFIRM_EMAIL : " http://vidchainpoc.azurewebsites.net/validate_email.php",
+        URL_VALIDATED_BIOMETRICS : " http://vidchainpoc.azurewebsites.net/validate_biometrics.php",
         URL_ETHEREUM :"https://vps493114.ovh.net:8443/stamp/sha256/",
         URL_SHOW_ETHEREUM : "https://ropsten.etherscan.io/tx/"
     },

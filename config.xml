@@ -102,5 +102,6 @@
         <variable name="REVERSED_CLIENT_ID" value="938949312980-f79pafv92qqtr45i7f72orhv8ig0kq3v.apps.googleusercontent.com" />
     </plugin>
     <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.2" />
     <engine name="android" spec="6.4.0" />
 </widget>

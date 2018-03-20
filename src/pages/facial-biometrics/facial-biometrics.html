@@ -1,0 +1,40 @@
+<ion-header color="primary">
+  <ion-navbar color="primary">
+      <ion-buttons >
+          <button ion-button (click)="closeModal()">
+              <span ion-text color="primary" showWhen="ios">Cancel</span>
+              <ion-icon name="arrow-round-back" showWhen="android,windows"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>
+          <img src="assets/img/ViDChain-negativo-sin-cuadro.png">
+      </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="div-dnie-photo">
+      <p>DNIe Photo</p>
+      <img [src]="dnieBase64Image" class="faces-img" />
+    </div>
+    <hr style="border: solid 1px gray">
+    <div class="div-selfie">
+      <p>Take a photo to validate your profile 
+      </p>
+      <img [src]="base64Image" *ngIf="base64Image" class="faces-img"/>
+      <br/>
+      <button  ion-button round icon-only class="btn-take-photo" (click)="takePhoto()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+      <br/>
+      <div id="txtValidating" class="content-description" style="display: none;">
+        <ion-spinner name="bubbles"></ion-spinner>
+        <div>{{textValidating}}</div>
+      </div>
+      <button id="btnValidateFaces" class="btn-green btn-validate-faces" ion-button block icon-left (click)="validateBiometrics()">
+          <ion-icon name="contacts"></ion-icon>
+          Validate Biometrics
+      </button>
+    </div>
+</ion-content>
+

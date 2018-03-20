@@ -6,6 +6,8 @@ import CONSTANT from "../../constants";
 import {SendAttributesPage} from "../sendAttributes/sendAttributes";
 import {ModalController} from "ionic-angular";
 import { HttpClient } from '@angular/common/http';
+import { FacialBiometricsPage } from "../facial-biometrics/facial-biometrics";
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -38,5 +40,4 @@ export class LoginPage {
     });
     
   }
-
 }

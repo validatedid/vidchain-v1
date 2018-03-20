@@ -21,6 +21,7 @@
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/barcode-scanner": "^4.5.3",
+    "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "4.4.0",
     "@ionic-native/facebook": "^4.5.3",
     "@ionic-native/firebase": "^4.5.3",
@@ -33,6 +34,7 @@
     "cordova-android": "6.4.0",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
+    "cordova-plugin-camera": "^4.0.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-dni-scanner-nfc": "./plugins/cordova-plugin-dni-scanner-nfc",
@@ -81,7 +83,8 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "938949312980-f79pafv92qqtr45i7f72orhv8ig0kq3v.apps.googleusercontent.com"
       },
-      "cordova-plugin-firebase": {}
+      "cordova-plugin-firebase": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"

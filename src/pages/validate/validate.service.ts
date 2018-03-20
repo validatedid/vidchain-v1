@@ -70,4 +70,11 @@ export class ValidateService {
 
         // return this.http.post('http://vps391817.ovh.net/api/chainevidences', JSON.stringify(data)).toPromise()
     }
+
+    validateBiometrics(dniePhoto, selfie){
+        //todo falta hacer
+        let headers = new HttpHeaders({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
+        let data = {"image_1": dniePhoto,"image_2": selfie};
+        return this.http.post(CONSTANT.URL.URL_VALIDATED_BIOMETRICS, JSON.stringify(data),{headers:headers}).toPromise();
+    }
 }

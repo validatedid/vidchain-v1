@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NavParams, ViewController} from "ionic-angular";
+import {NavParams, ViewController, ModalController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import CONSTANTS from "../../constants";
+import { FacialBiometricsPage } from "../facial-biometrics/facial-biometrics";
 declare var cordova: any;
 
 @Component({
@@ -17,7 +18,8 @@ export class DniLoginPage implements OnInit{
   constructor(public params: NavParams,
               public viewCtrl: ViewController,
               private formBuilder: FormBuilder,
-              private newAttributesService : NewAttributeService) {
+              private newAttributesService : NewAttributeService,
+              public modalCtrl: ModalController) {
   }
 
   ngOnInit(){
@@ -42,12 +44,12 @@ export class DniLoginPage implements OnInit{
       cordova.plugins.DniScanner.scanDNI(this.formGroup.value.code,function (val) {
         console.log(val);
         try{
-          let dniValues = JSON.parse(val);
+          let jsonDNIeValues = JSON.parse(val);
           setTimeout(() =>{
-            vm.newAttributesService.createSocialAttributes(CONSTANTS.SOCIAL_LOGINS.DNI,dniValues,function () {
-              vm.showButton = true;
-              vm.closeModal();
-            });
+              let facialBiometricsPage = vm.modalCtrl.create(FacialBiometricsPage,{dniValues:jsonDNIeValues});
+              facialBiometricsPage.present();
+              vm.viewCtrl.dismiss();
+              
           });
         }
         catch(e){
@@ -68,7 +70,7 @@ export class DniLoginPage implements OnInit{
   }
 
   resetInitPage = function () {
-    this.formGroup.reset()
+    this.formGroup.reset();
     this.textLoading = "";
   }
 }

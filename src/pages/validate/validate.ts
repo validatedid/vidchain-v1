@@ -8,6 +8,7 @@ import {ValidateService} from "./validate.service";
 import moment from 'moment';
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
+import CONSTANTS from '../../constants';
 
 @Component({
     selector: 'validate-page',
@@ -183,11 +184,10 @@ export class ValidatePage implements OnDestroy{
 
     showToastValidate(){
         let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:this.info.key==='phone'?'Phone':'Email address'});
-
         this.validateService.saveValueEthereum(this.info.value)
             .then(val =>{
                 console.log(val);
-                this.saveValidateValue(val['result']);
+                this.saveValidateValue(CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx']);
                 infoModal.present();
                 this.closeModal();
             })

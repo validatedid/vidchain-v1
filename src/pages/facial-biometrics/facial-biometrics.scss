@@ -1,0 +1,72 @@
+@import "../../theme/constant";
+@import "../../theme/sass-flexbox.scss";
+
+page-facial-biometrics {
+    ion-header{
+        ion-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0 90px 1px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            z-index: -1;
+            .toolbar-title{
+            font-size: 2.5vh;
+            }
+            img {
+            height: 27px;
+            }
+        }
+        ion-buttons{
+            ion-icon{
+            font-size: 4vh;
+            }
+        }
+    }
+    ion-content{
+        p{
+            color: $blueVidChain;
+            font-size: 2.2vh;
+        }
+        .div-dnie-photo{
+            width: 100%;
+            height: 35%; 
+            text-align: center; 
+            vertical-align: middle;
+        }
+        .div-selfie{
+            width: 100%;
+            height: 60%; 
+            text-align: center; 
+            vertical-align: middle;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .faces-img{
+            text-align: center; 
+            vertical-align: middle;
+            margin-top: 10px; 
+            max-height: 128px;
+        }
+        .btn-green{
+            height: 9vh;
+            font-size: 2.2vh;
+            background-color: #78B800;
+            color:white;
+        }
+        .btn-take-photo{
+            background-color: #78B800;
+            margin-top: 10px;
+        }
+        .btn-validate-faces{
+            margin-top: 15px;
+        }
+        .content-description{
+            text-align: center;
+            padding-top: 5%;
+            padding-bottom: 3%;
+          }
+    }
+}
