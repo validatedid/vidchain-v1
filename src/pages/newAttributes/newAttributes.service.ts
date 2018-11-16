@@ -131,14 +131,12 @@ export class NewAttributeService {
             infoModal.present();
             // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
         }
-
-
     }
     public saveAttributeWithEthereum(object){
         return new Promise((resolve, reject) => {
             this.validateService.saveValueEthereum(object.value)
                 .then(val =>{
-                    object.urlEthereum = CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx'];
+                    object.urlBlockChain = val['ExplorerURL'];//CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx'];
                     resolve(object)
                 })
                 .catch(err =>{
@@ -156,10 +154,12 @@ export class NewAttributeService {
         }
         return listAttributes;
     }
+
     public saveAttributes(listAttributes){
         localStorage.setItem('attributes',JSON.stringify(listAttributes));
         this.attributeAddEmitter.emit("all");
     }
+
     createNewEducation(msg){
         this.showLoading();
         /********* IONIC PUSH NOTIFICATION *********/
@@ -203,6 +203,7 @@ export class NewAttributeService {
             })
         }
     }
+
     createNewProfession(msg){
         this.showLoading();
         let obj = this.createNewAttribute({
@@ -237,6 +238,7 @@ export class NewAttributeService {
             })
         }
     }
+
     public searchAttribute(list,value){
         let res = -1;
         for(let i=0;i<list.length;i++){
@@ -246,6 +248,7 @@ export class NewAttributeService {
         }
         return res;
     }
+
     public showLoading(text = 'Please wait...'){
         this.loading = this.loadingCtrl.create({
             content: text
@@ -253,14 +256,17 @@ export class NewAttributeService {
         console.log(this.loading);
         this.loading.present()
     }
+
     public changeTextLoading(text){
         if(this.loading){
             this.loading.setContent(text);
         }
     }
+
     public hideLoading(){
         this.loading.dismiss();
     }
+
     private accessDataFromPropertyString(data,property){
         let res;
         let propertySplit = property.split('.');

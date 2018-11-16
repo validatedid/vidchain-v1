@@ -66,9 +66,17 @@ export class ValidateService {
     }
 
     saveValueEthereum(value){
-        return this.http.get(CONSTANT.URL.URL_ETHEREUM+shajs('sha256').update(JSON.stringify(value)).digest('hex')).toPromise();
+        // return this.http.get(CONSTANT.URL.URL_ETHEREUM+shajs('sha256').update(JSON.stringify(value)).digest('hex')).toPromise();
 
         // return this.http.post('http://vps391817.ovh.net/api/chainevidences', JSON.stringify(data)).toPromise()
+        let headers = new HttpHeaders({'Content-Type': 'application/json' });
+
+        let data = {
+            "destination": CONSTANT.BLOCKCHAIN.ALASTRIA.DESTINATION,
+            "network": CONSTANT.BLOCKCHAIN.ALASTRIA.TESTNET,
+            "sha256": shajs('sha256').update(JSON.stringify(value)).digest('hex')
+        };
+        return this.http.post(CONSTANT.URL.URL_ETHEREUM, JSON.stringify(data), {headers:headers}).toPromise();
     }
 
     validateBiometrics(dniePhoto, selfie){

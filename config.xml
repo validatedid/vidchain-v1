@@ -94,14 +94,16 @@
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.2" />
-    <plugin name="cordova-plugin-facebook4" spec="^1.7.4">
-        <variable name="APP_ID" value="1600429613357545" />
-        <variable name="APP_NAME" value="ViDChainAPP" />
-    </plugin>
     <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
         <variable name="REVERSED_CLIENT_ID" value="938949312980-f79pafv92qqtr45i7f72orhv8ig0kq3v.apps.googleusercontent.com" />
     </plugin>
     <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
+    <plugin name="cordova-plugin-facebook4" spec="^3.1.0">
+        <variable name="APP_ID" value="1600429613357545" />
+        <variable name="APP_NAME" value="ViDChainAPP" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.25.0" />
+    </plugin>
+    <allow-navigation href="http://192.168.1.151:8100" />
     <engine name="android" spec="6.4.0" />
 </widget>
