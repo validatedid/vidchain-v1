@@ -36,6 +36,7 @@ export class NewAttributeService {
         let listAttributes = this.getListAttribute();
         let alertsWaiting = [];
         this.showLoading();
+        let attributeProcessedCount=0;
         for (let attribute of attr){
             let value = this.accessDataFromPropertyString(data,attribute.value);
             //special for foto.
@@ -75,15 +76,16 @@ export class NewAttributeService {
             }
             if(attribute.unique && listAttributes[attribute.name].length>0){
                 if(value !==  listAttributes[attribute.name][0].value || social !== listAttributes[attribute.name][0].source){
-
                     let alert = this.modalCtrl.create(ChangeAttributesPage,{newValues:object,oldValues:listAttributes[attribute.name][0],callback: () =>{
                         this.saveAttributeWithEthereum(object).then(object => {
                             listAttributes[attribute.name][0] = object;
                             this.saveAttributes(listAttributes);
                         });
                     }});
-
+                    attributeProcessedCount++;
                     alertsWaiting.push(alert);
+                }else{
+                    attributeProcessedCount++;
                 }
             }
             else{
@@ -92,17 +94,20 @@ export class NewAttributeService {
                     this.saveAttributeWithEthereum(object).then(object => {
                         listAttributes[attribute.name][index] = object;
                         this.saveAttributes(listAttributes);
+                        attributeProcessedCount++;
                     });
                 }
                 else{
                     this.saveAttributeWithEthereum(object).then(object => {
                         listAttributes[attribute.name].push(object);
                         this.saveAttributes(listAttributes);
+                        attributeProcessedCount++;
                     });
                 }
 
             }
         }
+
         let infoModal = this.modalCtrl.create(InfoAttributesPages,{text:social.toLowerCase()+' attributes'});
         if(alertsWaiting.length>0){
             alertsWaiting[0].present();
@@ -131,14 +136,52 @@ export class NewAttributeService {
             infoModal.present();
             // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
         }
-
-
+        
+        /*
+        let thisRef = this;
+        let intervalID = setInterval(function(){
+            if(attributeProcessedCount==attr.length){
+                let infoModal = thisRef.modalCtrl.create(InfoAttributesPages,{text:social.toLowerCase()+' attributes'});
+                if(alertsWaiting.length>0){
+                    alertsWaiting[0].present();
+                    for(let i=0;i<alertsWaiting.length;i++){
+                        let ActualAlert = alertsWaiting[i];
+                        ActualAlert.onDidDismiss(() => {
+                            if(alertsWaiting[i+1]){
+                                alertsWaiting[i+1].present();
+                            }
+                            else{
+                                if(cb){
+                                    cb();
+                                }
+                                thisRef.hideLoading();
+                                infoModal.present();
+                                // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
+                            }
+                        });
+                    }
+                }
+                else{
+                    if(cb){
+                        cb();
+                    }
+                    thisRef.hideLoading();
+                    infoModal.present();
+                    // this.alertCtrl.create({title: 'Sync Done', buttons: [{text: 'Ok'},]}).present();
+                }
+                clearInterval(intervalID);
+            }
+        }	
+        , 500);
+        */
     }
+
     public saveAttributeWithEthereum(object){
         return new Promise((resolve, reject) => {
             this.validateService.saveValueEthereum(object.value)
                 .then(val =>{
-                    object.urlEthereum = CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx'];
+                    //object.urlEthereum = CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx'];
+                    object.urlBlockChain = val['ExplorerURL'];
                     resolve(object)
                 })
                 .catch(err =>{

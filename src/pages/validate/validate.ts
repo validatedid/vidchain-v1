@@ -68,11 +68,15 @@ export class ValidatePage implements OnDestroy{
         }, interval);
     }
 
-    saveValidateValue(urlEthereum = null){
+    //saveValidateValue(urlEthereum = null){
+    saveValidateValue(urlBlockChain = null){
         let list = JSON.parse(localStorage.getItem('attributes'));
         list[this.key][this.index].validated = true;
-        if(urlEthereum){
+        /*if(urlEthereum){
             list[this.key][this.index].urlEthereum = urlEthereum;
+        }*/
+        if(urlBlockChain){
+            list[this.key][this.index].urlBlockChain = urlBlockChain;
         }
         localStorage.setItem('attributes',JSON.stringify(list));
         this.validateService.attributedValidated.emit(list[this.key][this.index]);
@@ -187,7 +191,8 @@ export class ValidatePage implements OnDestroy{
         this.validateService.saveValueEthereum(this.info.value)
             .then(val =>{
                 console.log(val);
-                this.saveValidateValue(CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx']);
+                //this.saveValidateValue(CONSTANTS.URL.URL_SHOW_ETHEREUM + val['tx']);
+                this.saveValidateValue(val['ExplorerURL']);
                 infoModal.present();
                 this.closeModal();
             })
