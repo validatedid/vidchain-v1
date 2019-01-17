@@ -7,14 +7,14 @@ page-login {
   p{
     position: absolute;
     top: 10vh;
-    color: $blueVidChain;
+    color: $grayVidChain;
     font-size: 2.2vh;
   }
   .social-button{
     height: 9vh;
     font-size: 2.2vh;
     &.qr-scan{
-      background-color: #78B800;
+      background-color: $greenVidChain;
       color:white;
     }
   }

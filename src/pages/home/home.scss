@@ -22,7 +22,7 @@ page-home {
     //position: absolute;
     //top: 0;
     height: 30vh;
-    background: $blueVidChain;
+    background: $grayVidChain;
     .profile-avatar{
       background-color: white;
       background-image: url(../assets/img/empty_profile.png);
@@ -60,7 +60,8 @@ page-home {
       height: 100%;
       text-align: center;
       img{
-        height: 27px;
+        padding-top: 5px;
+        height: 50px;
       }
     }
   }
@@ -72,7 +73,7 @@ page-home {
 
     }
     ion-icon{
-      color: $blueVidChain;
+      color: $grayVidChain;
     }
   }
 
@@ -82,7 +83,7 @@ page-home {
       border-bottom: 5px solid $greenVidChain !important;
     }
     .tab-button{
-      color: $blueVidChain!important;
+      color: $grayVidChain!important;
       &:first-child{
         border-right: 1px solid rgba(60, 60, 60, 0.2);
       }

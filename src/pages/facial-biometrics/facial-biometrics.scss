@@ -16,7 +16,8 @@ page-facial-biometrics {
             font-size: 2.5vh;
             }
             img {
-            height: 27px;
+            padding-top: 5px;
+            height: 50px;
             }
         }
         ion-buttons{
@@ -27,7 +28,7 @@ page-facial-biometrics {
     }
     ion-content{
         p{
-            color: $blueVidChain;
+            color: $grayVidChain;
             font-size: 2.2vh;
         }
         .div-dnie-photo{
@@ -53,11 +54,11 @@ page-facial-biometrics {
         .btn-green{
             height: 9vh;
             font-size: 2.2vh;
-            background-color: #78B800;
+            background-color: $greenVidChain;
             color:white;
         }
         .btn-take-photo{
-            background-color: #78B800;
+            background-color: $greenVidChain;
             margin-top: 10px;
         }
         .btn-validate-faces{
