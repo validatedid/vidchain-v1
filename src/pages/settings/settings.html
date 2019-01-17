@@ -1,0 +1,10 @@
+<ion-list>
+    <ion-item>
+        <ion-label>Select your identity ledger</ion-label>
+    
+        <ion-select [(ngModel)]="selectedLedger.id">
+          <ion-option *ngFor="let ledger of ledgers" [value]="ledger.id" (ionSelect)="saveSetting('LEDGER', ledger)" >{{ledger.NAME}}</ion-option>
+        </ion-select>
+    
+    </ion-item>
+</ion-list>

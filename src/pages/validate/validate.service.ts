@@ -47,7 +47,6 @@ export class ValidateService {
         let headers = new HttpHeaders({ 'Authorization': 'Bearer 31924a56d96665904ccfff7291f7d7ad2bf9cfb9',
             'Accept': 'q=0.8;application/json;q=0.9' });
 
-
         return this.http.get('https://api.instasent.com/verify/'+id+'?token='+value,{headers:headers}).toPromise()
     }
 
@@ -57,6 +56,7 @@ export class ValidateService {
         let data = {
             "email": email,
         };
+
         return this.http.post(CONSTANT.URL.URL_CONFIRM_EMAIL, JSON.stringify(data),{headers:headers}).toPromise()
     }
 
@@ -65,25 +65,23 @@ export class ValidateService {
         return this.http.get(CONSTANT.URL.URL_CONFIRM_EMAIL+"?verification_code="+value+"&request_id="+id,{headers:headers}).toPromise()
     }
 
-    saveValueEthereum(value){
-        //return this.http.get(CONSTANT.URL.URL_ETHEREUM+shajs('sha256').update(JSON.stringify(value)).digest('hex')).toPromise();
-        
+    saveValueEthereum(value){       
         let headers = new HttpHeaders({'Content-Type': 'application/json' });
+        let ledger = JSON.parse(localStorage.getItem('appSettings')).LEDGER;
         let data = {
-           "destination": CONSTANT.BLOCKCHAIN.ALASTRIA.DESTINATION,
-           "network": CONSTANT.BLOCKCHAIN.ALASTRIA.TESTNET,
+           "destination": ledger.DESTINATION,
+           "network": ledger.TESTNET,
            "sha256": shajs('sha256').update(JSON.stringify(value)).digest('hex')
         };
-       return this.http.post(CONSTANT.URL.URL_ETHEREUM, JSON.stringify(data), {headers:headers}).toPromise();
         
-        
-        // return this.http.post('http://vps391817.ovh.net/api/chainevidences', JSON.stringify(data)).toPromise()
+       return this.http.post(CONSTANT.URL.URL_VIDCHAIN_API, JSON.stringify(data), {headers: headers}).toPromise();        
     }
 
     validateBiometrics(dniePhoto, selfie){
         //todo falta hacer
         let headers = new HttpHeaders({'Accept': 'q=0.8;application/json;q=0.9','Content-Type': 'application/json' });
         let data = {"image_1": dniePhoto,"image_2": selfie};
+
         return this.http.post(CONSTANT.URL.URL_VALIDATED_BIOMETRICS, JSON.stringify(data),{headers:headers}).toPromise();
     }
 }

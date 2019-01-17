@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { InfoAttributesPages } from '../pages/infoAttributes/infoAttributes';
 import { ListPage } from '../pages/list/list';
+import { SettingsPage } from '../pages/settings/settings';
 import { NewAttributesPage } from "../pages/newAttributes/newAttributes";
 import { FacialBiometricsPage } from "../pages/facial-biometrics/facial-biometrics";
 
@@ -102,6 +103,7 @@ firebase.initializeApp({
     LoginPage,
     TabsPage,
     ListPage,
+    SettingsPage,
     InfoAttributesPages,
     NewAttributesPage,
     FacialBiometricsPage,
@@ -127,6 +129,7 @@ firebase.initializeApp({
     LoginPage,
     TabsPage,
     ListPage,
+    SettingsPage,
     InfoAttributesPages,
     NewAttributesPage,
     FacialBiometricsPage,

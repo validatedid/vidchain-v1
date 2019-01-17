@@ -5,23 +5,34 @@
 
 let AVAILABLES_EMPTY_GROUPS = ['email','phone','numberID','name','education','photo', 'profession'];
 
+let LEDGERS = [
+    { 
+        id: "ALASTRIA",
+        NAME : "Alastria",
+        DESTINATION : "alastria",
+        TESTNET : "testnet"
+    },
+    {
+        id: "ETHEREUM_ROPSTEN",
+        NAME : "Ethereum Ropsten",
+        DESTINATION : "ethereum",
+        TESTNET : "ropsten"
+    }
+];
+
 let CONSTANT = {
     AVAILABLES_EMPTY_GROUPS : AVAILABLES_EMPTY_GROUPS,
+    DEFAULT_SETTINGS: {
+        LEDGER: LEDGERS[0]
+    },
+    LEDGERS: LEDGERS,
     URL : {
         URL_CONFIRM_LOGIN : " http://vidchainpoc.azurewebsites.net/confirm_login.php",
         URL_CONFIRM_EMAIL : " http://vidchainpoc.azurewebsites.net/validate_email.php",
         URL_VALIDATED_BIOMETRICS : " http://vidchainpoc.azurewebsites.net/validate_biometrics.php",
-        //URL_ETHEREUM :"https://vps493114.ovh.net:8443/stamp/sha256/",
-        URL_ETHEREUM :"http://vidchainapipre.cloudapp.net/api/v1.0/hash",
+        //URL_VIDCHAIN_API :"https://vps493114.ovh.net:8443/stamp/sha256/",
+        URL_VIDCHAIN_API :"http://vidchainapipre.cloudapp.net/api/v1.0/hash",
         URL_SHOW_ETHEREUM : "https://ropsten.etherscan.io/tx/"
-    },
-    BLOCKCHAIN : {
-        ALASTRIA : {
-            DESTINATION : "alastria",
-            TESTNET : "testnet",
-            URL_SHOW_ACCOUNT_TX : "https://alastria-explorer.councilbox.com/account/0x503d056BEB96bC865F26150E74dBB4AadeC3E0DB/transactions",
-            URL_SHOW_TX : "https://alastria-explorer.councilbox.com/transaction/",
-        }
     },
     SOCIAL_LOGINS:{
         'FACEBOOK':'FACEBOOK',
