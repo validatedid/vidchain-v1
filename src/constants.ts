@@ -10,13 +10,15 @@ let LEDGERS = [
         id: "ALASTRIA",
         NAME : "Alastria",
         DESTINATION : "alastria",
-        TESTNET : "testnet"
+        TESTNET : "testnet",
+        icon: "alastria.png"
     },
     {
         id: "ETHEREUM_ROPSTEN",
         NAME : "Ethereum Ropsten",
         DESTINATION : "ropsten",
-        TESTNET : "testnet"
+        TESTNET : "testnet",
+        icon: "ethereum.png"
     }
 ];
 

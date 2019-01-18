@@ -1,5 +1,5 @@
 import { Component ,OnInit , OnDestroy} from '@angular/core';
-import {AlertController, ModalController} from "ionic-angular";
+import {AlertController, ModalController, Icon} from "ionic-angular";
 import {InfoAttributesPages} from "../infoAttributes/infoAttributes";
 import {NewAttributeService} from "../newAttributes/newAttributes.service";
 import {ValidateService} from "../validate/validate.service";
@@ -92,6 +92,11 @@ export class ListPage implements OnInit,OnDestroy{
   ngOnDestroy(){
     this.newAttributesEmitter.unsubscribe();
     this.attributedValidatedEmitter.unsubscribe();
+  }
+
+  getLedgerImage(item){
+    let icon = Constants.LEDGERS.find(l => l.id === item.ledger).icon;
+    return icon;
   }
 
 

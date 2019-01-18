@@ -27,12 +27,12 @@ export class NewAttributesPage {
         let type = params.get('type') || 'other';
         let name = params.get('key') || '';
 
-        let validator = type==='email'?Validators.email:'';
+        let validator = type === 'email' ? Validators.email : '';
         this.formGroup = this.formBuilder.group({
             prefix: [34],
             type: [type],
-            key: [type ==='email'?type:type=='phone'?type:name],
-            value: ['',validator]
+            key: [type ==='email' ? type : type == 'phone' ? type : name],
+            value: ['', validator]
         });
 
 
@@ -46,7 +46,6 @@ export class NewAttributesPage {
     }
 
     addFormatAttribute(){
-
 
         let listAttributes = this.newAttributedService.getListAttribute();
 

@@ -20,14 +20,17 @@ export class NewAttributeService {
                 private modalCtrl: ModalController){}
 
     public createNewAttribute(obj){
+        let settings = JSON.parse(localStorage.getItem('settings')) || CONSTANTS.DEFAULT_SETTINGS;
+
         return {
-            type : obj.type === 'email'?obj.type:obj.type === 'phone'?obj.type:'other',
+            type : obj.type === 'email' ? obj.type : obj.type === 'phone' ? obj.type : 'other',
             key : obj.key,
             value : obj.value,
             timeToValidate : obj.timetoValidate || 'never',
             validated : obj.validate || true,
             source : obj.source || 'user',
-            createdAt : moment().unix()*1000
+            createdAt : moment().unix()*1000,
+            ledger : settings['LEDGER'].id
         }
     }
 
