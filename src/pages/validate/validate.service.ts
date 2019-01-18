@@ -13,15 +13,16 @@ import CONSTANT from '../../constants';
 export class ValidateService {
     private interval = 1000;
     public attributedValidated : EventEmitter<any> = new EventEmitter();
-    constructor( private http:HttpClient){
 
+    constructor( private http:HttpClient){
     }
+
     checkValidation(timeToFinish){
         let diffTime = timeToFinish - moment(new Date()).unix();
         let duration= moment.duration(diffTime*1000, 'milliseconds');
         if(diffTime > 0){
             duration = moment.duration(<any>duration - this.interval, 'milliseconds');
-            return (duration.minutes()<10?'0':'') + duration.minutes() + ":" + (duration.seconds()<10?'0':'')+duration.seconds();
+            return (duration.minutes() < 10 ? '0' : '') + duration.minutes() + ":" + (duration.seconds() < 10 ? '0' : '') + duration.seconds();
 
         }
         else{
@@ -67,10 +68,10 @@ export class ValidateService {
 
     saveValueEthereum(value){       
         let headers = new HttpHeaders({'Content-Type': 'application/json' });
-        let ledger = JSON.parse(localStorage.getItem('appSettings')).LEDGER;
+        let settings = JSON.parse(localStorage.getItem('settings')) || CONSTANT.DEFAULT_SETTINGS;
         let data = {
-           "destination": ledger.DESTINATION,
-           "network": ledger.TESTNET,
+           "destination": settings['LEDGER'].DESTINATION,
+           "network": settings['LEDGER'].TESTNET,
            "sha256": shajs('sha256').update(JSON.stringify(value)).digest('hex')
         };
         

@@ -15,7 +15,7 @@ export class SettingsPage {
 
     constructor(public navCtrl: NavController){
         // Load settings from localStorage
-        this.settings = JSON.parse(localStorage.getItem('appSettings'));        
+        this.settings = JSON.parse(localStorage.getItem('settings'));        
 
         // Populate html with options and selected option
         this.ledgers = Constants.LEDGERS;
@@ -26,7 +26,7 @@ export class SettingsPage {
 
         this.settings[setting.toUpperCase()] = value;
 
-        localStorage.setItem('appSettings', JSON.stringify(this.settings));
+        localStorage.setItem('settings', JSON.stringify(this.settings));
     }
       
 }

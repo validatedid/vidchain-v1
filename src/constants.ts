@@ -15,8 +15,8 @@ let LEDGERS = [
     {
         id: "ETHEREUM_ROPSTEN",
         NAME : "Ethereum Ropsten",
-        DESTINATION : "ethereum",
-        TESTNET : "ropsten"
+        DESTINATION : "ropsten",
+        TESTNET : "testnet"
     }
 ];
 

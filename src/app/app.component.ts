@@ -109,21 +109,21 @@ export class MyApp implements OnDestroy{
     localStorage.setItem('attributes',JSON.stringify(attributes));
 
     // Initialize settings
-    let appSettings = JSON.parse(localStorage.getItem('appSettings'));
+    let settings = JSON.parse(localStorage.getItem('settings'));
 
-    if(!appSettings){
-      appSettings = {}
+    if(!settings){
+      settings = {}
 
       let defaultSettings = Object.keys(Constants.DEFAULT_SETTINGS);
     
       if(defaultSettings){
         for(let settingsElement of defaultSettings){
-          if(!appSettings[settingsElement]){
-            appSettings[settingsElement] = Constants.DEFAULT_SETTINGS[settingsElement];
+          if(!settings[settingsElement]){
+            settings[settingsElement] = Constants.DEFAULT_SETTINGS[settingsElement];
           }
         }
       
-        localStorage.setItem('appSettings',JSON.stringify(appSettings));
+        localStorage.setItem('settings',JSON.stringify(settings));
       }
     }
   }
