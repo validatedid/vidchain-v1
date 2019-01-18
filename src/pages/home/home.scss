@@ -22,7 +22,7 @@ page-home {
     //position: absolute;
     //top: 0;
     height: 30vh;
-    background: $grayVidChain;
+    background: $greenVidChain;
     .profile-avatar{
       background-color: white;
       background-image: url(../assets/img/empty_profile.png);
@@ -37,6 +37,7 @@ page-home {
     }
   }
   ion-header{
+    background-color:white;
     .button-header{
       color:white;
       background-color: transparent;

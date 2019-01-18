@@ -1,5 +1,7 @@
 page-dni-login{
   ion-header{
+    background-color:white;
+
     ion-title {
       position: absolute;
       top: 0;
@@ -13,7 +15,8 @@ page-dni-login{
         font-size: 2.5vh;
       }
       img {
-        height: 33px;
+        padding-top: 5px;
+        height: 50px;
       }
     }
     ion-buttons{
