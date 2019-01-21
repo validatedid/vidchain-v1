@@ -19,3 +19,11 @@
 ```sh
  ionic cordova build android
 ```
+
+### Actualizar iconos y/o splash screen
+
+1. sustituir los ficheros `icon.png` y/o `splash.png` de la carpeta `/resources` por los nuevos.
+2. Regenerar los iconos con el siguiente comando:
+```
+ionic cordova resources
+```
