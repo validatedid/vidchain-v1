@@ -41,7 +41,7 @@
     "cordova-plugin-facebook4": "^1.7.4",
     "cordova-plugin-firebase": "^0.1.25",
     "cordova-plugin-googleplus": "^5.2.1",
-    "cordova-plugin-inappbrowser": "^2.0.2",
+    "cordova-plugin-inappbrowser": "^3.1.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-push": "0.0.1",
